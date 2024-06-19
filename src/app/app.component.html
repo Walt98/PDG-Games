@@ -1,24 +1,31 @@
-@if (payload.gioco === 1) { <app-passa-parola></app-passa-parola> }
-
-@else if (payload.gioco === 2) { <app-four-images-one-word></app-four-images-one-word> }
-
-@else
+@switch (payload.gioco)
 {
-    <div class="body fade-in">
-        <div class="cards-container">
-            <h1> PDG GAMES </h1>
+    <!-- Passa-Parola di Dio -->
+    @case (1) { <app-passa-parola></app-passa-parola> }
 
-            <div class="cards">
-                @for (title of cards; track $index)
-                {
-                    <div class="card" [style]="getCardImage($index)" [title]="title" (click)="payload.gioco = $index + 1"></div>
-                }
+    <!-- 4 Immagini 1 Parola di Dio -->
+    @case (2) { <app-four-images-one-word></app-four-images-one-word> }
+
+    <!-- Lista dei giochi -->
+    @default
+    {
+        <div class="body fade-in">
+            <div class="cards-container">
+                <h1> PDG GAMES </h1>
+    
+                <div class="cards">
+                    @for (title of cards; track $index)
+                    {
+                        <div class="card" [style]="getCardImage($index)" [title]="title" (click)="payload.gioco = $index + 1"></div>
+                    }
+                </div>
             </div>
         </div>
-    </div>
+    }
 }
 
-@if (payload.gioco >= 1 && payload.gioco <= cards.length)
+<!-- Pulsante per tornare alla lista dei giochi -->
+@if (!!+payload.gioco)
 {
-    <div class="close fade-in" (click)="payload.gioco = 0"> X </div>
+    <button class="close fade-in" (click)="payload.gioco = 0" title="Esci"> X </button>
 }

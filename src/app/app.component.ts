@@ -1,25 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FourImagesOneWordComponent } from './four-images-one-word/four-images-one-word.component';
 import { PassaParolaComponent } from './passa-parola/passa-parola.component';
 import { PayloadService } from './payload.service';
-
-/**
- * Classi dei giochi da importare.
- */
-const GAMES_IMPORTS: any[] = [
-  PassaParolaComponent,
-  FourImagesOneWordComponent
-];
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [RouterOutlet, ...GAMES_IMPORTS]
+  imports: [
+    RouterOutlet,
+    PassaParolaComponent,
+    FourImagesOneWordComponent
+  ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   title = 'pdg-games';
 
@@ -29,11 +25,6 @@ export class AppComponent implements OnInit {
   ];
 
   constructor(public payload: PayloadService) { }
-
-  ngOnInit(): void {
-
-    this.payload.giochi = GAMES_IMPORTS;
-  }
 
   /**
    * Restituisce lo stile background-image della singola card. 

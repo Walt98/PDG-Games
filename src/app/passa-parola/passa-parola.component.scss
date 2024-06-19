@@ -2,7 +2,6 @@
     background-image: url("/background1.jpg");
     flex-direction: column;
     gap: 60px;
-    font-family: "Roboto", sans-serif;
     
     .circle-container {
         position: relative;
@@ -39,11 +38,12 @@
         .circle.hover:not(.circle.skip):not(.circle.success):not(.circle.error) {
             background-color: #5fc5fb;
         }
-        .circle.skip.hover {
-            background-color: #ffcf56;
-        }
         .circle.skip {
             background-color: #ffb700;
+
+            &.hover {
+                background-color: #ffcf56;
+            }
         }
         .circle.success {
             background-color: #00ff18;
