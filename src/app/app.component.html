@@ -1,10 +1,10 @@
 @switch (payload.gioco)
 {
     <!-- Passa-Parola di Dio -->
-    @case (1) { <app-passa-parola></app-passa-parola> }
+    @case (0) { <app-passa-parola></app-passa-parola> }
 
     <!-- 4 Immagini 1 Parola di Dio -->
-    @case (2) { <app-four-images-one-word></app-four-images-one-word> }
+    @case (1) { <app-four-images-one-word></app-four-images-one-word> }
 
     <!-- Lista dei giochi -->
     @default
@@ -16,7 +16,7 @@
                 <div class="cards">
                     @for (title of cards; track $index)
                     {
-                        <div class="card" [style]="getCardImage($index)" [title]="title" (click)="payload.gioco = $index + 1"></div>
+                        <div class="card" [style]="getCardImage($index)" [title]="title" (click)="payload.gioco = $index"></div>
                     }
                 </div>
             </div>
@@ -25,7 +25,7 @@
 }
 
 <!-- Pulsante per tornare alla lista dei giochi -->
-@if (!!+payload.gioco)
+@if (+payload.gioco > -1)
 {
-    <button class="close fade-in" (click)="payload.gioco = 0" title="Esci"> X </button>
+    <button class="close fade-in" (click)="payload.gioco = -1" title="Esci"> X </button>
 }

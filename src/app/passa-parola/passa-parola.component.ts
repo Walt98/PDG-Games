@@ -47,7 +47,7 @@ export class PassaParolaComponent implements OnInit {
             if (i === +n - 1) this.isReady = true;
           }
           else {
-            setTimeout(() => this.payload.gioco = 0, 0);
+            this.closeGame();
             break;
           }
         }
@@ -67,7 +67,7 @@ export class PassaParolaComponent implements OnInit {
    */
   private closeGame() {
 
-    setTimeout(() => this.payload.gioco = 0, 0);
+    setTimeout(() => this.payload.gioco = -1, 0);
   }
 
   /**
