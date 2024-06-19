@@ -33,4 +33,12 @@ export class AppComponent {
 
     return `background-image: url("/card${index + 1}.jpg")`;
   }
+
+  /**
+   * Chiude il gioco.
+   */
+  onClose() {
+
+    if (this.payload.gioco > -1) this.payload.gioco = -1;
+  }
 }
