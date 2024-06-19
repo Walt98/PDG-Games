@@ -1,0 +1,23 @@
+<div class="body fade-in">
+    @if (isReady)
+    {
+        <h1>Passa-Parola di Dio</h1>
+    
+        <div class="circle-container">
+            <app-timer [timer]="90" style="transform: rotate(90deg);"></app-timer>
+    
+            @for (item of items; track $index)
+            {
+                <div class="circle {{ item.status }}"
+                [ngClass]="{ 'hover': this.index === $index }"
+                [ngStyle]="{'transform': 'rotate(' + ($index * (360 / items.length)) + 'deg) translate(153px) rotate(' + ((-$index * (360 / items.length)) + 90) + 'deg)'}"
+                (click)="setStatus(item)">
+                    {{ item.key }}
+                </div>
+            }
+        </div>
+    
+        <img src="logo.png" alt="logo" width="130px" height="auto">
+    }
+</div>
+  

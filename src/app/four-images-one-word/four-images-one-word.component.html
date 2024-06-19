@@ -1,0 +1,27 @@
+<div class="body fade-in">
+    <div class="title">
+      <h1> 4 Immagini 1 Parola di Dio </h1>
+    </div>
+  
+    <div class="images">
+        <div class="row">
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+    
+        <div class="row">
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+    </div>
+  
+    <div class="footer">
+        @for (letter of word; track $index)
+        {
+            <div class="char">
+            <span class="letter"> {{ letter }} </span>
+            <div *ngIf="letter !== ' '" class="line"></div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,68 @@
+.body {
+    background-image: url("/background2.jpg");
+    background-position: 50% 50%;
+    background-size: 100vw 100vh;
+    flex-direction: column;
+    font-family: "Montserrat", sans-serif;
+    gap: 30px;
+
+    .title {
+        height: 44px;
+        display: flex;
+        align-items: flex-end;
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    .images {
+        $sizeBlock: 470px;
+        width: $sizeBlock;
+        height: $sizeBlock;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+
+            .column {
+                $sizeCol: 220px;
+                width: $sizeCol;
+                height: $sizeCol;
+                border-radius: 10px;
+                border: 5px solid #a3cbe5;
+                background-color: whitesmoke;
+                background-image: url("/nothing.jpg");
+                background-position: 50% 50%;
+                background-size: $sizeCol $sizeCol;
+            }
+        }
+    }
+
+    .footer {
+        display: flex;
+        column-gap: 12px;
+
+        .char {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            gap: 5px;
+
+            .letter {
+                font-size: 30px;
+            }
+
+            .line {
+                width: 100%;
+                height: 3px;
+                background-color: #a3cbe5;
+            }
+        }
+    }
+}
