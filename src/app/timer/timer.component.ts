@@ -79,7 +79,7 @@ export class TimerComponent implements OnInit, OnDestroy {
    * Avvia e ferma il timer.
    */
   setTimer(isStarted?: boolean) {
-// debugger
+
     if (isStarted !== undefined) this.isStarted = isStarted;
     else this.isStarted = !this.isStarted;
 
