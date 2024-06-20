@@ -149,12 +149,6 @@ export class PassaParolaComponent implements OnInit {
 
         else {
 
-          let allSetted = true;
-
-          this.items.forEach(el => {
-            if (["", "skip"].includes(el.status)) allSetted = false;
-          });
-
           if (!allSetted) {
             do {
               if (this.index === 0) this.index = this.items.length - 1;

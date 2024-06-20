@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class PayloadService {
 
   /** Rappresenta il codice del gioco. */
-  public gioco!: number;
+  public gioco = -1;
 
   constructor() { }
 }
