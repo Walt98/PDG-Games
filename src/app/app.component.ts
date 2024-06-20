@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FourImagesOneWordComponent } from './four-images-one-word/four-images-one-word.component';
 import { PassaParolaComponent } from './passa-parola/passa-parola.component';
@@ -17,25 +17,41 @@ import { CommonModule } from '@angular/common';
     FourImagesOneWordComponent
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'pdg-games';
 
   index?: number;
   tmpIndex?: number;
+  showComingSoon = false;
   cards = [
     "Passa-Parola di Dio",
-    "4 Immagini 1 Parola di Dio"
+    "4 Immagini 1 Parola di Dio",
+    "Prossimamente"
   ];
 
   constructor(public payload: PayloadService) { }
+
+  ngOnInit(): void {
+
+    setTimeout(() => this.showComingSoon = true, 2000);
+  }
 
   /**
    * Restituisce lo stile background-image della singola card. 
    */
   getCardImage(index: number) {
 
-    return `background-image: url("/card${index + 1}.jpg")`;
+    const res = index === this.cards.length - 1
+      ? "coming-soon"
+      : `card${index + 1}`;
+
+    return `background-image: url("/${res}.jpg")`;
+  }
+
+  onSelectGame(index: number) {
+
+    if (index !== this.cards.length - 1) this.payload.gioco = index;
   }
 
   /**
@@ -59,7 +75,7 @@ export class AppComponent {
         if (this.tmpIndex !== this.index) this.index = this.tmpIndex;
         else {
 
-          if (this.index === undefined || this.index === this.cards.length - 1) this.index = 0;
+          if (this.index === undefined || this.index === this.cards.length - 2) this.index = 0;
           else this.index++;
           this.tmpIndex = this.index;
         }
@@ -72,7 +88,7 @@ export class AppComponent {
         else {
 
           if (this.index === undefined) this.index = 0;
-          else if (this.index === 0) this.index = this.cards.length - 1;
+          else if (this.index === 0) this.index = this.cards.length - 2;
           else this.index--;
           this.tmpIndex = this.index;
         }

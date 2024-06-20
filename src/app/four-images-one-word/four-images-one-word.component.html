@@ -3,24 +3,32 @@
       <h1> 4 Immagini 1 Parola di Dio </h1>
     </div>
   
-    <div class="images">
-        <div class="row">
-            <div class="column"></div>
-            <div class="column"></div>
+    <div class="images-container">
+        <div class="timer-container">
+            <app-timer *ngIf="showTimer" [timer]="20" (timeout)="onTimeout()"></app-timer>
         </div>
-    
-        <div class="row">
-            <div class="column"></div>
-            <div class="column"></div>
+
+        <div class="images">
+            <div class="row">
+                <div class="column" [style]="getImage(0)"></div>
+                <div class="column" [style]="getImage(1)"></div>
+            </div>
+        
+            <div class="row">
+                <div class="column" [style]="getImage(2)"></div>
+                <div class="column" [style]="getImage(3)"></div>
+            </div>
         </div>
+
+        <img src="logo.png" alt="logo" width="130px" height="auto">
     </div>
   
     <div class="footer">
-        @for (letter of word; track $index)
+        @for (letter of words[index]; track $index)
         {
-            <div class="char">
-            <span class="letter"> {{ letter }} </span>
-            <div *ngIf="letter !== ' '" class="line"></div>
+            <div class="char fade-in">
+                <span class="letter opacity{{ showLetters ? 1 : 0 }}"> {{ letter }} </span>
+                <div *ngIf="letter !== ' '" class="line"></div>
             </div>
         }
     </div>

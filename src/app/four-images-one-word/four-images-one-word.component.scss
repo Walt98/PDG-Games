@@ -16,28 +16,43 @@
         }
     }
 
-    .images {
-        $sizeBlock: 470px;
-        width: $sizeBlock;
-        height: $sizeBlock;
+    .images-container {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transform: translateX(-20px);
 
-        .row {
+        .timer-container {
+            width: 168px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
+            align-items: center;
+        }
 
-            .column {
-                $sizeCol: 220px;
-                width: $sizeCol;
-                height: $sizeCol;
-                border-radius: 10px;
-                border: 5px solid #a3cbe5;
-                background-color: whitesmoke;
-                background-image: url("/nothing.jpg");
-                background-position: 50% 50%;
-                background-size: $sizeCol $sizeCol;
+        .images {
+            $sizeBlock: 470px;
+            width: $sizeBlock;
+            height: $sizeBlock;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+    
+            .row {
+                display: flex;
+                justify-content: space-between;
+    
+                .column {
+                    $sizeCol: 220px;
+                    width: $sizeCol;
+                    height: $sizeCol;
+                    border-radius: 10px;
+                    border: 5px solid #a3cbe5;
+                    background-color: whitesmoke;
+                    background-image: url("/nothing.jpg");
+                    background-position: 50% 50%;
+                    background-size: $sizeCol $sizeCol;
+                }
             }
         }
     }
@@ -56,6 +71,7 @@
 
             .letter {
                 font-size: 30px;
+                cursor: default;
             }
 
             .line {

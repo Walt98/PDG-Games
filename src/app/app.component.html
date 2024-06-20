@@ -16,9 +16,17 @@
                 <div class="cards">
                     @for (title of cards; track $index)
                     {
-                        <div class="card"
-                        [ngClass]="{ 'hover': this.index === $index }"
-                        [style]="getCardImage($index)" [title]="title" (click)="payload.gioco = $index"></div>
+                        <div
+                            *ngIf="$index === cards.length - 1 ? showComingSoon : true"
+                            class="card fade-in"
+                            [ngClass]="{
+                                'hover': this.index === $index && $index !== cards.length - 1,
+                                'last': $index === cards.length - 1
+                            }"
+                            [style]="getCardImage($index)"
+                            [title]="title"
+                            (click)="onSelectGame($index)">
+                        </div>
                     }
                 </div>
             </div>

@@ -1,5 +1,6 @@
-import { Component, HostListener, Input } from '@angular/core';
-import { Subscription, interval } from 'rxjs';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subject, interval, skip, takeUntil } from 'rxjs';
+import { PayloadService } from '../payload.service';
 
 @Component({
   selector: 'app-timer',
@@ -8,14 +9,41 @@ import { Subscription, interval } from 'rxjs';
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss'
 })
-export class TimerComponent {
+export class TimerComponent implements OnInit, OnDestroy {
 
   @Input() timer!: number;
 
-  minuti = 1;
-  secondi = "30";
-  subscription!: Subscription;
+  @Output() timeout = new EventEmitter<void>();
+
+  minuti!: number;
+  secondi!: string;
   isStarted = false;
+  destroy$ = new Subject<void>();
+
+  constructor(public payload: PayloadService) { }
+
+  ngOnInit(): void {
+
+    this.setValues();
+
+    this.payload.startTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+
+      this.isStarted = false;
+      this.startTimer();
+    });
+
+    this.payload.stopTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+
+      this.isStarted = false;
+      this.payload.timerSubscription?.unsubscribe();
+    });
+  }
+
+  ngOnDestroy(): void {
+
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   /**
    * Imposta minuti e secondi del timer.
@@ -58,33 +86,38 @@ export class TimerComponent {
 
     this.isStarted = !this.isStarted;
 
-    if (this.isStarted) {
+    if (this.isStarted) this.startTimer();
+    else this.payload.timerSubscription.unsubscribe();
+  }
 
-      this.subscription = interval(1000).subscribe(() => {
+  /**
+   * Fa partire il timer.
+   */
+  private startTimer() {
 
-        // Decrementa il tempo rimanente di 1 secondo
-        if (this.timer > 1) {
+    this.payload.timerSubscription = interval(1000).subscribe(() => {
 
-          this.timer--;
-          this.setValues();
-        }
+      // Decrementa il tempo rimanente di 1 secondo
+      if (this.timer > 1) {
 
-        // Per ridurre il più possibile il delay tra timer e gong
-        // ho preferito settarlo io stesso a 0 e far partire subito l'audio
-        else {
+        this.timer--;
+        this.setValues();
+      }
 
-          this.timer = 0;
-          this.setValues();
+      // Per ridurre il più possibile il delay tra timer e gong
+      // ho preferito settarlo io stesso a 0 e far partire subito l'audio
+      else {
 
-          // Ferma il timer quando il tempo è scaduto
-          const audio = new Audio("/gong.mp3");
-          audio.play();
-          this.subscription.unsubscribe();
-          this.isStarted = false;
-        }
-      });
-    }
+        this.timer = 0;
+        this.setValues();
 
-    else this.subscription.unsubscribe();
+        // Ferma il timer quando il tempo è scaduto
+        const audio = new Audio("/gong.mp3");
+        audio.play();
+        this.payload.timerSubscription.unsubscribe();
+        this.isStarted = false;
+        this.timeout.emit();
+      }
+    });
   }
 }
