@@ -31,7 +31,7 @@ export class FourImagesOneWordComponent implements OnInit {
    */
   getImage(index: number): string {
 
-    return `background-image: url("/card2_${this.index}_${index}.jpg")`;
+    return `background-image: url("/game2_${this.index}_${index}.jpg")`;
   }
 
   /**
@@ -82,7 +82,32 @@ export class FourImagesOneWordComponent implements OnInit {
     }
 
     // Risposta esatta
-    if (event.code === "Enter") {
+    if (event.code === "Enter") this.showWord();
+  }
+
+  /**
+   * Metodo che mostra la parola.
+   */
+  showWord(isClick = false) {
+
+    if (this.showLetters && isClick) {
+
+      if (this.index !== this.words.length - 1) {
+
+        this.showLetters = false;
+        this.showTimer = false;
+
+        setTimeout(() => {
+          this.showTimer = true;
+          this.payload.timerSubscription?.unsubscribe();
+        }, 1);
+
+        this.index++;
+        this.startTimer();
+      }
+    }
+
+    else {
 
       this.showLetters = true;
       this.payload.stopTimer$.next();

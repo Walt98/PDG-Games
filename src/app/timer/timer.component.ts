@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subject, interval, skip, takeUntil } from 'rxjs';
+import { Subject, interval, takeUntil } from 'rxjs';
 import { PayloadService } from '../payload.service';
 
 @Component({
@@ -27,15 +27,11 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.setValues();
 
     this.payload.startTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-
-      this.isStarted = false;
-      this.startTimer();
+      this.setTimer(true);
     });
 
     this.payload.stopTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-
-      this.isStarted = false;
-      this.payload.timerSubscription?.unsubscribe();
+      this.setTimer(false);
     });
   }
 
@@ -82,12 +78,13 @@ export class TimerComponent implements OnInit, OnDestroy {
   /**
    * Avvia e ferma il timer.
    */
-  setTimer() {
-
-    this.isStarted = !this.isStarted;
+  setTimer(isStarted?: boolean) {
+// debugger
+    if (isStarted !== undefined) this.isStarted = isStarted;
+    else this.isStarted = !this.isStarted;
 
     if (this.isStarted) this.startTimer();
-    else this.payload.timerSubscription.unsubscribe();
+    else this.payload.timerSubscription?.unsubscribe();
   }
 
   /**

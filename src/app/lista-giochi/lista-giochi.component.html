@@ -1,0 +1,24 @@
+<div class="body fade-in">
+    <div class="cards-container">
+        <h1> PDG GAMES </h1>
+
+        <div class="cards">
+            @for (title of cards; track $index)
+            {
+                @if ($index === cards.length - 1 ? showComingSoon : true)
+                {
+                    <div
+                        class="card fade-in"
+                        [ngClass]="{
+                            'hover': this.index === $index && $index !== cards.length - 1,
+                            'last': $index === cards.length - 1
+                        }"
+                        [style]="getCardImage($index)"
+                        [title]="title"
+                        (click)="onSelectGame($index)">
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

@@ -20,13 +20,13 @@
             </div>
         </div>
 
-        <img src="logo.png" alt="logo" width="130px" height="auto">
+        <img src="logo-v.png" alt="logo" height="130" width="auto" (click)="showWord(true)">
     </div>
   
     <div class="footer">
         @for (letter of words[index]; track $index)
         {
-            <div class="char fade-in">
+            <div class="char">
                 <span class="letter opacity{{ showLetters ? 1 : 0 }}"> {{ letter }} </span>
                 <div *ngIf="letter !== ' '" class="line"></div>
             </div>
