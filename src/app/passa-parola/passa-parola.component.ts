@@ -31,32 +31,28 @@ export class PassaParolaComponent implements OnInit {
    */
   private setFields() {
 
-    let n = prompt("Inserisci il numero di lettere.", "6");
+    let charsString = prompt("Inserisci le lettere (min. 1 e max. 15).", "A B C D E F");
 
-    if (!!n && +n >= 0) {
+    if (!!charsString) {
 
-      if (+n >= 1 && +n <= 15) {
+      let allChars = charsString.split(" ");
+      let chars: string[] = [];
 
-        for (let i = 0; i < +n; i++) {
-  
-          let item = prompt(`Inserisci la ${i + 1}ª lettera.`);
-  
-          if (!!item) {
-            this.items.push({ key: item.toUpperCase(), status: "" });
-  
-            if (i === +n - 1) this.isReady = true;
-          }
-          else {
-            this.closeGame();
-            break;
-          }
-        }
-      }
-  
-      else {
-        alert("Assicurati di inserire un numero compreso tra 1 e 15 per continuare.");
+      allChars.forEach(c => {
+        if (c !== "") chars.push(c.toUpperCase());
+      });
+
+      if (chars.length < 1 || chars.length > 15) {
+
+        alert("Per poter giocare assicurati di inserire un numero di lettere compreso tra 1 e 15.");
         this.closeGame();
       }
+
+      else chars.forEach((char, i) => {
+
+        this.items.push({ key: char, status: "" });
+        if (i === +chars.length - 1) this.isReady = true;
+      });
     }
 
     else this.closeGame();

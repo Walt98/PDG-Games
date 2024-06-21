@@ -12,17 +12,27 @@ import { PayloadService } from '../payload.service';
 })
 export class FourImagesOneWordComponent implements OnInit {
 
-  words: string[] = [];
   index = 0;
   showLetters = false;
   showTimer = true;
+  words = [
+    "Mosè",
+    "Davide",
+    "Pietro",
+    "Isacco",
+    "Elia",
+    "Aaronne",
+    "66",
+    "Paolo",
+    "Adamo",
+    "Ebrei",
+    "Comandamenti"
+  ].map(w => w.toUpperCase());
 
   constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
 
-    const words = ["Mosè", "Davide", "Pietro", "Isacco", "Elia", "Aaronne"];
-    words.forEach(w => this.words.push(w.toUpperCase()));
     this.startTimer();
   }
 
@@ -83,6 +93,9 @@ export class FourImagesOneWordComponent implements OnInit {
 
     // Risposta esatta
     if (event.code === "Enter") this.showWord();
+
+    // Risposta esatta
+    if (["Delete", "Backspace"].includes(event.code)) this.showLetters = false;
   }
 
   /**
