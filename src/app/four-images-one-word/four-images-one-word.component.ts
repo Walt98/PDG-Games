@@ -26,7 +26,11 @@ export class FourImagesOneWordComponent implements OnInit {
     "Paolo",
     "Adamo",
     "Ebrei",
-    "Comandamenti"
+    "Comandamenti",
+    "Apocalisse",
+    "Vangeli",
+    "Pastore",
+    "Salmi"
   ].map(w => w.toUpperCase());
 
   constructor(public payload: PayloadService) { }
