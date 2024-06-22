@@ -30,7 +30,12 @@ export class FourImagesOneWordComponent {
     "Apocalisse",
     "Vangeli",
     "Pastore",
-    "Salmi"
+    "Salmi",
+    "Daniele",
+    "Apostolo",
+    "Sansone",
+    "Grace Party",
+    "Chiesa"
   ].map(w => w.toUpperCase());
 
   constructor(public payload: PayloadService) { }

@@ -7,11 +7,10 @@
     gap: 30px;
 
     .title {
-        height: 44px;
-        display: flex;
-        align-items: flex-end;
+        text-align: center;
 
-        h1 {
+        h2 {
+            font-size: 30px;
             margin: 0;
         }
     }
