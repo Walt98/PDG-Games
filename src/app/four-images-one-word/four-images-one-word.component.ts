@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { PayloadService } from '../payload.service';
 
@@ -10,7 +10,7 @@ import { PayloadService } from '../payload.service';
   templateUrl: './four-images-one-word.component.html',
   styleUrl: './four-images-one-word.component.scss'
 })
-export class FourImagesOneWordComponent implements OnInit {
+export class FourImagesOneWordComponent {
 
   index = 0;
   showLetters = false;
@@ -34,11 +34,6 @@ export class FourImagesOneWordComponent implements OnInit {
   ].map(w => w.toUpperCase());
 
   constructor(public payload: PayloadService) { }
-
-  ngOnInit(): void {
-
-    this.startTimer();
-  }
 
   /**
    * Restituisce il background-image del singolo quadrante.
@@ -74,7 +69,6 @@ export class FourImagesOneWordComponent implements OnInit {
         }, 1);
 
         this.index++;
-        this.startTimer();
       }
     }
 
@@ -91,7 +85,6 @@ export class FourImagesOneWordComponent implements OnInit {
         }, 1);
 
         this.index--;
-        this.startTimer();
       }
     }
 
@@ -120,7 +113,6 @@ export class FourImagesOneWordComponent implements OnInit {
         }, 1);
 
         this.index++;
-        this.startTimer();
       }
     }
 
@@ -131,13 +123,5 @@ export class FourImagesOneWordComponent implements OnInit {
       const audio = new Audio("/success.mp3");
       audio.play();
     }
-  }
-
-  /**
-   * Metodo che fa partire il timer.
-   */
-  private startTimer() {
-
-    setTimeout(() => this.payload.startTimer$.next(), 2);
   }
 }
