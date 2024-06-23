@@ -4,14 +4,16 @@
     background-size: 100vw 100vh;
     flex-direction: column;
     font-family: "Montserrat", sans-serif;
-    gap: 30px;
+    // gap: 30px;
 
     .title {
         text-align: center;
+        margin-top: 50px;
 
         h2 {
             font-size: 30px;
             margin: 0;
+            padding: 0 30px;
         }
     }
 
@@ -19,46 +21,58 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 40px;
-        margin-left: -100px;
+        // gap: 40px;
+        // margin-left: -100px;
 
         .timer-container {
-            width: 168px;
+            // width: 168px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
         }
 
-        .images {
-            $sizeBlock: 470px;
-            width: $sizeBlock;
-            height: $sizeBlock;
+        .images-col {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-    
-            .row {
+            justify-content: center;
+            margin: 20px 0 30px;
+
+            .images {
+                $size: calc(60vw - 2rem);
+                $maxSize: 470px;
+                width: $size;
+                height: $size;
+                max-width: $maxSize;
+                max-height: $maxSize;
                 display: flex;
+                flex-direction: column;
                 justify-content: space-between;
-    
-                .column {
-                    $sizeCol: 220px;
-                    width: $sizeCol;
-                    height: $sizeCol;
-                    border-radius: 10px;
-                    border: 5px solid #a3cbe5;
-                    background-color: whitesmoke;
-                    background-image: url("/nothing.jpg");
-                    background-position: 50% 50%;
-                    background-size: $sizeCol $sizeCol;
+        
+                .images-row {
+                    display: flex;
+                    justify-content: space-between;
+        
+                    .image {
+                        $colSize: calc(30vw - 2rem);
+                        $maxColSize: 220px;
+                        width: $colSize;
+                        height: $colSize;
+                        max-width: $maxColSize;
+                        max-height: $maxColSize;
+                        border-radius: 10px;
+                        border: 5px solid #a3cbe5;
+                        background-color: whitesmoke;
+                        background-image: url("/nothing.jpg");
+                        background-position: 50% 50%;
+                        background-size: 100% 100%;
+                    }
                 }
             }
         }
     }
 
     .footer {
-        display: flex;
         column-gap: 12px;
+        margin: 10px 0 20px;
 
         .char {
             display: flex;
