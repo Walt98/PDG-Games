@@ -27,10 +27,8 @@ export class IntroComponent {
       this.introVideo.nativeElement.play();
 
       setTimeout(() => {
-        if (!this.shiftClose) {
-          console.log("aaaaaa");
-          this.close.emit();
-        }
+
+        if (!this.shiftClose) this.close.emit();
       }, 15000);
     }
   }
@@ -43,6 +41,7 @@ export class IntroComponent {
     if (event.code === "Enter") {
 
       if (!event.shiftKey) this.showVideo();
+
       else {
         this.shiftClose = true;
         this.close.emit();
