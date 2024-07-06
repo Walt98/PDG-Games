@@ -25,12 +25,17 @@ export class IntroComponent {
 
       this.show = true;
       this.introVideo.nativeElement.play();
-
-      setTimeout(() => {
-
-        if (!this.shiftClose) this.close.emit();
-      }, 15000);
     }
+  }
+
+  /**
+   * Evento ended del video.
+   * 
+   * Chiude il componente facendo mostrare la lista dei giochi.
+   */
+  onEnded() {
+
+    if (!this.shiftClose) this.close.emit();
   }
 
   /**
