@@ -14,6 +14,7 @@ export class IntroComponent {
   @ViewChild("introVideo") introVideo!: ElementRef;
 
   show = false;
+  shiftClose = false;
 
   /**
    * Mostra il video.
@@ -25,15 +26,27 @@ export class IntroComponent {
       this.show = true;
       this.introVideo.nativeElement.play();
 
-      setTimeout(() => this.close.emit(), 15000);
+      setTimeout(() => {
+        if (!this.shiftClose) {
+          console.log("aaaaaa");
+          this.close.emit();
+        }
+      }, 15000);
     }
   }
 
   /**
    * Eventi keydown dell'intro.
    */
-  @HostListener('document:keydown', ['$event.code']) onKeydown(code: string) {
+  @HostListener('document:keydown', ['$event']) onKeydown(event: KeyboardEvent) {
 
-    if (code === "Enter") this.showVideo();
+    if (event.code === "Enter") {
+
+      if (!event.shiftKey) this.showVideo();
+      else {
+        this.shiftClose = true;
+        this.close.emit();
+      }
+    }
   }
 }
