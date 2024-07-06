@@ -6,8 +6,15 @@
     <!-- 4 Immagini 1 Parola di Dio -->
     @case (1) { <app-four-images-one-word></app-four-images-one-word> }
 
+    <!-- Completa il verso -->
+    @case (2) { <app-completa-il-verso></app-completa-il-verso> }
+
     <!-- Lista dei giochi -->
-    @default { <app-lista-giochi></app-lista-giochi> }
+    @default
+    {
+        <app-intro *ngIf="showIntroComponent" (close)="showIntroComponent = false"></app-intro>
+        <app-lista-giochi *ngIf="!showIntroComponent"></app-lista-giochi>
+    }
 }
 
 <!-- Pulsante per tornare alla lista dei giochi -->

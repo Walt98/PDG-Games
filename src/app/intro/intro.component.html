@@ -1,0 +1,8 @@
+<div class="body">
+    @if (!show)
+    {
+        <button class="introButton fade-in" (click)="showVideo()"> START! </button>
+    }
+
+    <video #introVideo class="introVideo opacity{{ show ? 1 : 0 }}" src="/intro.mp4" width="100%" height="auto"></video>
+</div>

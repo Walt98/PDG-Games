@@ -17,13 +17,15 @@ export class ListaGiochiComponent implements OnInit {
   cards = [
     "Passa-Parola di Dio",
     "4 Immagini 1 Parola di Dio",
-    "Prossimamente" // Questa stringa deve rimanere l'ultima dell'array
+    // "Completa il verso",
+    "Prossimamente"
   ];
 
   constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
-
+    
+    this.changeComingSoonPosition();
     setTimeout(() => this.showComingSoon = true, 2000);
   }
 
@@ -32,9 +34,9 @@ export class ListaGiochiComponent implements OnInit {
    */
   getCardImage(index: number) {
 
-    const res = index === this.cards.length - 1
-      ? "coming-soon"
-      : `card${index + 1}`;
+    const cond = index === this.cards.length - 1 || this.cards[index] === "Prossimamente";
+
+    const res = cond ? "coming-soon" : `card${index + 1}`;
 
     return `background-image: url("/${res}.jpg")`;
   }
@@ -95,6 +97,18 @@ export class ListaGiochiComponent implements OnInit {
         if (this.index !== undefined) this.tmpIndex = this.index;
         this.index = undefined;
       }
+    }
+  }
+
+  /**
+   * Motodo che sposta l'elemento "Prossimamente" dell'array cards mettendolo all'ultimo posto se non si trova già lì.
+   */
+  private changeComingSoonPosition() {
+
+    if (this.cards[this.cards.length - 1] !== "Prossimamente") {
+
+      const comingSoongIndex = this.cards.indexOf("Prossimamente");
+      this.cards.splice(this.cards.length - 1, 0, this.cards.splice(comingSoongIndex, 1)[0]);
     }
   }
 }

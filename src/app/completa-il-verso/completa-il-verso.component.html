@@ -1,0 +1,18 @@
+<div class="body fade-in">
+    <div class="completaIlVerso">
+        <div class="domanda">
+            <h2> {{ items[0].verso }} </h2>
+        </div>
+
+        <div class="risposte-container">
+            @for (risposta of items[0].risposte; track $index)
+            {
+                <div class="risposta"> {{ risposta }} </div>
+            }
+        </div>
+
+        <div class="gameTimer">
+            <app-timer [timer]="30"></app-timer>
+        </div>
+    </div>
+</div>

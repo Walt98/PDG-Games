@@ -4,6 +4,9 @@ import { FourImagesOneWordComponent } from './four-images-one-word/four-images-o
 import { PassaParolaComponent } from './passa-parola/passa-parola.component';
 import { PayloadService } from './payload.service';
 import { ListaGiochiComponent } from './lista-giochi/lista-giochi.component';
+import { CompletaIlVersoComponent } from './completa-il-verso/completa-il-verso.component';
+import { IntroComponent } from './intro/intro.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +15,18 @@ import { ListaGiochiComponent } from './lista-giochi/lista-giochi.component';
   standalone: true,
   imports: [
     RouterOutlet,
+    CommonModule,
+    IntroComponent,
     ListaGiochiComponent,
     PassaParolaComponent,
-    FourImagesOneWordComponent
+    FourImagesOneWordComponent,
+    CompletaIlVersoComponent
   ]
 })
 export class AppComponent {
 
   title = 'pdg-games';
+  showIntroComponent = true;
 
   constructor(public payload: PayloadService) { }
 
