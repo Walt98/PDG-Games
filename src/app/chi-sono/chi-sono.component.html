@@ -13,8 +13,8 @@
         }
     </div>
   
-    <div class="footer d-flex justify-content-center">
-        <img src="logo-v.png" alt="logo" height="110" width="auto" (click)="show(true)">
+    <div class="footer d-flex justify-content-center align-items-center">
+        <img src="logo-v.png" alt="logo" height="90" width="auto" (click)="show(true)">
         <app-timer *ngIf="showTimer" [timer]="30" (timeout)="onTimeout()"></app-timer>
     </div>
 </div>
