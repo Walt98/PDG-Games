@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, interval, takeUntil } from 'rxjs';
 import { PayloadService } from '../payload.service';
+import { play } from '../app.component';
 
 @Component({
   selector: 'app-timer',
@@ -109,8 +110,7 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.setValues();
 
         // Ferma il timer quando il tempo è scaduto
-        const audio = new Audio("/gong.mp3");
-        audio.play();
+        play("gong");
         this.payload.timerSubscription.unsubscribe();
         this.isStarted = false;
         this.timeout.emit();

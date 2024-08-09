@@ -1,0 +1,21 @@
+<div class="body fade-in">
+    <div class="title col-12 d-flex justify-content-center">
+      <h2> Chi sono? </h2>
+    </div>
+  
+    <div class="col-12 d-flex justify-content-center word">
+        @for (letter of randomized[index]; track $index)
+        {
+            <div class="char">
+                <span class="letter"> {{ showName ? characters[index][$index] : letter }} </span>
+                <div class="line"></div>
+            </div>
+        }
+    </div>
+  
+    <div class="footer d-flex justify-content-center">
+        <img src="logo-v.png" alt="logo" height="110" width="auto" (click)="show(true)">
+        <app-timer *ngIf="showTimer" [timer]="30" (timeout)="onTimeout()"></app-timer>
+    </div>
+</div>
+

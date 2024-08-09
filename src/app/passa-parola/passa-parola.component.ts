@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { PayloadService } from '../payload.service';
+import { play } from '../app.component';
 
 declare type PassaParola = { key: string; status: string; }
 
@@ -166,8 +167,7 @@ export class PassaParolaComponent implements OnInit {
       if (this.index !== undefined) {
 
         this.items[this.index].status = "skip";
-        const audio = new Audio("/skip.mp3");
-        audio.play();
+        play("skip");
       }
     }
 
@@ -177,8 +177,7 @@ export class PassaParolaComponent implements OnInit {
       if (this.index !== undefined) {
 
         this.items[this.index].status = "success";
-        const audio = new Audio("/success.mp3");
-        audio.play();
+        play("success");
       }
     }
 
@@ -188,8 +187,7 @@ export class PassaParolaComponent implements OnInit {
       if (this.index !== undefined) {
 
         this.items[this.index].status = "error";
-        const audio = new Audio("/error.mp3");
-        audio.play();
+        play("error");
       }
     }
 
@@ -214,22 +212,19 @@ export class PassaParolaComponent implements OnInit {
 
     if (item.status === "") {
 
-      const audio = new Audio("/skip.mp3");
-      audio.play();
+      play("skip");
       item.status = "skip";
     }
 
     else if (item.status === "skip") {
 
-      const audio = new Audio("/success.mp3");
-      audio.play();
+      play("success");
       item.status = "success";
     }
 
     else if (item.status === "success") {
 
-      const audio = new Audio("/error.mp3");
-      audio.play();
+      play("error");
       item.status = "error";
     }
 

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { PayloadService } from '../payload.service';
+import { play } from '../app.component';
 
 @Component({
   selector: 'app-four-images-one-word',
@@ -125,8 +126,7 @@ export class FourImagesOneWordComponent {
 
       this.showLetters = true;
       this.payload.stopTimer$.next();
-      const audio = new Audio("/success.mp3");
-      audio.play();
+      play("success");
     }
   }
 }

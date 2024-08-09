@@ -3,9 +3,9 @@
         <h1> PDG BIBLE GAMES </h1>
 
         <div class="game-cards">
-            @for (title of cards; track $index)
+            @for (card of cards; track $index)
             {
-                @if ($index === cards.length - 1 ? showComingSoon : true)
+                @if ($index === cards.length - 1 ? showComingSoon : !card?.hidden)
                 {
                     <div
                         class="game-card fade-in"
@@ -14,7 +14,7 @@
                             'last': $index === cards.length - 1
                         }"
                         [style]="getCardImage($index)"
-                        [title]="title"
+                        [title]="card.title"
                         (click)="onSelectGame($index)">
                     </div>
                 }

@@ -7,6 +7,16 @@ import { ListaGiochiComponent } from './lista-giochi/lista-giochi.component';
 import { CompletaIlVersoComponent } from './completa-il-verso/completa-il-verso.component';
 import { IntroComponent } from './intro/intro.component';
 import { CommonModule } from '@angular/common';
+import { ChiSonoComponent } from './chi-sono/chi-sono.component';
+
+/**
+ * Riproduce il suono descritto in parametro.
+ */
+export function play(sound: "success" | "error" | "skip" | "gong") {
+
+  const audio = new Audio(`/${sound}.mp3`);
+  audio.play();
+}
 
 @Component({
   selector: 'app-root',
@@ -20,7 +30,8 @@ import { CommonModule } from '@angular/common';
     ListaGiochiComponent,
     PassaParolaComponent,
     FourImagesOneWordComponent,
-    CompletaIlVersoComponent
+    CompletaIlVersoComponent,
+    ChiSonoComponent
   ]
 })
 export class AppComponent {
