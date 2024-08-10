@@ -27,13 +27,11 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     this.setValues();
 
-    this.payload.startTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.setTimer(true);
-    });
+    this.payload.startTimer$.pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.setTimer(true));
 
-    this.payload.stopTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.setTimer(false);
-    });
+    this.payload.stopTimer$.pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.setTimer(false));
   }
 
   ngOnDestroy(): void {

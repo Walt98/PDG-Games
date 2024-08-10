@@ -2,7 +2,7 @@
     <div class="title col-12">
       <h2> 4 Immagini 1 Parola di Dio </h2>
     </div>
-  
+
     <div class="images-container row col-12">
         <div class="timer-container col-md-3 d-flex justify-content-center">
             <app-timer *ngIf="showTimer" [timer]="25" (timeout)="onTimeout()"></app-timer>
@@ -14,7 +14,7 @@
                     <div class="image col-6" [style]="getImage(0)" title="Immagine 1"></div>
                     <div class="image col-6" [style]="getImage(1)" title="Immagine 2"></div>
                 </div>
-            
+
                 <div class="images-row">
                     <div class="image col-6" [style]="getImage(2)" title="Immagine 3"></div>
                     <div class="image col-6" [style]="getImage(3)" title="Immagine 4"></div>
@@ -26,7 +26,7 @@
             <img src="logo-v.png" alt="logo" height="110" width="auto" (click)="showWord(true)">
         </div>
     </div>
-  
+
     <div class="footer col-12 d-flex justify-content-center">
         @for (letter of words[index]; track $index)
         {

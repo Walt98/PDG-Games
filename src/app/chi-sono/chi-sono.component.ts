@@ -108,10 +108,10 @@ export class ChiSonoComponent implements OnInit {
 
     // Risposta esatta
     if (["Delete", "Backspace"].includes(event.code)) {
-      
-      this.showName = true;
+
       this.payload.stopTimer$.next();
       play("error");
+      this.showName = true;
     }
   }
 

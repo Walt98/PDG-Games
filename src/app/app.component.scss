@@ -7,15 +7,15 @@
     svg {
         width: 35px;
         height: 35px;
-    
+
         path {
             color: #e5e5e5 !important;
             transition: 0.2s;
         }
-    
+
         &:hover {
             cursor: pointer;
-    
+
             path {
                 color: white !important;
             }

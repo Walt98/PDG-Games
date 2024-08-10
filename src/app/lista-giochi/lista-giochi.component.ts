@@ -26,7 +26,7 @@ export class ListaGiochiComponent implements OnInit {
   constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
-    
+
     this.changeComingSoonPosition();
     setTimeout(() => this.showComingSoon = true, 2000);
   }

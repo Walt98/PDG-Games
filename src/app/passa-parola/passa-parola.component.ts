@@ -75,6 +75,7 @@ export class PassaParolaComponent implements OnInit {
     if (code.includes("Key")) {
 
       let item = this.items.find(i => i.key === code[3]);
+
       if (!!item) {
         this.index = this.items.indexOf(item);
         this.tmpIndex = this.index;
@@ -91,6 +92,7 @@ export class PassaParolaComponent implements OnInit {
     if (code === "ArrowRight") {
 
       if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
+
       else {
 
         if (this.index === undefined) {
@@ -104,12 +106,14 @@ export class PassaParolaComponent implements OnInit {
           if (!allSetted) {
             while (!["", "skip"].includes(this.items[this.index].status)) this.index++;
           }
+
           else this.index = undefined;
         }
 
         else {
 
           if (!allSetted) {
+
             do {
               if (this.index === this.items.length - 1) this.index = 0;
               else (this.index)++;
@@ -141,12 +145,14 @@ export class PassaParolaComponent implements OnInit {
           if (!allSetted) {
             while (!["", "skip"].includes(this.items[this.index].status)) this.index--;
           }
+
           else this.index = undefined;
         }
 
         else {
 
           if (!allSetted) {
+
             do {
               if (this.index === 0) this.index = this.items.length - 1;
               else this.index--;

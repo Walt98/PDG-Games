@@ -2,10 +2,10 @@
     @if (isReady)
     {
         <h2 style="font-size: 30px;">Passa-Parola di Dio</h2>
-    
+
         <div class="circle-container">
             <app-timer [timer]="90" style="transform: rotate(90deg);"></app-timer>
-    
+
             @for (item of items; track $index)
             {
                 <div class="circle {{ item.status }}"
@@ -16,8 +16,7 @@
                 </div>
             }
         </div>
-    
+
         <img src="logo.png" alt="logo" width="130" height="auto">
     }
 </div>
-  
