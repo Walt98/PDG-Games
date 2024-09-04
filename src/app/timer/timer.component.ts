@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, interval, takeUntil } from 'rxjs';
 import { PayloadService } from '../payload.service';
-import { play } from '../app.component';
+import { play } from '../common-functions';
 
 @Component({
   selector: 'app-timer',

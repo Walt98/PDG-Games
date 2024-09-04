@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { PayloadService } from '../payload.service';
-import { play } from '../app.component';
+import { play } from '../common-functions';
 
 declare type PassaParola = { key: string; status: string; }
 

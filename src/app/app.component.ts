@@ -10,15 +10,6 @@ import { CommonModule } from '@angular/common';
 import { ChiSonoComponent } from './chi-sono/chi-sono.component';
 import { ReazioneACatenaComponent } from './reazione-a-catena/reazione-a-catena.component';
 
-/**
- * Riproduce il suono descritto in parametro.
- */
-export function play(sound: "success" | "error" | "skip" | "gong") {
-
-  const audio = new Audio(`/${sound}.mp3`);
-  audio.play();
-}
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -48,6 +39,7 @@ export class AppComponent {
    */
   onClose() {
 
-    if (this.payload.gioco > -1) this.payload.gioco = -1;
+    this.payload.gioco = -1;
+    this.payload.stopTimer$.next();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { PayloadService } from '../payload.service';
-import { play } from '../app.component';
+import { play } from '../common-functions';
 import { TimerComponent } from '../timer/timer.component';
 import { CommonModule } from '@angular/common';
 
@@ -69,7 +69,7 @@ export class ChiSonoComponent implements OnInit {
   /**
    * Evento keydown.
    */
-  @HostListener('document:keydown', ['$event']) onKeydown(event: KeyboardEvent) {
+  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
     // Va avanti
     if (event.code === "ArrowRight") {

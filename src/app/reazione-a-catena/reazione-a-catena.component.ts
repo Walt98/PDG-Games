@@ -1,7 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { PayloadService } from '../payload.service';
 import { TimerComponent } from '../timer/timer.component';
-import { play } from '../app.component';
+import { play } from '../common-functions';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './reazione-a-catena.component.html',
   styleUrl: './reazione-a-catena.component.scss'
 })
-export class ReazioneACatenaComponent {
+export class ReazioneACatenaComponent implements OnInit {
 
   index = 0;
   showTimer = true;
@@ -49,7 +49,7 @@ export class ReazioneACatenaComponent {
   /**
    * Evento keydown.
    */
-  @HostListener('document:keydown', ['$event']) onKeydown(event: KeyboardEvent) {
+  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
     // Va avanti
     if (event.code === "ArrowRight") {
