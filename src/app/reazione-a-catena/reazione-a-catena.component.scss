@@ -1,0 +1,47 @@
+.body {
+    background-image: url("/background5.jpg");
+    background-position: 50% 50%;
+    background-size: 100vw 100vh;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+    margin-top: 50px;
+    position: absolute;
+    top: 0;
+
+    h2 {
+        font-size: 30px;
+        padding: 0 30px;
+        margin: 0;
+    }
+}
+
+.points {
+    font-size: 70px;
+    top: calc(50% + 10%);
+}
+
+.word-container {
+    column-gap: 5px;
+    font-size: 100px;
+    font-weight: 800;
+    cursor: default;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 25px;
+    gap: 50px;
+
+    img {
+        -webkit-filter: drop-shadow(0 0 20px #000000bf);
+        filter: drop-shadow(0 0 20px #000000bf);
+    }
+
+    app-timer {
+        text-shadow: #000000bf 0 0 20px;
+    }
+}

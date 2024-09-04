@@ -8,6 +8,7 @@ import { CompletaIlVersoComponent } from './completa-il-verso/completa-il-verso.
 import { IntroComponent } from './intro/intro.component';
 import { CommonModule } from '@angular/common';
 import { ChiSonoComponent } from './chi-sono/chi-sono.component';
+import { ReazioneACatenaComponent } from './reazione-a-catena/reazione-a-catena.component';
 
 /**
  * Riproduce il suono descritto in parametro.
@@ -30,8 +31,9 @@ export function play(sound: "success" | "error" | "skip" | "gong") {
     ListaGiochiComponent,
     PassaParolaComponent,
     FourImagesOneWordComponent,
+    ChiSonoComponent,
     CompletaIlVersoComponent,
-    ChiSonoComponent
+    ReazioneACatenaComponent
   ]
 })
 export class AppComponent {

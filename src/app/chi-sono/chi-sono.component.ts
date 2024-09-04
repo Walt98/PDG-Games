@@ -106,7 +106,7 @@ export class ChiSonoComponent implements OnInit {
     // Risposta esatta
     if (event.code === "Enter") this.show();
 
-    // Risposta esatta
+    // Risposta sbagliata
     if (["Delete", "Backspace"].includes(event.code)) {
 
       this.payload.stopTimer$.next();

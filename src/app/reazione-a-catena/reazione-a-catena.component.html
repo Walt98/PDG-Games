@@ -1,0 +1,21 @@
+<div class="body fade-in">
+    <div class="title col-12 d-flex justify-content-center">
+      <h2> Reazione a catena </h2>
+    </div>
+
+    <div class="col-12 text-center position-absolute points">
+        <span> {{ points }} </span>
+    </div>
+  
+    <div class="col-12 d-flex justify-content-center word-container">
+        @for (letter of words[index]; track $index)
+        {
+            <span> {{ letter }} </span>
+        }
+    </div>
+  
+    <div class="footer d-flex justify-content-center align-items-center">
+        <img src="logo-v.png" alt="logo" height="90" width="auto" (click)="setPoints(undefined, undefined, true)">
+        <app-timer *ngIf="showTimer" [timer]="60"></app-timer>
+    </div>
+</div>

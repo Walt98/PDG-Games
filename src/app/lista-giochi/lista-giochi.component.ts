@@ -18,8 +18,9 @@ export class ListaGiochiComponent implements OnInit {
   cards: Card[] = [
     { title: "Passa-Parola di Dio" },
     { title: "4 Immagini 1 Parola di Dio" },
-    { title: "Completa il verso", hidden: true },
     { title: "Chi sono?" },
+    { title: "Completa il verso" },
+    { title: "Reazione a catena" },
     { title: "Prossimamente" }
   ];
 
