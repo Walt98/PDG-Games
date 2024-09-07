@@ -19,7 +19,7 @@ export class ListaGiochiComponent implements OnInit {
     { title: "Passa-Parola di Dio" },
     { title: "4 Immagini 1 Parola di Dio" },
     { title: "Chi sono?" },
-    { title: "Completa il verso", hidden: true },
+    { title: "Completa il verso" },
     { title: "Reazione a catena" },
     { title: "Prossimamente" }
   ];

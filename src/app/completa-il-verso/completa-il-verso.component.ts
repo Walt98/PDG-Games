@@ -1,11 +1,12 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import data from '../../../public/game3items.json';
 import { PayloadService } from '../payload.service';
 import { play } from '../common-functions';
 import { CommonModule } from '@angular/common';
 
-declare type CompletaIlVersoItem = { verso: string; risposte: string[]; };
+declare type RispostaItem = { text: string; isCurrect?: boolean; status?: "success" | "error" };
+declare type CompletaIlVersoItem = { verso: string; risposte: RispostaItem[]; };
 
 @Component({
   selector: 'app-completa-il-verso',
@@ -14,14 +15,38 @@ declare type CompletaIlVersoItem = { verso: string; risposte: string[]; };
   templateUrl: './completa-il-verso.component.html',
   styleUrl: './completa-il-verso.component.scss'
 })
-export class CompletaIlVersoComponent {
+export class CompletaIlVersoComponent implements OnInit {
 
   index = 0;
   showTimer = true;
-  showAnswer = false;
   items = JSON.parse(JSON.stringify(data)) as CompletaIlVersoItem[];
 
   constructor(public payload: PayloadService) { }
+
+  ngOnInit(): void {
+    
+    this.setItems();
+  }
+
+  /**
+   * Imposta domande e risposte in maiuscolo.
+   */
+  private setItems() {
+
+    let items: CompletaIlVersoItem[] = [];
+
+    this.items.forEach(i => items.push({
+      verso: i.verso.toUpperCase(),
+      risposte: [
+        { text: "A — " + i.risposte[0].text.toUpperCase(), isCurrect: i.risposte[0]?.isCurrect },
+        { text: "B — " + i.risposte[1].text.toUpperCase(), isCurrect: i.risposte[1]?.isCurrect },
+        { text: "C — " + i.risposte[2].text.toUpperCase(), isCurrect: i.risposte[2]?.isCurrect },
+        { text: "D — " + i.risposte[3].text.toUpperCase(), isCurrect: i.risposte[3]?.isCurrect }
+      ]
+    }));
+
+    this.items = items;
+  }
 
   /**
    * Evento keydown.
@@ -31,8 +56,9 @@ export class CompletaIlVersoComponent {
     // Va avanti
     if (event.code === "ArrowRight") {
 
-      if (this.index < this.items.length - 1 && (this.showAnswer || event.shiftKey)) {
-        this.showAnswer = false;
+      let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
+
+      if (this.index < this.items.length - 1 && (risposta?.status || event.shiftKey)) {
         this.showTimer = false;
 
         setTimeout(() => {
@@ -47,8 +73,9 @@ export class CompletaIlVersoComponent {
     // Va indietro
     if (event.code === "ArrowLeft") {
 
-      if (this.index > 0 && (this.showAnswer || event.shiftKey)) {
-        this.showAnswer = false;
+      let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
+
+      if (this.index > 0 && (risposta?.status || event.shiftKey)) {
         this.showTimer = false;
 
         setTimeout(() => {
@@ -59,45 +86,25 @@ export class CompletaIlVersoComponent {
         this.index--;
       }
     }
-
-    // Risposta esatta
-    if (event.code === "Enter") this.show();
-
-    // Risposta sbagliata
-    if (["Delete", "Backspace"].includes(event.code)) {
-
-      this.payload.stopTimer$.next();
-      play("error");
-      this.showAnswer = true;
-    }
   }
 
   /**
-   * Mostra la parola corretta.
+   * Evento click del logo.
+   * 
+   * Va avanti con le domande.
    */
-  show(isClick = false) {
+  change() {
 
-    if (this.showAnswer && isClick) {
+    if (this.index !== this.items.length - 1) {
 
-      if (this.index !== this.items.length - 1) {
+      this.showTimer = false;
 
-        this.showAnswer = false;
-        this.showTimer = false;
+      setTimeout(() => {
+        this.showTimer = true;
+        this.payload.timerSubscription?.unsubscribe();
+      }, 1);
 
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
-
-        this.index++;
-      }
-    }
-
-    else {
-
-      this.showAnswer = true;
-      this.payload.stopTimer$.next();
-      play("success");
+      this.index++;
     }
   }
 
@@ -106,6 +113,21 @@ export class CompletaIlVersoComponent {
    */
   onTimeout() {
 
-    setTimeout(() => this.showAnswer = true, 3000);
+    setTimeout(() => {
+      let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
+      if (risposta) risposta.status = "success";
+    }, 3000);
+  }
+
+  /**
+   * Evento click delle risposte.
+   */
+  onSelect(risposta: RispostaItem) {
+    
+    const i = this.items[this.index].risposte.indexOf(risposta);
+    const status = risposta.isCurrect ? "success" : "error";
+
+    this.items[this.index].risposte[i].status = status;
+    play(status);
   }
 }

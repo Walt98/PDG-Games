@@ -1,19 +1,200 @@
 [
     {
-        "verso": "Ma cercate prima...",
-        "risposte": [
-            "Di amarvi gli uni gli altri",
-            "Di avere fede",
-            "La Sua giustizia",
-            "Il regno di Dio"
-        ]
-    }, {
-        "verso": "(Salmo 23) Il Signore è...",
-        "risposte": [
-            "Un Dio di amore",
-            "Il mio pastore",
-            "Onnipotente",
-            "Lo stesso ieri, oggi e in eterno"
-        ]
+      "verso": "(Filippesi 4:13) Io posso ogni cosa [...]",
+      "risposte": [
+        {
+          "text": "in colui che mi fortifica",
+          "isCurrect": true
+        },
+        {
+          "text": "attraverso la mia forza"
+        },
+        {
+          "text": "perché sono determinato"
+        },
+        {
+          "text": "con la mia volontà"
+        }
+      ]
+    },
+    {
+      "verso": "(Abacuc 2:3) perché è una visione per un tempo già fissato. Essa si affretta verso il suo termine e non mentirà; se tarda, aspettala, [...]",
+      "risposte": [
+        {
+          "text": "poiché certamente verrà, e non tarderà",
+          "isCurrect": true
+        },
+        {
+          "text": "perché verrà all'improvviso"
+        },
+        {
+          "text": "perché non ci sarà un ritardo"
+        },
+        {
+          "text": "quando meno te lo aspetti"
+        }
+      ]
+    },
+    {
+      "verso": "(Isaia 43:1) Ma ora così parla il Signore, il tuo Creatore, o Giacobbe, colui che ti ha formato, o Israele: «Non temere, [...]!",
+      "risposte": [
+        {
+          "text": "perché io ti ho riscattato, ti ho chiamato per nome; tu sei mio!",
+          "isCurrect": true
+        },
+        {
+          "text": "perché io sono con te ovunque tu vada"
+        },
+        {
+          "text": "perché sei prezioso ai miei occhi"
+        },
+        {
+          "text": "perché io ti proteggerò sempre"
+        }
+      ]
+    },
+    {
+      "verso": "(Salmi 23:2) Egli mi fa riposare in verdeggianti pascoli, [...]",
+      "risposte": [
+        {
+          "text": "mi guida lungo le acque calme",
+          "isCurrect": true
+        },
+        {
+          "text": "mi protegge dalle tempeste"
+        },
+        {
+          "text": "mi conduce verso la luce"
+        },
+        {
+          "text": "mi ristora con amore"
+        }
+      ]
+    },
+    {
+      "verso": "(Giovanni 3:16) Perché Dio ha tanto amato il mondo, che ha dato il suo unigenito Figlio, [...]",
+      "risposte": [
+        {
+          "text": "affinché chiunque crede in lui non perisca, ma abbia vita eterna.",
+          "isCurrect": true
+        },
+        {
+          "text": "affinché chiunque crede in lui sia benedetto."
+        },
+        {
+          "text": "affinché nessuno si perda ma tutti abbiano pace."
+        },
+        {
+          "text": "affinché tutti conoscano la sua gloria."
+        }
+      ]
+    },
+    {
+      "verso": "(Giovanni 18:10) Allora Simon Pietro, che aveva una spada, la prese e colpì il servo del sommo sacerdote, [...]",
+      "risposte": [
+        {
+          "text": "colpì il servo del sommo sacerdote",
+          "isCurrect": true
+        },
+        {
+          "text": "ferì un soldato romano"
+        },
+        {
+          "text": "attaccò un guardiano del tempio"
+        },
+        {
+          "text": "minacciò il centurione"
+        }
+      ]
+    },
+    {
+      "verso": "(Giovanni 14:7) Se mi conoscete, conoscete anche il Padre, anzi, [...]",
+      "risposte": [
+        {
+          "text": "già lo conoscete e lo avete veduto",
+          "isCurrect": true
+        },
+        {
+          "text": "già lo avete incontrato"
+        },
+        {
+          "text": "già lo avete riconosciuto"
+        },
+        {
+          "text": "già lo avete compreso"
+        }
+      ]
+    },
+    {
+      "verso": "(Matteo 19:26) Gesù, fissando lo sguardo su di loro, disse: «Agli uomini questo è impossibile; [...]",
+      "risposte": [
+        {
+          "text": "ma a Dio ogni cosa è possibile",
+          "isCurrect": true
+        },
+        {
+          "text": "ma a Dio niente è impossibile"
+        },
+        {
+          "text": "ma a Dio tutto è facile"
+        },
+        {
+          "text": "ma a Dio ogni cosa è fattibile"
+        }
+      ]
+    },
+    {
+      "verso": "(Salmi 119:105) La tua parola è [...]",
+      "risposte": [
+        {
+          "text": "una lampada al mio piede e una luce sul mio sentiero",
+          "isCurrect": true
+        },
+        {
+          "text": "una guida sicura e un faro luminoso"
+        },
+        {
+          "text": "una luce che illumina la mia strada"
+        },
+        {
+          "text": "una guida nelle tenebre della vita"
+        }
+      ]
+    },
+    {
+      "verso": "(Isaia 40:31) ma quelli che sperano nel Signore acquistano nuove forze, si alzano a volo come aquile, [...]",
+      "risposte": [
+        {
+          "text": "corrono e non si stancano",
+          "isCurrect": true
+        },
+        {
+          "text": "camminano e non si affaticano"
+        },
+        {
+          "text": "volano e non si affaticano"
+        },
+        {
+          "text": "si alzano e non si fermano"
+        }
+      ]
+    },
+    {
+      "verso": "(Seconda lettera ai Corinzi 5:7) (poiché camminiamo per fede [...]",
+      "risposte": [
+        {
+          "text": "e non per visione",
+          "isCurrect": true
+        },
+        {
+          "text": "e non per segni"
+        },
+        {
+          "text": "e non per osservazione"
+        },
+        {
+          "text": "e non per intuizione"
+        }
+      ]
     }
-]
+]  

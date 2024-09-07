@@ -3,7 +3,7 @@
       <h2> Completa il verso </h2>
     </div>
 
-    <div class="col-12 d-flex justify-content-center">
+    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
         <div class="domanda">
             <h2> {{ items[index].verso }} </h2>
         </div>
@@ -11,13 +11,13 @@
         <div class="risposte-container">
             @for (risposta of items[index].risposte; track $index)
             {
-                <div class="risposta"> {{ risposta }} </div>
+                <div class="risposta {{ risposta.status ?? '' }}" (click)="onSelect(risposta)"> {{ risposta.text }} </div>
             }
         </div>
     </div>
   
     <div class="footer d-flex justify-content-center align-items-center">
-        <img src="logo-v.png" alt="logo" height="90" width="auto" (click)="show(true)">
-        <app-timer *ngIf="showTimer" [timer]="15"></app-timer>
+        <img src="logo-v.png" alt="logo" height="90" width="auto" (click)="change()">
+        <app-timer *ngIf="showTimer" [timer]="20"></app-timer>
     </div>
 </div>
