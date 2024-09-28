@@ -86,6 +86,22 @@ export class CompletaIlVersoComponent implements OnInit {
         this.index--;
       }
     }
+
+    // Seleziona la risposta
+    if (["KeyA", "KeyB", "KeyC", "KeyD"].includes(event.code)) {
+
+      let index = -1;
+
+      switch (event.code) {
+        case "KeyA": index = 0; break;
+        case "KeyB": index = 1; break;
+        case "KeyC": index = 2; break;
+        case "KeyD": index = 3; break;
+        default: index = -1; break;
+      }
+
+      if (index > -1) this.onSelect(this.items[this.index].risposte[index]);
+    }
   }
 
   /**
