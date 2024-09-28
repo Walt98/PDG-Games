@@ -1,200 +1,380 @@
 [
-    {
-      "verso": "(Filippesi 4:13) Io posso ogni cosa [...]",
-      "risposte": [
-        {
-          "text": "in colui che mi fortifica",
-          "isCurrect": true
-        },
-        {
-          "text": "attraverso la mia forza"
-        },
-        {
-          "text": "perché sono determinato"
-        },
-        {
-          "text": "con la mia volontà"
-        }
-      ]
-    },
-    {
-      "verso": "(Abacuc 2:3) perché è una visione per un tempo già fissato. Essa si affretta verso il suo termine e non mentirà; se tarda, aspettala, [...]",
-      "risposte": [
-        {
-          "text": "poiché certamente verrà, e non tarderà",
-          "isCurrect": true
-        },
-        {
-          "text": "perché verrà all'improvviso"
-        },
-        {
-          "text": "perché non ci sarà un ritardo"
-        },
-        {
-          "text": "quando meno te lo aspetti"
-        }
-      ]
-    },
-    {
-      "verso": "(Isaia 43:1) Ma ora così parla il Signore, il tuo Creatore, o Giacobbe, colui che ti ha formato, o Israele: «Non temere, [...]!",
-      "risposte": [
-        {
-          "text": "perché io ti ho riscattato, ti ho chiamato per nome; tu sei mio!",
-          "isCurrect": true
-        },
-        {
-          "text": "perché io sono con te ovunque tu vada"
-        },
-        {
-          "text": "perché sei prezioso ai miei occhi"
-        },
-        {
-          "text": "perché io ti proteggerò sempre"
-        }
-      ]
-    },
-    {
-      "verso": "(Salmi 23:2) Egli mi fa riposare in verdeggianti pascoli, [...]",
-      "risposte": [
-        {
-          "text": "mi guida lungo le acque calme",
-          "isCurrect": true
-        },
-        {
-          "text": "mi protegge dalle tempeste"
-        },
-        {
-          "text": "mi conduce verso la luce"
-        },
-        {
-          "text": "mi ristora con amore"
-        }
-      ]
-    },
-    {
-      "verso": "(Giovanni 3:16) Perché Dio ha tanto amato il mondo, che ha dato il suo unigenito Figlio, [...]",
-      "risposte": [
-        {
-          "text": "affinché chiunque crede in lui non perisca, ma abbia vita eterna.",
-          "isCurrect": true
-        },
-        {
-          "text": "affinché chiunque crede in lui sia benedetto."
-        },
-        {
-          "text": "affinché nessuno si perda ma tutti abbiano pace."
-        },
-        {
-          "text": "affinché tutti conoscano la sua gloria."
-        }
-      ]
-    },
-    {
-      "verso": "(Giovanni 18:10) Allora Simon Pietro, che aveva una spada, la prese e colpì il servo del sommo sacerdote, [...]",
-      "risposte": [
-        {
-          "text": "colpì il servo del sommo sacerdote",
-          "isCurrect": true
-        },
-        {
-          "text": "ferì un soldato romano"
-        },
-        {
-          "text": "attaccò un guardiano del tempio"
-        },
-        {
-          "text": "minacciò il centurione"
-        }
-      ]
-    },
-    {
-      "verso": "(Giovanni 14:7) Se mi conoscete, conoscete anche il Padre, anzi, [...]",
-      "risposte": [
-        {
-          "text": "già lo conoscete e lo avete veduto",
-          "isCurrect": true
-        },
-        {
-          "text": "già lo avete incontrato"
-        },
-        {
-          "text": "già lo avete riconosciuto"
-        },
-        {
-          "text": "già lo avete compreso"
-        }
-      ]
-    },
-    {
-      "verso": "(Matteo 19:26) Gesù, fissando lo sguardo su di loro, disse: «Agli uomini questo è impossibile; [...]",
-      "risposte": [
-        {
-          "text": "ma a Dio ogni cosa è possibile",
-          "isCurrect": true
-        },
-        {
-          "text": "ma a Dio niente è impossibile"
-        },
-        {
-          "text": "ma a Dio tutto è facile"
-        },
-        {
-          "text": "ma a Dio ogni cosa è fattibile"
-        }
-      ]
-    },
-    {
-      "verso": "(Salmi 119:105) La tua parola è [...]",
-      "risposte": [
-        {
-          "text": "una lampada al mio piede e una luce sul mio sentiero",
-          "isCurrect": true
-        },
-        {
-          "text": "una guida sicura e un faro luminoso"
-        },
-        {
-          "text": "una luce che illumina la mia strada"
-        },
-        {
-          "text": "una guida nelle tenebre della vita"
-        }
-      ]
-    },
-    {
-      "verso": "(Isaia 40:31) ma quelli che sperano nel Signore acquistano nuove forze, si alzano a volo come aquile, [...]",
-      "risposte": [
-        {
-          "text": "corrono e non si stancano",
-          "isCurrect": true
-        },
-        {
-          "text": "camminano e non si affaticano"
-        },
-        {
-          "text": "volano e non si affaticano"
-        },
-        {
-          "text": "si alzano e non si fermano"
-        }
-      ]
-    },
-    {
-      "verso": "(Seconda lettera ai Corinzi 5:7) (poiché camminiamo per fede [...]",
-      "risposte": [
-        {
-          "text": "e non per visione",
-          "isCurrect": true
-        },
-        {
-          "text": "e non per segni"
-        },
-        {
-          "text": "e non per osservazione"
-        },
-        {
-          "text": "e non per intuizione"
-        }
-      ]
-    }
-]  
+  {
+    "verso": "(Filippesi 4:13) Io posso ogni cosa [...]",
+    "risposte": [
+      {
+        "text": "attraverso la mia forza"
+      },
+      {
+        "text": "in colui che mi fortifica",
+        "isCurrect": true
+      },
+      {
+        "text": "perché sono determinato"
+      },
+      {
+        "text": "con la mia volontà"
+      }
+    ]
+  },
+  {
+    "verso": "(Abacuc 2:3) perché è una visione per un tempo già fissato. Essa si affretta verso il suo termine e non mentirà; se tarda, aspettala, [...]",
+    "risposte": [
+      {
+        "text": "perché verrà all'improvviso"
+      },
+      {
+        "text": "perché non ci sarà un ritardo"
+      },
+      {
+        "text": "poiché certamente verrà, e non tarderà",
+        "isCurrect": true
+      },
+      {
+        "text": "quando meno te lo aspetti"
+      }
+    ]
+  },
+  {
+    "verso": "(Isaia 43:1) Ma ora così parla il Signore, il tuo Creatore, o Giacobbe, colui che ti ha formato, o Israele: «Non temere, [...]!",
+    "risposte": [
+      {
+        "text": "perché io ti ho riscattato, ti ho chiamato per nome; tu sei mio!",
+        "isCurrect": true
+      },
+      {
+        "text": "perché io sono con te ovunque tu vada"
+      },
+      {
+        "text": "perché sei prezioso ai miei occhi"
+      },
+      {
+        "text": "perché io ti proteggerò sempre"
+      }
+    ]
+  },
+  {
+    "verso": "(Salmi 23:2) Egli mi fa riposare in verdeggianti pascoli, [...]",
+    "risposte": [
+      {
+        "text": "mi protegge dalle tempeste"
+      },
+      {
+        "text": "mi guida lungo le acque calme",
+        "isCurrect": true
+      },
+      {
+        "text": "mi conduce verso la luce"
+      },
+      {
+        "text": "mi ristora con amore"
+      }
+    ]
+  },
+  {
+    "verso": "(Giovanni 3:16) Perché Dio ha tanto amato il mondo, che ha dato il suo unigenito Figlio, [...]",
+    "risposte": [
+      {
+        "text": "affinché chiunque crede in lui sia benedetto."
+      },
+      {
+        "text": "affinché nessuno si perda ma tutti abbiano pace."
+      },
+      {
+        "text": "affinché tutti conoscano la sua gloria."
+      },
+      {
+        "text": "affinché chiunque crede in lui non perisca, ma abbia vita eterna.",
+        "isCurrect": true
+      }
+    ]
+  },
+  {
+    "verso": "(Giovanni 18:10) Allora Simon Pietro, che aveva una spada, la prese e colpì il servo del sommo sacerdote, [...]. Quel servo si chiamava Marco.",
+    "risposte": [
+      {
+        "text": "recidendogli l'orecchio sinistro"
+      },
+      {
+        "text": "uccidendolo"
+      },
+      {
+        "text": "recidendogli l'orecchio destro",
+        "isCurrect": true
+      },
+      {
+        "text": "ferendolo gravemente"
+      }
+    ]
+  },
+  {
+    "verso": "(Giovanni 14:7) Se mi conoscete, conoscete anche il Padre, anzi, [...]",
+    "risposte": [
+      {
+        "text": "già lo conoscete e lo avete veduto",
+        "isCurrect": true
+      },
+      {
+        "text": "già lo avete incontrato"
+      },
+      {
+        "text": "già lo avete riconosciuto"
+      },
+      {
+        "text": "già lo avete compreso"
+      }
+    ]
+  },
+  {
+    "verso": "(Matteo 19:26) Gesù, fissando lo sguardo su di loro, disse: «Agli uomini questo è impossibile; [...]",
+    "risposte": [
+      {
+        "text": "ma a Dio ogni cosa è possibile",
+        "isCurrect": true
+      },
+      {
+        "text": "ma a Dio niente è impossibile"
+      },
+      {
+        "text": "ma a Dio tutto è facile"
+      },
+      {
+        "text": "ma Dio lo farà"
+      }
+    ]
+  },
+  {
+    "verso": "(Salmi 119:105) La tua parola è una lampada al mio piede e [...]",
+    "risposte": [
+      {
+        "text": "un faro luminoso"
+      },
+      {
+        "text": "una luce che illumina la mia strada"
+      },
+      {
+        "text": "una guida nelle tenebre della vita"
+      },
+      {
+        "text": "una luce sul mio sentiero",
+        "isCurrect": true
+      }
+    ]
+  },
+  {
+    "verso": "(Isaia 40:31) ma quelli che sperano nel Signore acquistano nuove forze, si alzano a volo come aquile, [...]",
+    "risposte": [
+      {
+        "text": "camminano e non si affaticano"
+      },
+      {
+        "text": "corrono e non si stancano",
+        "isCurrect": true
+      },
+      {
+        "text": "volano e non si affaticano"
+      },
+      {
+        "text": "si alzano e non si fermano"
+      }
+    ]
+  },
+  {
+    "verso": "(Seconda lettera ai Corinzi 5:7) (poiché camminiamo per fede [...]",
+    "risposte": [
+      {
+        "text": "e non per segni"
+      },
+      {
+        "text": "e non per osservazione"
+      },
+      {
+        "text": "e non per visione",
+        "isCurrect": true
+      },
+      {
+        "text": "e non per intuizione"
+      }
+    ]
+  },
+  {
+    "verso": "(Proverbi 3:5) Confida nel Signore con tutto il cuore, [...]",
+    "risposte": [
+      {
+        "text": "e non ti appoggiare sul tuo discernimento",
+        "isCurrect": true
+      },
+      {
+        "text": "e affidati alla tua comprensione"
+      },
+      {
+        "text": "e segui la tua intuizione"
+      },
+      {
+        "text": "e ascolta solo la tua mente"
+      }
+    ]
+  },
+  {
+    "verso": "(Matteo 6:33) Cercate prima il regno di Dio e la sua giustizia, e tutte queste cose [...]",
+    "risposte": [
+      {
+        "text": "non vi mancheranno"
+      },
+      {
+        "text": "ve le preparerà il Signore"
+      },
+      {
+        "text": "non vi serviranno"
+      },
+      {
+        "text": "vi saranno date in aggiunta",
+        "isCurrect": true
+      }
+    ]
+  },
+  {
+    "verso": "(Giovanni 8:12) Gesù parlò loro di nuovo, dicendo: «Io sono la luce del mondo; chi mi segue [...], ma avrà la luce della vita",
+    "risposte": [
+      {
+        "text": "non conoscerà mai l'oscurità"
+      },
+      {
+        "text": "non perderà mai la strada"
+      },
+      {
+        "text": "sarà sempre illuminato"
+      },
+      {
+        "text": "non camminerà nelle tenebre",
+        "isCurrect": true
+      }
+    ]
+  },
+  {
+    "verso": "(Romani 8:28) Or sappiamo che tutte le cose cooperano al bene di quelli che amano Dio, [...]",
+    "risposte": [
+      {
+        "text": "che lo seguono con tutto il cuore"
+      },
+      {
+        "text": "che lo servono fedelmente"
+      },
+      {
+        "text": "i quali sono chiamati secondo il suo disegno",
+        "isCurrect": true
+      },
+      {
+        "text": "che sono giusti e sinceri"
+      }
+    ]
+  },
+  {
+    "verso": "(Salmo 46:1) Dio è per noi un rifugio e una forza, [...]",
+    "risposte": [
+      {
+        "text": "un aiuto sicuro nelle avversità"
+      },
+      {
+        "text": "un aiuto sempre pronto nelle difficoltà",
+        "isCurrect": true
+      },
+      {
+        "text": "un aiuto e un conforto nelle tempeste"
+      },
+      {
+        "text": "un aiuto e un sostegno nelle prove"
+      }
+    ]
+  },
+  {
+    "verso": "(Giacomo 1:2) Fratelli miei, considerate una grande gioia quando venite a trovarvi in prove svariate, sapendo che la prova della vostra fede [...]",
+    "risposte": [
+      {
+        "text": "rafforza la vostra pazienza"
+      },
+      {
+        "text": "aumenta la vostra saggezza"
+      },
+      {
+        "text": "produce costanza",
+        "isCurrect": true
+      },
+      {
+        "text": "porta alla perfezione"
+      }
+    ]
+  },
+  {
+    "verso": "(Efesini 2:8) Infatti è per grazia che siete stati salvati, [...]; e ciò non viene da voi, è il dono di Dio",
+    "risposte": [
+      {
+        "text": "attraverso le vostre opere e sforzi"
+      },
+      {
+        "text": "grazie al vostro amore per Dio"
+      },
+      {
+        "text": "mediante la fede",
+        "isCurrect": true
+      },
+      {
+        "text": "mediante la vostra fedeltà e perseveranza"
+      }
+    ]
+  },
+  {
+    "verso": "(1 Corinzi 13:4) L'amore è paziente, è benevolo; [...]",
+    "risposte": [
+      {
+        "text": "l'amore non invidia, non si vanta, non si gonfia",
+        "isCurrect": true
+      },
+      {
+        "text": "l'amore non è mai geloso, non è mai egoista"
+      },
+      {
+        "text": "l'amore non si adira mai, non porta rancore"
+      },
+      {
+        "text": "l'amore non fa del male, non inganna"
+      }
+    ]
+  },
+  {
+    "verso": "(2 Timoteo 1:7) Dio infatti non ci ha dato uno spirito di paura, [...]",
+    "risposte": [
+      {
+        "text": "ma di coraggio e determinazione"
+      },
+      {
+        "text": "ma di speranza e perseveranza"
+      },
+      {
+        "text": "ma di forza, di amore e di autodisciplina",
+        "isCurrect": true
+      },
+      {
+        "text": "ma di fede e fiducia"
+      }
+    ]
+  },
+  {
+    "verso": "(1 Giovanni 4:8) Chi non ama, [...], perché Dio è amore",
+    "risposte": [
+      {
+        "text": "non vive in verità"
+      },
+      {
+        "text": "non segue i comandamenti"
+      },
+      {
+        "text": "non ha conosciuto Dio",
+        "isCurrect": true
+      },
+      {
+        "text": "non ha fede in Dio"
+      }
+    ]
+  }
+]

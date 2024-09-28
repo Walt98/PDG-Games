@@ -129,5 +129,13 @@ export class CompletaIlVersoComponent implements OnInit {
 
     this.items[this.index].risposte[i].status = status;
     play(status);
+
+    this.payload.stopTimer$.next();
+
+    if (status === "error") {
+
+      let currect = this.items[this.index].risposte.find(r => !!r?.isCurrect);
+      if (currect) currect.status = "success";
+    }
   }
 }
