@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { FourImagesOneWordComponent } from './four-images-one-word/four-images-one-word.component';
 import { PassaParolaComponent } from './passa-parola/passa-parola.component';
 import { PayloadService } from './payload.service';
@@ -9,6 +8,7 @@ import { IntroComponent } from './intro/intro.component';
 import { CommonModule } from '@angular/common';
 import { ChiSonoComponent } from './chi-sono/chi-sono.component';
 import { ReazioneACatenaComponent } from './reazione-a-catena/reazione-a-catena.component';
+import { ImpiccatoComponent } from "./impiccato/impiccato.component";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,6 @@ import { ReazioneACatenaComponent } from './reazione-a-catena/reazione-a-catena.
   styleUrl: './app.component.scss',
   standalone: true,
   imports: [
-    RouterOutlet,
     CommonModule,
     IntroComponent,
     ListaGiochiComponent,
@@ -24,8 +23,9 @@ import { ReazioneACatenaComponent } from './reazione-a-catena/reazione-a-catena.
     FourImagesOneWordComponent,
     ChiSonoComponent,
     CompletaIlVersoComponent,
-    ReazioneACatenaComponent
-  ]
+    ReazioneACatenaComponent,
+    ImpiccatoComponent
+]
 })
 export class AppComponent {
 

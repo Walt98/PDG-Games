@@ -21,6 +21,7 @@ export class ListaGiochiComponent implements OnInit {
     { title: "Chi sono?" },
     { title: "Completa il verso" },
     { title: "Reazione a catena" },
+    { title: "Impiccato" },
     { title: "Prossimamente" }
   ];
 

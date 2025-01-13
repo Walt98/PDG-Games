@@ -1,0 +1,16 @@
+<div class="body fade-in">
+    <div class="title col-12 d-flex justify-content-center">
+      <h2> Impiccato </h2>
+    </div>
+
+    <div class="impiccato">
+        <div class="image" [style]="getImage(6)" title="Impiccato"></div>
+    </div>
+  
+    <div class="col-12 d-flex justify-content-center word-container">
+        @for (letter of words[index]; track $index)
+        {
+            <span> {{ letter }} </span>
+        }
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.body {
+    background-image: url("/background6.jpg");
+    background-position: 50% 50%;
+    background-size: 100vw 100vh;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+    margin-top: 50px;
+    position: absolute;
+    top: 0;
+
+    h2 {
+        font-size: 30px;
+        padding: 0 30px;
+        margin: 0;
+    }
+}
+
+.image {
+    $size: calc(100vw - 40rem);
+    $maxSize: 460px;
+    width: $size;
+    height: $size;
+    max-width: $maxSize;
+    max-height: $maxSize;
+    background-repeat: round;
+}
