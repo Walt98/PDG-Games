@@ -29,7 +29,7 @@ import { ImpiccatoComponent } from "./impiccato/impiccato.component";
 })
 export class AppComponent {
 
-  title = 'pdg-games';
+  title = "pdg-games";
   showIntroComponent = true;
 
   constructor(public payload: PayloadService) { }

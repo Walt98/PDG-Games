@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { PayloadService } from '../payload.service';
 import { CommonModule } from '@angular/common';
+import { play } from '../common-functions';
+
+declare type ImpiccatoCharItem = { char: string; show: boolean; }
 
 @Component({
   selector: 'app-impiccato',
@@ -12,7 +15,9 @@ import { CommonModule } from '@angular/common';
 export class ImpiccatoComponent implements OnInit {
 
   index = 0;
-  words: string[] = [];
+  imageIndex = 0;
+  showWord = false;
+  items: ImpiccatoCharItem[][] = [];
 
   constructor(public payload: PayloadService) { }
 
@@ -26,11 +31,21 @@ export class ImpiccatoComponent implements OnInit {
    */
   private setNames() {
 
-    const charsString = prompt("Inserisci le parole.", "Rivelazione, 1 Samuele, Grace Party, Efod, Betesda");
+    const wordsString = prompt("Inserisci le parole.", "Rivelazione, 1 Samuele, Grace Party, Efod, Betesda");
 
-    if (!charsString || charsString === "") this.closeGame();
+    if (!wordsString || wordsString === "") this.closeGame();
 
-    else this.words = charsString.split(",").map(c => c.trim().toUpperCase());
+    else wordsString.split(",").map(c => c.trim().toUpperCase()).forEach(w => {
+
+      // Ho provato a usare il metodo replace ma non ha funzionato
+      // Alla fine ho optato per una rimozione "forzata" degli spazi in più
+      const trimmed = w.split(" ").filter(c => c !== "").join(" ");
+
+      let word: ImpiccatoCharItem[] = [];
+
+      trimmed.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c) }));
+      this.items.push(word);
+    });
   }
 
   /**
@@ -40,6 +55,69 @@ export class ImpiccatoComponent implements OnInit {
 
     alert("Per poter giocare assicurati di aggiungere delle parole.");
     setTimeout(() => this.payload.gioco = -1, 0);
+  }
+
+  /**
+   * Evento keydown.
+   */
+  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
+
+    // Va avanti
+    if (event.code === "ArrowRight") {
+
+      if (this.index !== this.items.length - 1) {
+
+        this.index++;
+        this.imageIndex = 0;
+      }
+    }
+
+    // Va indietro
+    if (event.code === "ArrowLeft") {
+
+      if (this.index > 0) {
+
+        this.index--;
+        this.imageIndex = 0;
+      }
+    }
+
+    if (this.checkIfIsLetter(event.key)) {
+
+      const key = event.key.toUpperCase();
+
+      let guessed = this.items[this.index].filter(item => item.char === key);
+      guessed.forEach(item => item.show = true);
+
+      if (!guessed.length && this.imageIndex < 6) {
+
+        this.imageIndex++;
+        play("error");
+      }
+    }
+
+    // Risposta esatta
+    if (event.code === "Enter") {
+
+      this.showWord = true;
+    }
+
+    // // Risposta sbagliata
+    if (["Delete", "Backspace"].includes(event.code)) {
+      
+      if (this.imageIndex < 6) {
+
+        this.imageIndex++;
+        play("error");
+
+        if (this.imageIndex === 6) this.showWord = true;
+      }
+    }
+  }
+
+  public checkIfIsLetter(key: string) {
+
+    return /^[a-zA-Z]$/.test(key);
   }
 
   /**
