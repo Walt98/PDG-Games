@@ -17,6 +17,7 @@ export class ImpiccatoComponent implements OnInit {
   index = 0;
   imageIndex = 0;
   showWord = false;
+  wrong: string[] = [];
   items: ImpiccatoCharItem[][] = [];
 
   constructor(public payload: PayloadService) { }
@@ -58,6 +59,22 @@ export class ImpiccatoComponent implements OnInit {
   }
 
   /**
+   * Cambia la parola in base alla freccia (sinistra/destra) premuta.
+   * @param back Parametro che, se true, farà visualizzare la parola precedente
+   */
+  private changeWord(back = false) {
+
+    this.showWord = false;
+    this.wrong = [];
+    this.imageIndex = 0;
+
+    if (back) this.index--;
+    else this.index++;
+
+    this.items[this.index].forEach(i => i.show = !this.checkIfIsLetter(i.char));
+  }
+
+  /**
    * Evento keydown.
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
@@ -65,56 +82,54 @@ export class ImpiccatoComponent implements OnInit {
     // Va avanti
     if (event.code === "ArrowRight") {
 
-      if (this.index !== this.items.length - 1) {
-
-        this.index++;
-        this.imageIndex = 0;
-      }
+      if (this.index !== this.items.length - 1) this.changeWord();
     }
 
     // Va indietro
     if (event.code === "ArrowLeft") {
 
-      if (this.index > 0) {
-
-        this.index--;
-        this.imageIndex = 0;
-      }
+      if (this.index > 0) this.changeWord(true);
     }
 
-    if (this.checkIfIsLetter(event.key)) {
+    if (this.checkIfIsLetter(event.key) && !event.ctrlKey && !event.shiftKey) {
 
       const key = event.key.toUpperCase();
 
-      let guessed = this.items[this.index].filter(item => item.char === key);
-      guessed.forEach(item => item.show = true);
+      if (!this.wrong.includes(key)) {
 
-      if (!guessed.length && this.imageIndex < 6) {
+        let guessed = this.items[this.index].filter(i => i.char === key);
+        guessed.forEach(item => item.show = true);
 
-        this.imageIndex++;
-        play("error");
+        if (!guessed.length && this.imageIndex < 6) {
+
+          this.imageIndex++;
+
+          if (this.imageIndex === 6) {
+
+            this.showWord = true;
+            play("gong");
+          }
+
+          else {
+
+            this.wrong.push(key);
+            play("error");
+          }
+        }
       }
     }
 
     // Risposta esatta
     if (event.code === "Enter") {
 
+      if (!this.showWord) play("success");
       this.showWord = true;
-    }
-
-    // // Risposta sbagliata
-    if (["Delete", "Backspace"].includes(event.code)) {
-      
-      if (this.imageIndex < 6) {
-
-        this.imageIndex++;
-        play("error");
-
-        if (this.imageIndex === 6) this.showWord = true;
-      }
     }
   }
 
+  /**
+   * Verifica se il carattere in parametro è una lettera; in tal caso restituirà true, altrimenti false.
+   */
   public checkIfIsLetter(key: string) {
 
     return /^[a-zA-Z]$/.test(key);
@@ -123,8 +138,8 @@ export class ImpiccatoComponent implements OnInit {
   /**
    * Restituisce il background-image corretto dell'impiccato.
    */
-  public getImage(index: number) {
+  public getImage() {
 
-    return `background-image: url("/impiccato${index}.jpg")`;
+    return `background-image: url("/impiccato${this.imageIndex}.jpg")`;
   }
 }

@@ -4,9 +4,9 @@
     </div>
 
     <div class="impiccato">
-        <div class="image col-6" [style]="getImage(imageIndex)" title="Impiccato"></div>
+        <div class="image col-6" [style]="getImage()" title="Impiccato"></div>
 
-        <div class="col-6 d-flex align-items-center">
+        <div class="col-6 flex-column d-flex justify-content-center" style="margin-top: 140px;">
             <div class="col-12 d-flex justify-content-center word">
                 @for (item of items[index]; track $index)
                 {
@@ -17,6 +17,9 @@
                         <div *ngIf="![' ', '-'].includes(item.char)" class="line"></div>
                     </div>
                 }
+            </div>
+            <div class="col-12 d-flex justify-content-center" style="margin-top: 90px;">
+                <img src="logo-v.png" alt="logo" height="90" width="auto">
             </div>
         </div>
     </div>
