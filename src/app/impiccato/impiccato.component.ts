@@ -125,6 +125,16 @@ export class ImpiccatoComponent implements OnInit {
       if (!this.showWord) play("success");
       this.showWord = true;
     }
+
+    // Risposta sbagliata
+    if (["Delete", "Backspace"].includes(event.code)) {
+
+      if (this.imageIndex > 0 && this.imageIndex < 6) {
+
+        this.imageIndex--;
+        this.wrong.pop();
+      }
+    }
   }
 
   /**
