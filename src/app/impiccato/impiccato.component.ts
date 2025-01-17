@@ -79,16 +79,20 @@ export class ImpiccatoComponent implements OnInit {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
+    // Si può cambiare pagina solo se la parola è
+    // completamente visibile oppure forzando utilizzando Shift
+    const canChange = this.showWord || event.shiftKey;
+
     // Va avanti
     if (event.code === "ArrowRight") {
 
-      if (this.index !== this.items.length - 1) this.changeWord();
+      if (this.index !== this.items.length - 1 && canChange) this.changeWord();
     }
 
     // Va indietro
     if (event.code === "ArrowLeft") {
 
-      if (this.index > 0) this.changeWord(true);
+      if (this.index > 0 && canChange) this.changeWord(true);
     }
 
     if (this.checkIfIsLetter(event.key) && !event.ctrlKey && !event.shiftKey) {
@@ -119,14 +123,14 @@ export class ImpiccatoComponent implements OnInit {
       }
     }
 
-    // Risposta esatta
+    // Parola indovinata
     if (event.code === "Enter") {
 
       if (!this.showWord) play("success");
       this.showWord = true;
     }
 
-    // Risposta sbagliata
+    // Parola sbagliata
     if (["Delete", "Backspace"].includes(event.code)) {
 
       if (this.imageIndex > 0 && this.imageIndex < 6) {
