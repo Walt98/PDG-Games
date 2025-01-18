@@ -38,8 +38,8 @@ export class ImpiccatoComponent implements OnInit {
 
     else wordsString.split(",").map(c => c.trim().toUpperCase()).forEach(w => {
 
-      // Ho provato a usare il metodo replace ma non ha funzionato
-      // Alla fine ho optato per una rimozione "forzata" degli spazi in più
+      // Ho provato a usare il metodo replace ma non ha funzionato;
+      // alla fine ho optato per una rimozione "forzata" degli spazi in più
       const trimmed = w.split(" ").filter(c => c !== "").join(" ");
 
       let word: ImpiccatoCharItem[] = [];
@@ -75,6 +75,14 @@ export class ImpiccatoComponent implements OnInit {
   }
 
   /**
+   * Restituisce la stringa in parametro senza vocali accentate.
+   */
+  private normalize(str: string) {
+
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
+  /**
    * Evento keydown.
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
@@ -101,10 +109,17 @@ export class ImpiccatoComponent implements OnInit {
 
       if (!this.wrong.includes(key)) {
 
-        let guessed = this.items[this.index].filter(i => i.char === key);
-        guessed.forEach(item => item.show = true);
+        let guessed = this.items[this.index].filter(i => this.normalize(i.char) === key);
 
-        if (!guessed.length && this.imageIndex < 6) {
+        guessed.forEach(i => i.show = true);
+
+        if (!this.items[this.index].map(i => i.show).includes(false)) {
+
+          if (!this.showWord) play("success");
+          this.showWord = true;
+        }
+
+        if (!guessed.length && this.imageIndex < 6 && !this.showWord) {
 
           this.imageIndex++;
 
@@ -146,7 +161,7 @@ export class ImpiccatoComponent implements OnInit {
    */
   public checkIfIsLetter(key: string) {
 
-    return /^[a-zA-Z]$/.test(key);
+    return /^[a-zA-Z]$/.test(this.normalize(key));
   }
 
   /**
