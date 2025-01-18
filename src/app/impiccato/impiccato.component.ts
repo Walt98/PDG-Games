@@ -44,7 +44,7 @@ export class ImpiccatoComponent implements OnInit {
 
       let word: ImpiccatoCharItem[] = [];
 
-      trimmed.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c) }));
+      trimmed.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c, true) }));
       this.items.push(word);
     });
   }
@@ -71,7 +71,7 @@ export class ImpiccatoComponent implements OnInit {
     if (back) this.index--;
     else this.index++;
 
-    this.items[this.index].forEach(i => i.show = !this.checkIfIsLetter(i.char));
+    this.items[this.index].forEach(i => i.show = !this.checkIfIsLetter(i.char, true));
   }
 
   /**
@@ -159,9 +159,9 @@ export class ImpiccatoComponent implements OnInit {
   /**
    * Verifica se il carattere in parametro è una lettera; in tal caso restituirà true, altrimenti false.
    */
-  public checkIfIsLetter(key: string) {
+  public checkIfIsLetter(key: string, normalize = false) {
 
-    return /^[a-zA-Z]$/.test(this.normalize(key));
+    return /^[a-zA-Z]$/.test(normalize ? this.normalize(key) : key);
   }
 
   /**
