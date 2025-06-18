@@ -70,11 +70,11 @@ export class PassaParolaComponent implements OnInit {
   /**
    * Imposta l'index e lo status delle lettere.
    */
-  @HostListener('document:keydown', ['$event.code']) onKeydown(code: string) {
+  @HostListener('document:keydown', ['$event']) onKeydown(event: KeyboardEvent) {
 
-    if (code.includes("Key")) {
+    if (event.code.includes("Key")) {
 
-      let item = this.items.find(i => i.key === code[3]);
+      let item = this.items.find(i => i.key === event.code[3]);
 
       if (!!item) {
         this.index = this.items.indexOf(item);
@@ -89,7 +89,7 @@ export class PassaParolaComponent implements OnInit {
     })
 
     // Va solo avanti
-    if (code === "ArrowRight") {
+    if (event.code === "ArrowRight") {
 
       if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
 
@@ -129,7 +129,7 @@ export class PassaParolaComponent implements OnInit {
     }
 
     // Va solo indietro
-    if (code === "ArrowLeft") {
+    if (event.code === "ArrowLeft") {
 
       if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
       else {
@@ -168,7 +168,7 @@ export class PassaParolaComponent implements OnInit {
     }
 
     // PassaParola
-    if (code.includes("Shift")) {
+    if (event.code.includes("Shift")) {
 
       if (this.index !== undefined) {
 
@@ -178,17 +178,19 @@ export class PassaParolaComponent implements OnInit {
     }
 
     // Corretto
-    if (code === "Enter") {
+    if (event.code === "Enter") {
 
       if (this.index !== undefined) {
 
         this.items[this.index].status = "success";
         play("success");
+
+        if ([...new Set(this.items.map(i => i.status))].length === 1) this.payload.stopTimer$.next();
       }
     }
 
     // Sbagliato
-    if (code === "Backspace") {
+    if (event.code === "Backspace" && !event.metaKey) {
 
       if (this.index !== undefined) {
 
@@ -198,13 +200,13 @@ export class PassaParolaComponent implements OnInit {
     }
 
     // Nessuno status
-    if (code === "Delete") {
+    if (event.code === "Delete" || (event.metaKey && event.code === "Backspace")) {
 
       if (this.index !== undefined) this.items[this.index].status = "";
     }
 
     // Nessun index
-    if (code === "Escape") {
+    if (event.code === "Escape" && !this.payload.showClassification) {
 
       if (this.index !== undefined) this.tmpIndex = this.index;
       this.index = undefined;

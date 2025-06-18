@@ -97,7 +97,7 @@ export class FourImagesOneWordComponent {
     // Risposta esatta
     if (event.code === "Enter") this.showWord();
 
-    // Risposta esatta
+    // Risposta sbagliata
     if (["Delete", "Backspace"].includes(event.code)) this.showLetters = false;
   }
 
