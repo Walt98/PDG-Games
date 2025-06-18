@@ -1,7 +1,6 @@
-.close {
+.list, .close {
     position: absolute;
     top: 20px;
-    right: 20px;
     z-index: 100000000;
 
     svg {
@@ -16,9 +15,26 @@
         &:hover {
             cursor: pointer;
 
-            path {
-                color: white !important;
+            path.number1 {
+                fill: #ffb300;
+            }
+
+            path.number2 {
+                color: rgb(219, 221, 224) !important;
+            }
+
+            path.number3 {
+                fill: #f16e49;
             }
         }
     }
+}
+
+.list {
+    left: 20px;
+}
+
+.close {
+    right: 20px;
+    z-index: 10000000;
 }

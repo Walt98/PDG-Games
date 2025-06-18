@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ChiSonoComponent } from './chi-sono/chi-sono.component';
 import { ReazioneACatenaComponent } from './reazione-a-catena/reazione-a-catena.component';
 import { ImpiccatoComponent } from "./impiccato/impiccato.component";
+import { ClassificaComponent } from './classifica/classifica.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { ImpiccatoComponent } from "./impiccato/impiccato.component";
   imports: [
     CommonModule,
     IntroComponent,
+    ClassificaComponent,
     ListaGiochiComponent,
     PassaParolaComponent,
     FourImagesOneWordComponent,
@@ -31,6 +33,7 @@ export class AppComponent {
 
   title = "pdg-games";
   showIntroComponent = true;
+  timeout: any;
 
   constructor(public payload: PayloadService) { }
 
@@ -41,5 +44,22 @@ export class AppComponent {
 
     this.payload.gioco = -1;
     this.payload.stopTimer$.next();
+  }
+
+  /**
+   * Mostra o nasconde la classifica.
+   */
+  onShowClassification() {
+
+    this.payload.showClassification = !this.payload.showClassification;
+
+    this.timeout = setTimeout(() => {
+
+      if (!this.payload.giocatori.length) {
+
+        this.payload.showClassification = false;
+        clearTimeout(this.timeout);
+      }
+    });
   }
 }

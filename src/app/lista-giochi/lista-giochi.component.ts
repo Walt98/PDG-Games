@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { PayloadService } from '../payload.service';
-import { Card } from '../card';
+import { ICard } from '../card';
 
 @Component({
   selector: 'app-lista-giochi',
@@ -15,7 +15,7 @@ export class ListaGiochiComponent implements OnInit {
   index?: number;
   tmpIndex?: number;
   showComingSoon = false;
-  cards: Card[] = [
+  cards: ICard[] = [
     { title: "Passa-Parola di Dio" },
     { title: "4 Immagini 1 Parola di Dio" },
     { title: "Chi sono?" },
@@ -50,7 +50,10 @@ export class ListaGiochiComponent implements OnInit {
    */
   onSelectGame(index: number) {
 
-    if (index !== this.cards.length - 1) this.payload.gioco = index;
+    if (index !== this.cards.length - 1) {
+
+      this.payload.gioco = index;
+    }
   }
 
   /**
@@ -58,7 +61,7 @@ export class ListaGiochiComponent implements OnInit {
    */
   @HostListener('document:keydown', ['$event.code']) onKeydown(code: string) {
 
-    if (this.payload.gioco === -1) {
+    if (this.payload.gioco === -1 && !this.payload.showClassification) {
 
       // Entra qui quando index = undefined ma mi ero già mosso tra i giochi
       if (["ArrowRight", "ArrowLeft"].includes(code) && this.tmpIndex !== this.index) {

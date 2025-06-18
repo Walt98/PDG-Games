@@ -38,14 +38,15 @@ export class ImpiccatoComponent implements OnInit {
 
     else wordsString.split(",").map(c => c.trim().toUpperCase()).forEach(w => {
 
-      // Ho provato a usare il metodo replace ma non ha funzionato;
-      // alla fine ho optato per una rimozione "forzata" degli spazi in più
-      const trimmed = w.split(" ").filter(c => c !== "").join(" ");
+      if (w?.length) {
 
-      let word: ImpiccatoCharItem[] = [];
+        const trimmed = w.split(" ").filter(c => c !== "").join(" ");
 
-      trimmed.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c, true) }));
-      this.items.push(word);
+        let word: ImpiccatoCharItem[] = [];
+
+        trimmed.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c, true) }));
+        this.items.push(word);
+      }
     });
   }
 

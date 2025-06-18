@@ -1,0 +1,34 @@
+.body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100000000;
+  background-color: #171717;
+  overflow: hidden;
+}
+
+input {
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+input, button {
+  color: #171717;
+}
+
+.fast-fade-in {
+  animation: fadeIn .35s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

@@ -1,0 +1,10 @@
+<div class="body fast-fade-in">
+  @for (giocatore of payload.giocatori; track $index)
+    {
+      <div>
+        <div> {{ giocatore.name }} </div>
+        <input type="number" [name]="giocatore.name" [(ngModel)]="giocatore.points">
+      </div>
+    }
+    <button type="button"> Aggiorna </button>
+</div>
