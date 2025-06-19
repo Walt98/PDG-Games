@@ -6,25 +6,28 @@
     svg {
         width: 35px;
         height: 35px;
+        cursor: pointer;
 
         path {
-            color: #e5e5e5 !important;
+            fill: #e5e5e5 !important;
             transition: 0.2s;
         }
 
         &:hover {
-            cursor: pointer;
+            path {
+                fill: white !important;
+            }
 
             path.number1 {
-                fill: #ffb300;
+                fill: #ffb300 !important;
             }
 
             path.number2 {
-                color: rgb(219, 221, 224) !important;
+                fill: #b4b6b8 !important;
             }
 
             path.number3 {
-                fill: #f16e49;
+                fill: #d17034 !important;
             }
         }
     }
