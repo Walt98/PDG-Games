@@ -5,9 +5,9 @@
     @for (giocatore of slice(0, 3); track $index)
     {
       <div class="row player-row">
-        <span class="position"> {{ $index + 1 }} </span>
+        <label class="position" for="{{ giocatore.name }}"> {{ $index + 1 }} </label>
         <div class="col p-0 player">
-          <div class="player-name"> {{ giocatore.name }} </div>
+          <label class="player-name" for="{{ giocatore.name }}"> {{ giocatore.name }} </label>
           <input type="number" class="points" [name]="giocatore.name" [id]="giocatore.name" [(ngModel)]="giocatore.points">
         </div>
       </div>
@@ -19,9 +19,9 @@
       @for (giocatore of group; track $index)
       {
         <div class="row player-row">
-          <span class="position"> {{ $index + (4 * (i + 1)) }} </span>
+          <label class="position" for="{{ giocatore.name }}"> {{ $index + (4 * (i + 1)) }} </label>
           <div class="p-0 player">
-            <div class="player-name"> {{ giocatore.name }} </div>
+            <label class="player-name" for="{{ giocatore.name }}"> {{ giocatore.name }} </label>
             <input type="number" class="points" [name]="giocatore.name" [id]="giocatore.name" [(ngModel)]="giocatore.points">
           </div>
         </div>

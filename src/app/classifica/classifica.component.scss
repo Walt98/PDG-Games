@@ -32,8 +32,15 @@ input {
   }
 }
 
-input, button {
-  color: #171717;
+input {
+  background: none;
+  padding: 3px 0 5px 5px;
+  width: 186px;
+  border: dashed 2px;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  font-weight: 600;
 }
 
 .overflow-y {
@@ -44,18 +51,23 @@ input, button {
   gap: 40px;
 }
 
+.player-name {
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .lista.row-cols-3 {
   & .player-row {
     width: 260px;
   }
 
-  & .player-row:nth-child(1) > .position {
+  & .player-row:nth-child(1) > .position, .player-row:nth-child(1) .player-name {
     color: #ffb300;
   }
-  & .player-row:nth-child(2) > .position {
+  & .player-row:nth-child(2) > .position, .player-row:nth-child(2) .player-name {
     color: #b4b6b8;
   }
-  & .player-row:nth-child(3) > .position {
+  & .player-row:nth-child(3) > .position, .player-row:nth-child(3) .player-name {
     color: #d17034;
   }
 }
@@ -64,7 +76,7 @@ input, button {
   display: grid;
   margin-top: 80px;
   gap: 40px;
-  max-height: 250px;
+  max-height: 260px;
 }
 
 .lista.row-cols-4 {
@@ -86,12 +98,15 @@ input, button {
   font-weight: 700;
   font-size: 30px;
   width: fit-content;
-  height: fit-content;
+  height: 100%;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .player {
   width: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .buttons {
