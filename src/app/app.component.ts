@@ -89,9 +89,9 @@ export class AppComponent {
       this.onShowClassification();
     }
 
-    if (event.code === "KeyH") {
+    // if (event.code === "KeyH") {
 
-      this.onShowHelp();
-    }
+    //   this.onShowHelp();
+    // }
   }
 }

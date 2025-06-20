@@ -25,7 +25,7 @@ export class ClassificaComponent implements OnInit {
 
     else {
 
-      this.refreshPoints();
+      this.onRefreshPositions();
       this.setGroupedPlayers();
     }
   }
