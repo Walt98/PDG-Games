@@ -70,13 +70,14 @@ export class PassaParolaComponent implements OnInit {
   /**
    * Imposta l'index e lo status delle lettere.
    */
-  @HostListener('document:keydown', ['$event']) onKeydown(event: KeyboardEvent) {
+  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
     if (event.code.includes("Key")) {
 
       let item = this.items.find(i => i.key === event.code[3]);
 
       if (!!item) {
+
         this.index = this.items.indexOf(item);
         this.tmpIndex = this.index;
       }
@@ -96,6 +97,7 @@ export class PassaParolaComponent implements OnInit {
       else {
 
         if (this.index === undefined) {
+
           if (!allSetted) this.index = 0;
         }
 
@@ -104,6 +106,7 @@ export class PassaParolaComponent implements OnInit {
           this.index = 0;
 
           if (!allSetted) {
+
             while (!["", "skip"].includes(this.items[this.index].status)) this.index++;
           }
 
@@ -135,6 +138,7 @@ export class PassaParolaComponent implements OnInit {
       else {
 
         if (this.index === undefined) {
+
           if (!allSetted) this.index = 0;
         }
 
@@ -143,6 +147,7 @@ export class PassaParolaComponent implements OnInit {
           this.index = this.items.length - 1;
 
           if (!allSetted) {
+
             while (!["", "skip"].includes(this.items[this.index].status)) this.index--;
           }
 

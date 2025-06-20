@@ -59,12 +59,13 @@ export class ListaGiochiComponent implements OnInit {
   /**
    * Evento keydown nella home.
    */
-  @HostListener('document:keydown', ['$event.code']) onKeydown(code: string) {
+  @HostListener("document:keydown", ["$event.code"]) onKeydown(code: string) {
 
     if (this.payload.gioco === -1 && !this.payload.showClassification) {
 
       // Entra qui quando index = undefined ma mi ero già mosso tra i giochi
       if (["ArrowRight", "ArrowLeft"].includes(code) && this.tmpIndex !== this.index) {
+
         this.index = this.tmpIndex;
       }
 
@@ -142,6 +143,7 @@ export class ListaGiochiComponent implements OnInit {
           if (code === "Enter") {
 
             if (this.index !== undefined) {
+
               this.payload.gioco = this.index;
               this.index = undefined;
               this.tmpIndex = undefined;

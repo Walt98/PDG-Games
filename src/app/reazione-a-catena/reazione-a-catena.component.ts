@@ -95,11 +95,14 @@ export class ReazioneACatenaComponent implements OnInit {
     else {
 
       if (result) this.points++;
+
       else {
+
         if (this.points > 0) this.points--;
       }
-  
+
       this.payload.stopTimer$.next();
+
       if (playSound) play(result ? "success" : "error");
     }
   }

@@ -16,28 +16,7 @@ export class FourImagesOneWordComponent {
   index = 0;
   showLetters = false;
   showTimer = true;
-  words = [
-    "Mosè",
-    "Davide",
-    "Pietro",
-    "Isacco",
-    "Elia",
-    "Aaronne",
-    "66",
-    "Paolo",
-    "Adamo",
-    "Ebrei",
-    "Comandamenti",
-    "Apocalisse",
-    "Vangeli",
-    "Pastore",
-    "Salmi",
-    "Daniele",
-    "Apostolo",
-    "Sansone",
-    "Grace Party",
-    "Chiesa"
-  ].map(w => w.toUpperCase());
+  words = [ "MOSÈ", "DAVIDE", "PIETRO", "ISACCO", "ELIA", "AARONNE", "66", "PAOLO", "ADAMO", "EBREI", "COMANDAMENTI", "APOCALISSE", "VANGELI", "PASTORE", "SALMI", "DANIELE", "APOSTOLO", "SANSONE", "GRACE PARTY", "CHIESA" ];
 
   constructor(public payload: PayloadService) { }
 
@@ -60,12 +39,13 @@ export class FourImagesOneWordComponent {
   /**
    * Evento keydown.
    */
-  @HostListener('document:keydown', ['$event']) onKeydown(event: KeyboardEvent) {
+  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
     // Va avanti
     if (event.code === "ArrowRight") {
 
       if (this.index !== this.words.length - 1 && (this.showLetters || event.shiftKey)) {
+
         this.showLetters = false;
         this.showTimer = false;
 
@@ -82,6 +62,7 @@ export class FourImagesOneWordComponent {
     if (event.code === "ArrowLeft") {
 
       if (this.index !== 0 && (this.showLetters || event.shiftKey)) {
+
         this.showLetters = false;
         this.showTimer = false;
 

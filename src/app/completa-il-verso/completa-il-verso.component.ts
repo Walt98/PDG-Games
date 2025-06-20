@@ -59,6 +59,7 @@ export class CompletaIlVersoComponent implements OnInit {
       let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
 
       if (this.index < this.items.length - 1 && (risposta?.status || event.shiftKey)) {
+
         this.showTimer = false;
 
         setTimeout(() => {
@@ -76,6 +77,7 @@ export class CompletaIlVersoComponent implements OnInit {
       let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
 
       if (this.index > 0 && (risposta?.status || event.shiftKey)) {
+
         this.showTimer = false;
 
         setTimeout(() => {

@@ -27,11 +27,9 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     this.setValues();
 
-    this.payload.startTimer$.pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.setTimer(true));
+    this.payload.startTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => this.setTimer(true));
 
-    this.payload.stopTimer$.pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.setTimer(false));
+    this.payload.stopTimer$.pipe(takeUntil(this.destroy$)).subscribe(() => this.setTimer(false));
   }
 
   ngOnDestroy(): void {
@@ -54,6 +52,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
 
     this.secondi = timerTmp + "";
+
     if (this.secondi.length === 1 && this.minuti > 0) this.secondi = "0" + this.secondi;
   }
 
@@ -73,13 +72,16 @@ export class TimerComponent implements OnInit, OnDestroy {
       if (event.shiftKey) {
 
         if (this.timer > 9) this.timer -= 10;
+
         else {
+
           if (this.timer > 0 && this.timer < 10) this.timer = 0;
         }
       }
 
       // Diminuisce il timer di un secondo se è maggiore di 0
       else {
+
         if (this.timer > 0) this.timer--;
       }
 
@@ -116,7 +118,7 @@ export class TimerComponent implements OnInit, OnDestroy {
       }
 
       // Per ridurre il più possibile il delay tra timer e gong
-      // ho preferito settarlo io stesso a 0 e far partire subito l'audio
+      // ho preferito settarlo manualmente a 0 e far partire subito l'audio
       else {
 
         this.timer = 0;

@@ -33,12 +33,13 @@ export class ChiSonoComponent implements OnInit {
 
     const charsString = prompt("Inserisci i nomi.", "Giobbe Ester Pietro Timoteo Giosuè");
 
-    if (!charsString || charsString === "") this.closeGame();
+    if (charsString?.length) {
 
-    else {
       this.characters = charsString.split(" ").map(c => c.toUpperCase());
       this.characters.forEach(c => this.randomized.push(this.shuffle(c)));
     }
+
+    else this.closeGame();
   }
 
   /**
@@ -51,11 +52,11 @@ export class ChiSonoComponent implements OnInit {
   }
 
   /**
-   * Metodo che restituisce l'anagramma del parametro.
+   * Restituisce il parametro ma con i caratteri mescolati.
    */
-  private shuffle(name: string) {
+  private shuffle(name: string): string {
 
-    const arr = name.split("");
+    let arr = name.split("");
 
     for (let i = arr.length - 1; i > 0; i--) {
 
@@ -63,7 +64,9 @@ export class ChiSonoComponent implements OnInit {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 
-    return arr.join("");
+    const res = arr.join("");
+
+    return res !== name ? res : this.shuffle(res);
   }
 
   /**
@@ -75,6 +78,7 @@ export class ChiSonoComponent implements OnInit {
     if (event.code === "ArrowRight") {
 
       if (this.index !== this.randomized.length - 1 && (this.showName || event.shiftKey)) {
+
         this.showName = false;
         this.showTimer = false;
 
@@ -91,6 +95,7 @@ export class ChiSonoComponent implements OnInit {
     if (event.code === "ArrowLeft") {
 
       if (this.index !== 0 && (this.showName || event.shiftKey)) {
+
         this.showName = false;
         this.showTimer = false;
 

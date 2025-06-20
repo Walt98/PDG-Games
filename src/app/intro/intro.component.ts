@@ -41,16 +41,17 @@ export class IntroComponent {
   /**
    * Eventi keydown dell'intro.
    */
-  @HostListener('document:keydown', ['$event']) onKeydown(event: KeyboardEvent) {
+  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
     if (event.code === "Enter") {
 
-      if (!event.shiftKey) this.showVideo();
+      if (event.shiftKey) {
 
-      else {
         this.shiftClose = true;
         this.close.emit();
       }
+
+      else this.showVideo();
     }
   }
 }
