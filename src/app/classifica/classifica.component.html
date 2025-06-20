@@ -8,7 +8,7 @@
         <label class="position" for="{{ giocatore.name }}"> {{ $index + 1 }} </label>
         <div class="col p-0 player">
           <label class="player-name" for="{{ giocatore.name }}"> {{ giocatore.name }} </label>
-          <input type="number" class="points" [name]="giocatore.name" [id]="giocatore.name" [(ngModel)]="giocatore.points">
+          <input type="number" class="points" [name]="giocatore.name" [id]="giocatore.name" [(ngModel)]="giocatore.points" #pointsInput>
         </div>
       </div>
     }
@@ -22,7 +22,7 @@
           <label class="position" for="{{ giocatore.name }}"> {{ $index + (4 * (i + 1)) }} </label>
           <div class="p-0 player">
             <label class="player-name" for="{{ giocatore.name }}"> {{ giocatore.name }} </label>
-            <input type="number" class="points" [name]="giocatore.name" [id]="giocatore.name" [(ngModel)]="giocatore.points">
+            <input type="number" class="points" [name]="giocatore.name" [id]="giocatore.name" [(ngModel)]="giocatore.points" #pointsInput>
           </div>
         </div>
       }

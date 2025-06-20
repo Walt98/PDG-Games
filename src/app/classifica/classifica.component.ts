@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { PayloadService } from '../payload.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,8 @@ import { IGiocatore } from '../giocatore';
   styleUrl: './classifica.component.scss'
 })
 export class ClassificaComponent implements OnInit {
+
+  @ViewChildren("pointsInput") inputs?: QueryList<ElementRef<HTMLInputElement>>;
 
   grouped: IGiocatore[][] = [];
 
@@ -137,13 +139,36 @@ export class ClassificaComponent implements OnInit {
   }
 
   /**
+   * Forza il focusout.
+   */
+  forceFocusout() {
+
+    this.inputs?.forEach(i => i.nativeElement.blur());
+  }
+
+  /**
    * Evento keydown.
    */
-  @HostListener("document:keydown", ["$event.code"]) onKeydown(code: string) {
+  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    if (code === "Escape" && !this.payload.showHelp) {
+    if (!this.payload.showHelp) {
 
-      this.payload.showClassification = false;
+      if (event.code === "KeyR") {
+
+        this.onRefreshPositions();
+        this.forceFocusout();
+      }
+
+      if (event.code === "KeyE") {
+
+        this.onEditPlayers();
+        this.forceFocusout();
+      }
+
+      if (event.code === "Escape") {
+
+        this.payload.showClassification = false;
+      }
     }
   }
 }
