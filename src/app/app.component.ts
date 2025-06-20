@@ -84,12 +84,12 @@ export class AppComponent {
       }
     }
 
-    if (event.code === "KeyC" && event.altKey && !this.payload.showHelp) {
+    if (event.code === "KeyC" && !this.payload.showHelp) {
 
       this.onShowClassification();
     }
 
-    if (event.code === "KeyH" && event.altKey) {
+    if (event.code === "KeyH") {
 
       this.onShowHelp();
     }
