@@ -72,7 +72,7 @@ export class PassaParolaComponent implements OnInit {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    if (event.code.includes("Key")) {
+    if (event.code.includes("Key") && !event.ctrlKey && !event.metaKey && !event.altKey) {
 
       let item = this.items.find(i => i.key === event.code[3]);
 
@@ -211,7 +211,7 @@ export class PassaParolaComponent implements OnInit {
     }
 
     // Nessun index
-    if (event.code === "Escape" && !this.payload.showClassification) {
+    if (event.code === "Escape" && !this.payload.showClassification && !this.payload.showHelp) {
 
       if (this.index !== undefined) this.tmpIndex = this.index;
       this.index = undefined;

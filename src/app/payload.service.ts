@@ -16,6 +16,9 @@ export class PayloadService {
   /** Mostra o nasconde la classifica. */
   public showClassification = false;
 
+  /** Mostra o nasconde la sezione di aiuto. */
+  public showHelp = false;
+
   /** Subscription del timer. */
   public timerSubscription!: Subscription;
 

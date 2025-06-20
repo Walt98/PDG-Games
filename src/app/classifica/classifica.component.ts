@@ -139,8 +139,11 @@ export class ClassificaComponent implements OnInit {
   /**
    * Evento keydown.
    */
-  @HostListener('document:keydown', ['$event.code']) onKeydown(code: string) {
+  @HostListener("document:keydown", ["$event.code"]) onKeydown(code: string) {
 
-    if (code === "Escape") this.payload.showClassification = false;
+    if (code === "Escape" && !this.payload.showHelp) {
+
+      this.payload.showClassification = false;
+    }
   }
 }
