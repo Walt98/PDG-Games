@@ -1,36 +1,43 @@
 .list, .help, .close {
     position: absolute;
+    padding: 0;
+    margin: 0;
+    border: none;
+
+    &:active {
+        background-color: transparent !important;
+        border: none !important;
+    }
 
     svg {
         width: 35px;
         height: 35px;
-        cursor: pointer;
 
         path {
             fill: #e5e5e5 !important;
             transition: 0.2s;
         }
+    }
 
-        &:hover {
-            path {
-                fill: white !important;
-            }
+    &:focus-visible svg, &:hover svg {
+        path {
+            fill: white !important;
+        }
 
-            path.number1 {
-                fill: #ffb300 !important;
-            }
+        path.number1 {
+            fill: #ffb300 !important;
+        }
 
-            path.number2 {
-                fill: #b4b6b8 !important;
-            }
+        path.number2 {
+            fill: #b4b6b8 !important;
+        }
 
-            path.number3 {
-                fill: #d17034 !important;
-            }
+        path.number3 {
+            fill: #d17034 !important;
+        }
 
-            path.i-help {
-                fill: var(--bs-warning) !important;
-            }
+        path.i-help {
+            fill: var(--bs-warning) !important;
         }
     }
 }
