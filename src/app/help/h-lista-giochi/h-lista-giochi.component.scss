@@ -1,0 +1,16 @@
+.help-text {
+  width: 90%;
+  margin: 0;
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+  padding: 0 20px;
+
+  .help-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+
+  b {
+    color: var(--bs-warning);
+  }
+}

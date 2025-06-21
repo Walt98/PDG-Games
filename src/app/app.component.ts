@@ -84,14 +84,14 @@ export class AppComponent {
       }
     }
 
-    if (event.code === "KeyC" && !this.payload.showHelp) {
+    if (event.code === "KeyC" && event.altKey && !this.showIntroComponent) {
 
-      this.onShowClassification();
+      if (!this.payload.showHelp) this.onShowClassification();
     }
 
-    // if (event.code === "KeyH") {
+    if (event.code === "KeyH" && event.altKey && !this.showIntroComponent) {
 
-    //   this.onShowHelp();
-    // }
+      this.onShowHelp();
+    }
   }
 }

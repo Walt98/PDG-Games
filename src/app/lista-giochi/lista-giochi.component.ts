@@ -151,7 +151,7 @@ export class ListaGiochiComponent implements OnInit {
           }
 
           // Nessun index
-          if (code === "Escape") {
+          if (code === "Escape" && !this.payload.showClassification && !this.payload.showHelp) {
 
             if (this.index !== undefined) this.tmpIndex = this.index;
             this.index = undefined;

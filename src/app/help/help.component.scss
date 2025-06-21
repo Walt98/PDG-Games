@@ -5,6 +5,7 @@
   z-index: 1000000000;
   background-color: #171717;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 .title {
@@ -13,10 +14,8 @@
   text-align: center;
   font-size: 50px;
   font-weight: 900;
-  margin: 30px 0 0;
+  margin: 30px 0 50px;
   padding: 0 40px;
-  position: absolute;
-  top: 0;
 }
 
 .fast-fade-in {
