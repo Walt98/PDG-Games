@@ -190,7 +190,7 @@ export class PassaParolaComponent implements OnInit {
         this.items[this.index].status = "success";
         play("success");
 
-        if ([...new Set(this.items.map(i => i.status))].length === 1) this.payload.stopTimer$.next();
+        this.stopTimer();
       }
     }
 
@@ -201,6 +201,8 @@ export class PassaParolaComponent implements OnInit {
 
         this.items[this.index].status = "error";
         play("error");
+
+        this.stopTimer();
       }
     }
 
@@ -215,6 +217,19 @@ export class PassaParolaComponent implements OnInit {
 
       if (this.index !== undefined) this.tmpIndex = this.index;
       this.index = undefined;
+    }
+  }
+
+  /**
+   * Se non ci sono altre lettere su cui posizionarsi ferma il timer.
+   */
+  stopTimer() {
+
+    const statusSet = [...new Set(this.items.map(i => i.status))];
+
+    if (!statusSet.includes("") && !statusSet.includes("skip")) {
+
+      this.payload.stopTimer$.next();
     }
   }
 

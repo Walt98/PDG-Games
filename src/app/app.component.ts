@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { FourImagesOneWordComponent } from './four-images-one-word/four-images-one-word.component';
 import { PassaParolaComponent } from './passa-parola/passa-parola.component';
 import { PayloadService } from './payload.service';
@@ -32,6 +32,8 @@ import { HelpComponent } from './help/help.component';
 ]
 })
 export class AppComponent {
+
+  @ViewChildren("classificationHelp") buttons?: QueryList<ElementRef<HTMLButtonElement>>;
 
   title = "pdg-games";
   showIntroComponent = true;
@@ -72,6 +74,14 @@ export class AppComponent {
   }
 
   /**
+   * Forza il focusout dai bottoni classifica e aiuto.
+   */
+  forceFocusout() {
+
+    this.buttons?.forEach(i => i.nativeElement.blur());
+  }
+
+  /**
    * Evento keydown.
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
@@ -81,17 +91,28 @@ export class AppComponent {
       if (event.code === "KeyX" && (event.ctrlKey || event.metaKey)) {
 
         this.payload.gioco = -1;
+        this.forceFocusout();
       }
     }
 
     if (event.code === "KeyC" && event.altKey && !this.showIntroComponent) {
 
-      if (!this.payload.showHelp) this.onShowClassification();
+      if (!this.payload.showHelp) {
+
+        this.onShowClassification();
+        this.forceFocusout();
+      }
     }
 
     if (event.code === "KeyH" && event.altKey && !this.showIntroComponent) {
 
       this.onShowHelp();
+      this.forceFocusout();
+    }
+
+    if (["ArrowLeft", "ArrowRight"].includes(event.code)) {
+
+      this.forceFocusout();
     }
   }
 }
