@@ -1,7 +1,7 @@
 <div class="body">
     @if (!show)
     {
-        <button class="introButton fade-in" (click)="showVideo()"> START! </button>
+        <button class="introButton fade-in" (click)="showVideo()" title="START! (Shift + Invio per saltare il video)"> START! </button>
     }
 
     <video #introVideo class="introVideo opacity{{ show ? 1 : 0 }}" src="/intro.mp4" width="100%" height="auto" (ended)="onEnded()"></video>
