@@ -11,20 +11,38 @@ import { Component } from '@angular/core';
         <br>
         <br>
 
-        <h5 class="help-title"> Mostrare le lettere </h5>
-        Premettendo che tutti i numeri e i simboli della parola saranno già visibili all'inizio del round, per far apparire le lettere (o una parte dell'impiccato) basta premere la <b>lettera corrispondente sulla tastiera</b>. Per mostrare l'intera parola basta usare il tasto <b>Invio</b>.
+        <button class="btn btn-outline-warning altro-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse" (click)="click = !click">
+          <span class="d-flex align-items-center justify-content-center">
+            Altro
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle arrow {{ click ? 'clicked' : '' }}" viewBox="-2 -2 20 20">
+              <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z" stroke="#ffc107" stroke-width="1"/>
+            </svg>
+          </span>
+        </button>
         <br>
         <br>
 
-        <h5 class="help-title"> Rimuovere parti dell'impiccato </h5>
-        È anche possibile rimuovere parti del corpo dell'impiccato usando il tasto <b>Backspace</b>.
-        <br>
-        <br>
+        <div class="collapse" id="collapse">
+          <div class="card card-body">
+            <h5 class="help-title"> Mostrare le lettere </h5>
+            Premettendo che tutti i numeri e i simboli della parola saranno già visibili all'inizio del round, per far apparire le lettere (o una parte dell'impiccato) basta premere la <b>lettera corrispondente sulla tastiera</b>. Per mostrare l'intera parola basta usare il tasto <b>Invio</b>.
+            <br>
+            <br>
 
-        <h5 class="help-title"> Cambiare round </h5>
-        Solo quando la parola verrà mostrata sarà possibile cambiare round; per farlo basta usare le <b>frecce sinistra e destra</b>. Ma nel caso in cui si volesse forzare un cambio round, a prescindere se la parola è stata indovinata o meno, sarà possibile farlo utilizzando le frecce e il tasto <b>Shift</b>.
+            <h5 class="help-title"> Rimuovere parti dell'impiccato </h5>
+            È anche possibile rimuovere parti del corpo dell'impiccato usando il tasto <b>Backspace</b>.
+            <br>
+            <br>
+
+            <h5 class="help-title"> Cambiare round </h5>
+            Solo quando la parola verrà mostrata sarà possibile cambiare round; per farlo basta usare le <b>frecce sinistra e destra</b>. Ma nel caso in cui si volesse forzare un cambio round, a prescindere se la parola è stata indovinata o meno, sarà possibile farlo utilizzando le frecce e il tasto <b>Shift</b>.
+          </div>
+        </div>
       </section>
     </div>
   `
 })
-export class HImpiccatoComponent { }
+export class HImpiccatoComponent {
+  
+  click = false;
+}

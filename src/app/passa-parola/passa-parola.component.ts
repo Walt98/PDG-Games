@@ -72,151 +72,154 @@ export class PassaParolaComponent implements OnInit {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    if (event.code.includes("Key") && !event.ctrlKey && !event.metaKey && !event.altKey) {
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-      let item = this.items.find(i => i.key === event.code[3]);
+      if (event.code.includes("Key") && !event.ctrlKey && !event.metaKey && !event.altKey) {
 
-      if (!!item) {
+        let item = this.items.find(i => i.key === event.code[3]);
 
-        this.index = this.items.indexOf(item);
-        this.tmpIndex = this.index;
+        if (!!item) {
+
+          this.index = this.items.indexOf(item);
+          this.tmpIndex = this.index;
+        }
       }
-    }
 
-    let allSetted = true;
+      let allSetted = true;
 
-    this.items.forEach(el => {
-      if (["", "skip"].includes(el.status)) allSetted = false;
-    })
+      this.items.forEach(el => {
+        if (["", "skip"].includes(el.status)) allSetted = false;
+      })
 
-    // Va solo avanti
-    if (event.code === "ArrowRight") {
+      // Va solo avanti
+      if (event.code === "ArrowRight") {
 
-      if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
-
-      else {
-
-        if (this.index === undefined) {
-
-          if (!allSetted) this.index = 0;
-        }
-
-        else if (this.index === this.items.length - 1) {
-
-          this.index = 0;
-
-          if (!allSetted) {
-
-            while (!["", "skip"].includes(this.items[this.index].status)) this.index++;
-          }
-
-          else this.index = undefined;
-        }
+        if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
 
         else {
 
-          if (!allSetted) {
+          if (this.index === undefined) {
 
-            do {
-              if (this.index === this.items.length - 1) this.index = 0;
-              else (this.index)++;
+            if (!allSetted) this.index = 0;
+          }
+
+          else if (this.index === this.items.length - 1) {
+
+            this.index = 0;
+
+            if (!allSetted) {
+
+              while (!["", "skip"].includes(this.items[this.index].status)) this.index++;
             }
-            while (!["", "skip"].includes(this.items[(this.index)].status));
+
+            else this.index = undefined;
           }
 
-          else this.index = undefined;
-        }
+          else {
 
-        this.tmpIndex = this.index;
+            if (!allSetted) {
+
+              do {
+                if (this.index === this.items.length - 1) this.index = 0;
+                else (this.index)++;
+              }
+              while (!["", "skip"].includes(this.items[(this.index)].status));
+            }
+
+            else this.index = undefined;
+          }
+
+          this.tmpIndex = this.index;
+        }
       }
-    }
 
-    // Va solo indietro
-    if (event.code === "ArrowLeft") {
+      // Va solo indietro
+      if (event.code === "ArrowLeft") {
 
-      if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
-      else {
-
-        if (this.index === undefined) {
-
-          if (!allSetted) this.index = 0;
-        }
-
-        else if (this.index === 0) {
-
-          this.index = this.items.length - 1;
-
-          if (!allSetted) {
-
-            while (!["", "skip"].includes(this.items[this.index].status)) this.index--;
-          }
-
-          else this.index = undefined;
-        }
-
+        if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
         else {
 
-          if (!allSetted) {
+          if (this.index === undefined) {
 
-            do {
-              if (this.index === 0) this.index = this.items.length - 1;
-              else this.index--;
-            }
-            while (!["", "skip"].includes(this.items[this.index].status));
+            if (!allSetted) this.index = 0;
           }
 
-          else this.index = undefined;
+          else if (this.index === 0) {
+
+            this.index = this.items.length - 1;
+
+            if (!allSetted) {
+
+              while (!["", "skip"].includes(this.items[this.index].status)) this.index--;
+            }
+
+            else this.index = undefined;
+          }
+
+          else {
+
+            if (!allSetted) {
+
+              do {
+                if (this.index === 0) this.index = this.items.length - 1;
+                else this.index--;
+              }
+              while (!["", "skip"].includes(this.items[this.index].status));
+            }
+
+            else this.index = undefined;
+          }
+
+          this.tmpIndex = this.index;
         }
-
-        this.tmpIndex = this.index;
       }
-    }
 
-    // PassaParola
-    if (event.code.includes("Shift")) {
+      // PassaParola
+      if (event.code.includes("Shift")) {
 
-      if (this.index !== undefined) {
+        if (this.index !== undefined) {
 
-        this.items[this.index].status = "skip";
-        play("skip");
+          this.items[this.index].status = "skip";
+          play("skip");
+        }
       }
-    }
 
-    // Corretto
-    if (event.code === "Enter") {
+      // Corretto
+      if (event.code === "Enter") {
 
-      if (this.index !== undefined) {
+        if (this.index !== undefined) {
 
-        this.items[this.index].status = "success";
-        play("success");
+          this.items[this.index].status = "success";
+          play("success");
 
-        this.stopTimer();
+          this.stopTimer();
+        }
       }
-    }
 
-    // Sbagliato
-    if (event.code === "Backspace" && !event.metaKey) {
+      // Sbagliato
+      if (event.code === "Backspace" && !event.metaKey) {
 
-      if (this.index !== undefined) {
+        if (this.index !== undefined) {
 
-        this.items[this.index].status = "error";
-        play("error");
+          this.items[this.index].status = "error";
+          play("error");
 
-        this.stopTimer();
+          this.stopTimer();
+        }
       }
-    }
 
-    // Nessuno status
-    if (event.code === "Delete" || (event.metaKey && event.code === "Backspace")) {
+      // Nessuno status
+      if (event.code === "Delete" || (event.metaKey && event.code === "Backspace")) {
 
-      if (this.index !== undefined) this.items[this.index].status = "";
-    }
+        if (this.index !== undefined) this.items[this.index].status = "";
+      }
 
-    // Nessun index
-    if (event.code === "Escape" && !this.payload.showClassification && !this.payload.showHelp) {
+      // Nessun index
+      if (event.code === "Escape") {
 
-      if (this.index !== undefined) this.tmpIndex = this.index;
-      this.index = undefined;
+        if (this.index !== undefined) this.tmpIndex = this.index;
+        this.index = undefined;
+      }
     }
   }
 

@@ -51,31 +51,34 @@ export class ReazioneACatenaComponent implements OnInit {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    // Va avanti
-    if (event.code === "ArrowRight") {
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-      if (this.index !== this.words.length - 1) {
+      // Va avanti
+      if (event.code === "ArrowRight") {
 
-        this.index++;
-        this.startTimer();
+        if (this.index !== this.words.length - 1) {
+
+          this.index++;
+          this.startTimer();
+        }
       }
-    }
 
-    // Va indietro
-    if (event.code === "ArrowLeft") {
+      // Va indietro
+      if (event.code === "ArrowLeft") {
 
-      if (this.index > 0) {
+        if (this.index > 0) {
 
-        this.index--;
-        this.startTimer();
+          this.index--;
+          this.startTimer();
+        }
       }
+
+      // Risposta esatta
+      if (event.code === "Enter") this.setPoints(true, !event.shiftKey);
+
+      // Risposta sbagliata
+      if (event.code === "Backspace") this.setPoints(false, !event.shiftKey);
     }
-
-    // Risposta esatta
-    if (event.code === "Enter") this.setPoints(true, !event.shiftKey);
-
-    // Risposta sbagliata
-    if (event.code === "Backspace") this.setPoints(false, !event.shiftKey);
   }
 
   /**

@@ -45,8 +45,11 @@ export class AppComponent {
    */
   onClose() {
 
-    this.payload.gioco = -1;
-    this.payload.stopTimer$.next();
+    if (!this.payload.showHelp) {
+
+      this.payload.gioco = -1;
+      this.payload.stopTimer$.next();
+    }
   }
 
   /**
@@ -54,17 +57,20 @@ export class AppComponent {
    */
   onShowClassification() {
 
-    this.payload.showClassification = !this.payload.showClassification;
+    if (!this.payload.showHelp) {
 
-    setTimeout(() => {
+      this.payload.showClassification = !this.payload.showClassification;
 
-      if (!this.payload.giocatori.length) {
+      setTimeout(() => {
 
-        this.payload.showClassification = false;
-      }
+        if (!this.payload.giocatori.length) {
 
-      this.forceFocusout();
-    });
+          this.payload.showClassification = false;
+        }
+
+        this.forceFocusout();
+      });
+    }
   }
 
   /**

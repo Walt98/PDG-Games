@@ -53,56 +53,59 @@ export class CompletaIlVersoComponent implements OnInit {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    // Va avanti
-    if (event.code === "ArrowRight") {
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-      let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
+      // Va avanti
+      if (event.code === "ArrowRight") {
 
-      if (this.index < this.items.length - 1 && (risposta?.status || event.shiftKey)) {
+        let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
 
-        this.showTimer = false;
+        if (this.index < this.items.length - 1 && (risposta?.status || event.shiftKey)) {
 
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
+          this.showTimer = false;
 
-        this.index++;
-      }
-    }
+          setTimeout(() => {
+            this.showTimer = true;
+            this.payload.timerSubscription?.unsubscribe();
+          }, 1);
 
-    // Va indietro
-    if (event.code === "ArrowLeft") {
-
-      let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
-
-      if (this.index > 0 && (risposta?.status || event.shiftKey)) {
-
-        this.showTimer = false;
-
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
-
-        this.index--;
-      }
-    }
-
-    // Seleziona la risposta
-    if (["KeyA", "KeyB", "KeyC", "KeyD"].includes(event.code) && !event.altKey) {
-
-      let index = -1;
-
-      switch (event.code) {
-        case "KeyA": index = 0; break;
-        case "KeyB": index = 1; break;
-        case "KeyC": index = 2; break;
-        case "KeyD": index = 3; break;
-        default: index = -1; break;
+          this.index++;
+        }
       }
 
-      if (index > -1) this.onSelect(this.items[this.index].risposte[index]);
+      // Va indietro
+      if (event.code === "ArrowLeft") {
+
+        let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
+
+        if (this.index > 0 && (risposta?.status || event.shiftKey)) {
+
+          this.showTimer = false;
+
+          setTimeout(() => {
+            this.showTimer = true;
+            this.payload.timerSubscription?.unsubscribe();
+          }, 1);
+
+          this.index--;
+        }
+      }
+
+      // Seleziona la risposta
+      if (["KeyA", "KeyB", "KeyC", "KeyD"].includes(event.code) && !event.altKey) {
+
+        let index = -1;
+
+        switch (event.code) {
+          case "KeyA": index = 0; break;
+          case "KeyB": index = 1; break;
+          case "KeyC": index = 2; break;
+          case "KeyD": index = 3; break;
+          default: index = -1; break;
+        }
+
+        if (index > -1) this.onSelect(this.items[this.index].risposte[index]);
+      }
     }
   }
 

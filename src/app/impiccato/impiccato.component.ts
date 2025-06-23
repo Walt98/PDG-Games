@@ -88,71 +88,74 @@ export class ImpiccatoComponent implements OnInit {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    // Si può cambiare pagina solo se la parola è
-    // completamente visibile oppure forzando utilizzando Shift
-    const canChange = this.showWord || event.shiftKey;
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-    // Va avanti
-    if (event.code === "ArrowRight") {
+      // Si può cambiare pagina solo se la parola è
+      // completamente visibile oppure forzando utilizzando Shift
+      const canChange = this.showWord || event.shiftKey;
 
-      if (this.index !== this.items.length - 1 && canChange) this.changeWord();
-    }
+      // Va avanti
+      if (event.code === "ArrowRight") {
 
-    // Va indietro
-    if (event.code === "ArrowLeft") {
+        if (this.index !== this.items.length - 1 && canChange) this.changeWord();
+      }
 
-      if (this.index > 0 && canChange) this.changeWord(true);
-    }
+      // Va indietro
+      if (event.code === "ArrowLeft") {
 
-    if (this.checkIfIsLetter(event.key) && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        if (this.index > 0 && canChange) this.changeWord(true);
+      }
 
-      const key = event.key.toUpperCase();
+      if (this.checkIfIsLetter(event.key) && !event.ctrlKey && !event.metaKey && !event.altKey) {
 
-      if (!this.wrong.includes(key)) {
+        const key = event.key.toUpperCase();
 
-        let guessed = this.items[this.index].filter(i => this.normalize(i.char) === key);
+        if (!this.wrong.includes(key)) {
 
-        guessed.forEach(i => i.show = true);
+          let guessed = this.items[this.index].filter(i => this.normalize(i.char) === key);
 
-        if (!this.items[this.index].map(i => i.show).includes(false)) {
+          guessed.forEach(i => i.show = true);
 
-          if (!this.showWord) play("success");
-          this.showWord = true;
-        }
+          if (!this.items[this.index].map(i => i.show).includes(false)) {
 
-        if (!guessed.length && this.imageIndex < 6 && !this.showWord) {
-
-          this.imageIndex++;
-
-          if (this.imageIndex === 6) {
-
+            if (!this.showWord) play("success");
             this.showWord = true;
-            play("gong");
           }
 
-          else {
+          if (!guessed.length && this.imageIndex < 6 && !this.showWord) {
 
-            this.wrong.push(key);
-            play("error");
+            this.imageIndex++;
+
+            if (this.imageIndex === 6) {
+
+              this.showWord = true;
+              play("gong");
+            }
+
+            else {
+
+              this.wrong.push(key);
+              play("error");
+            }
           }
         }
       }
-    }
 
-    // Parola indovinata
-    if (event.code === "Enter") {
+      // Parola indovinata
+      if (event.code === "Enter") {
 
-      if (!this.showWord) play("success");
-      this.showWord = true;
-    }
+        if (!this.showWord) play("success");
+        this.showWord = true;
+      }
 
-    // Parola sbagliata
-    if (event.code === "Backspace") {
+      // Parola sbagliata
+      if (event.code === "Backspace") {
 
-      if (this.imageIndex > 0 && this.imageIndex < 6) {
+        if (this.imageIndex > 0 && this.imageIndex < 6) {
 
-        this.imageIndex--;
-        this.wrong.pop();
+          this.imageIndex--;
+          this.wrong.pop();
+        }
       }
     }
   }

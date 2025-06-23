@@ -74,49 +74,52 @@ export class ChiSonoComponent implements OnInit {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    // Va avanti
-    if (event.code === "ArrowRight") {
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-      if (this.index !== this.randomized.length - 1 && (this.showName || event.shiftKey)) {
+      // Va avanti
+      if (event.code === "ArrowRight") {
 
-        this.showName = false;
-        this.showTimer = false;
+        if (this.index !== this.randomized.length - 1 && (this.showName || event.shiftKey)) {
 
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
+          this.showName = false;
+          this.showTimer = false;
 
-        this.index++;
+          setTimeout(() => {
+            this.showTimer = true;
+            this.payload.timerSubscription?.unsubscribe();
+          }, 1);
+
+          this.index++;
+        }
       }
-    }
 
-    // Va indietro
-    if (event.code === "ArrowLeft") {
+      // Va indietro
+      if (event.code === "ArrowLeft") {
 
-      if (this.index !== 0 && (this.showName || event.shiftKey)) {
+        if (this.index !== 0 && (this.showName || event.shiftKey)) {
 
-        this.showName = false;
-        this.showTimer = false;
+          this.showName = false;
+          this.showTimer = false;
 
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
+          setTimeout(() => {
+            this.showTimer = true;
+            this.payload.timerSubscription?.unsubscribe();
+          }, 1);
 
-        this.index--;
+          this.index--;
+        }
       }
-    }
 
-    // Risposta esatta
-    if (event.code === "Enter") this.show();
+      // Risposta esatta
+      if (event.code === "Enter") this.show();
 
-    // Risposta sbagliata
-    if (["Delete", "Backspace"].includes(event.code)) {
+      // Risposta sbagliata
+      if (["Delete", "Backspace"].includes(event.code)) {
 
-      this.payload.stopTimer$.next();
-      play("error");
-      this.showName = true;
+        this.payload.stopTimer$.next();
+        play("error");
+        this.showName = true;
+      }
     }
   }
 

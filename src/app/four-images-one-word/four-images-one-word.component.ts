@@ -41,45 +41,48 @@ export class FourImagesOneWordComponent {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    // Va avanti
-    if (event.code === "ArrowRight") {
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-      if (this.index !== this.words.length - 1 && (this.showLetters || event.shiftKey)) {
+      // Va avanti
+      if (event.code === "ArrowRight") {
 
-        this.showLetters = false;
-        this.showTimer = false;
+        if (this.index !== this.words.length - 1 && (this.showLetters || event.shiftKey)) {
 
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
+          this.showLetters = false;
+          this.showTimer = false;
 
-        this.index++;
+          setTimeout(() => {
+            this.showTimer = true;
+            this.payload.timerSubscription?.unsubscribe();
+          }, 1);
+
+          this.index++;
+        }
       }
-    }
 
-    // Va indietro
-    if (event.code === "ArrowLeft") {
+      // Va indietro
+      if (event.code === "ArrowLeft") {
 
-      if (this.index !== 0 && (this.showLetters || event.shiftKey)) {
+        if (this.index !== 0 && (this.showLetters || event.shiftKey)) {
 
-        this.showLetters = false;
-        this.showTimer = false;
+          this.showLetters = false;
+          this.showTimer = false;
 
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
+          setTimeout(() => {
+            this.showTimer = true;
+            this.payload.timerSubscription?.unsubscribe();
+          }, 1);
 
-        this.index--;
+          this.index--;
+        }
       }
+
+      // Risposta esatta
+      if (event.code === "Enter") this.showWord();
+
+      // Risposta sbagliata
+      if (["Delete", "Backspace"].includes(event.code)) this.showLetters = false;
     }
-
-    // Risposta esatta
-    if (event.code === "Enter") this.showWord();
-
-    // Risposta sbagliata
-    if (["Delete", "Backspace"].includes(event.code)) this.showLetters = false;
   }
 
   /**

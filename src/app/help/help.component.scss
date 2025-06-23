@@ -35,6 +35,42 @@
   b {
     color: var(--bs-warning);
   }
+
+  .altro-button {
+    border: none;
+
+    span {
+      font-weight: 600;
+      gap: 5px;
+      color: var(--bs-warning);
+
+      .arrow {
+        fill: var(--bs-warning);
+        transition: .35s;
+      }
+
+      .arrow.clicked {
+        transform: rotate(-180deg);
+      }
+    }
+
+    &:hover, &:active, &:focus-visible {
+      background-color: transparent;
+    }
+  }
+
+  .card.card-body {
+    display: block;
+    background-color: transparent;
+    background-clip: initial;
+    border: none;
+    color: whitesmoke;
+    padding: 0;
+    border-radius: 0;
+    min-width: auto;
+    height: auto;
+    word-wrap: normal;
+  }
 }
 
 .fast-fade-in {
