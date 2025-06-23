@@ -104,7 +104,7 @@ export class ImpiccatoComponent implements OnInit {
       if (this.index > 0 && canChange) this.changeWord(true);
     }
 
-    if (this.checkIfIsLetter(event.key) && !event.ctrlKey && !event.shiftKey) {
+    if (this.checkIfIsLetter(event.key) && !event.ctrlKey && !event.metaKey && !event.altKey) {
 
       const key = event.key.toUpperCase();
 
@@ -147,7 +147,7 @@ export class ImpiccatoComponent implements OnInit {
     }
 
     // Parola sbagliata
-    if (["Delete", "Backspace"].includes(event.code)) {
+    if (event.code === "Backspace") {
 
       if (this.imageIndex > 0 && this.imageIndex < 6) {
 

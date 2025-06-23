@@ -1,13 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { PayloadService } from '../payload.service';
-import { HClassificaComponent } from './h-classifica/h-classifica.component';
-import { HListaGiochiComponent } from './h-lista-giochi/h-lista-giochi.component';
-import { HPassaParolaComponent } from './h-passa-parola/h-passa-parola.component';
-import { HFourImagesOneWordComponent } from './h-four-images-one-word/h-four-images-one-word.component';
-import { HChiSonoComponent } from './h-chi-sono/h-chi-sono.component';
-import { HCompletaIlVersoComponent } from './h-completa-il-verso/h-completa-il-verso.component';
-import { HReazioneACatenaComponent } from './h-reazione-a-catena/h-reazione-a-catena.component';
-import { HImpiccatoComponent } from './h-impiccato/h-impiccato.component';
+import { HClassificaComponent } from './sezioni/h-classifica.component';
+import { HListaGiochiComponent } from './sezioni/h-lista-giochi.component';
+import { HPassaParolaComponent } from './sezioni/h-passa-parola.component';
+import { HFourImagesOneWordComponent } from './sezioni/h-four-images-one-word.component';
+import { HChiSonoComponent } from './sezioni/h-chi-sono.component';
+import { HCompletaIlVersoComponent } from './sezioni/h-completa-il-verso.component';
+import { HReazioneACatenaComponent } from './sezioni/h-reazione-a-catena.component';
+import { HImpiccatoComponent } from './sezioni/h-impiccato.component';
 
 @Component({
   selector: 'app-help',

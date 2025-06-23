@@ -75,7 +75,7 @@ export class ReazioneACatenaComponent implements OnInit {
     if (event.code === "Enter") this.setPoints(true, !event.shiftKey);
 
     // Risposta sbagliata
-    if (["Delete", "Backspace"].includes(event.code)) this.setPoints(false, !event.shiftKey);
+    if (event.code === "Backspace") this.setPoints(false, !event.shiftKey);
   }
 
   /**

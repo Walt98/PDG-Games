@@ -62,6 +62,8 @@ export class AppComponent {
 
         this.payload.showClassification = false;
       }
+
+      this.forceFocusout();
     });
   }
 
@@ -71,6 +73,7 @@ export class AppComponent {
   onShowHelp() {
 
     this.payload.showHelp = !this.payload.showHelp;
+    this.forceFocusout();
   }
 
   /**
@@ -86,13 +89,15 @@ export class AppComponent {
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    if (!this.payload.showClassification && !this.payload.showHelp) {
+    if (event.code === "KeyX" && (event.ctrlKey || event.metaKey)) {
 
-      if (event.code === "KeyX" && (event.ctrlKey || event.metaKey)) {
+      if (this.payload.gioco > -1) {
 
-        this.payload.gioco = -1;
-        this.forceFocusout();
+        if (this.payload.showClassification) this.payload.showClassification = false;
+        if (this.payload.showHelp) this.payload.showHelp = false;
       }
+
+      this.payload.gioco = -1;
     }
 
     if (event.code === "KeyC" && event.altKey && !this.showIntroComponent) {

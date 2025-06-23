@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-h-passa-parola',
+  standalone: true,
+  template: `
+    <div class="d-flex justify-content-center">
+      <section class="text-center help-text">
+        <h5 class="help-title"> Come si gioca </h5>
+        Ogni lettera del cerchio indica l'iniziale della parola a cui si riferisce e l'obiettivo del gioco è riuscire a indovinare quante più parole possibili in base agli indizi dati, prima che scada il timer. Se sul momento non si riesce a capire qual è la parola corretta è possibile "passare" alla quella successiva per poi riprenderla in un secondo momento; ma se viene data la parola sbagliata essa non potrà essere più indovinata.
+        <br>
+        Il colore della lettera indica lo stato in cui si trova: blu, lettera neutra; giallo, lettera "passata"; verde, lettera indovinata; rosso, lettera sbagliata.
+        <br>
+        <br>
+
+        <h5 class="help-title"> Muoversi tra le lettere </h5>
+        Ci sono due modi per spostarsi su una lettera: utilizzando le <b>freccie sinistra e destra</b> oppure cliccando sulla <b>lettera corrispondente sulla tastiera</b>.
+        <br>
+        Premendo <b>Esc</b> si perderà il focus sulla lettera, ma se si riprende a utilizzare le frecce si ripartirà dalla stessa.
+        <br>
+        Non è possibile muoversi sulle lettere in verde e in rosso utilizzando le frecce, ma si può forzare l'accesso utilizzando la lettera corrispondente sulla tastiera.
+        <br>
+        <br>
+
+        <h5 class="help-title"> Modifica dello stato </h5>
+        Una volta posizionati su una lettera si possono utilizzare degli shortcut per modificarne lo stato: <b>Invio</b> se è corretta; <b>Backspace</b> se è sbagliata; <b>Shift</b> se è "passata"; <b>Canc</b> (<b>Cmd + Backspace</b> su Mac) per riportarla a neutra.
+        <br>
+        È anche possibile modificare lo stato cliccando sulla lettera direttamente a schermo finché non ci sarà quello desiderato.
+        <br>
+        <br>
+
+        <h5 class="help-title"> Timer </h5>
+        Per poter avviare il timer basta premere la <b>Barra spaziatrice</b>, oppure cliccando sul timer stesso; per fermarlo basta ripetere una delle due azioni precedentemente indicate, oppure completando il gioco.
+        <br>
+        È anche possibile aggiungere/rimuovere secondi utilizzando le <b>frecce su e giù</b>, ma usando anche il tasto <b>Shift</b> se ne potranno aggiungere/rimuovere 10 per volta.
+      </section>
+    </div>
+  `
+})
+export class HPassaParolaComponent { }

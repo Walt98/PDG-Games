@@ -90,7 +90,7 @@ export class CompletaIlVersoComponent implements OnInit {
     }
 
     // Seleziona la risposta
-    if (["KeyA", "KeyB", "KeyC", "KeyD"].includes(event.code)) {
+    if (["KeyA", "KeyB", "KeyC", "KeyD"].includes(event.code) && !event.altKey) {
 
       let index = -1;
 
@@ -115,14 +115,19 @@ export class CompletaIlVersoComponent implements OnInit {
 
     if (this.index !== this.items.length - 1) {
 
-      this.showTimer = false;
+      let risposta = this.items[this.index].risposte.find(r => r.isCurrect);
 
-      setTimeout(() => {
-        this.showTimer = true;
-        this.payload.timerSubscription?.unsubscribe();
-      }, 1);
+      if (risposta?.status) {
 
-      this.index++;
+        this.showTimer = false;
+
+        setTimeout(() => {
+          this.showTimer = true;
+          this.payload.timerSubscription?.unsubscribe();
+        }, 1);
+
+        this.index++;
+      }
     }
   }
 
