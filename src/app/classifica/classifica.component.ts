@@ -83,6 +83,7 @@ export class ClassificaComponent implements OnInit {
       });
 
       this.setGroupedPlayers();
+      this.forceFocusout();
     }
   }
 
@@ -96,6 +97,7 @@ export class ClassificaComponent implements OnInit {
     this.payload.giocatori.sort((a, b) => b.points - a.points);
 
     this.setGroupedPlayers();
+    this.forceFocusout();
   }
 
   /**
@@ -153,22 +155,8 @@ export class ClassificaComponent implements OnInit {
 
     if (!this.payload.showHelp) {
 
-      if (event.code === "KeyR") {
-
-        this.onRefreshPositions();
-        this.forceFocusout();
-      }
-
-      if (event.code === "KeyE") {
-
-        this.onEditPlayers();
-        this.forceFocusout();
-      }
-
-      if (event.code === "Escape") {
-
-        this.payload.showClassification = false;
-      }
+      if (event.code === "KeyR") this.onRefreshPositions();
+      if (event.code === "KeyE") this.onEditPlayers();
     }
   }
 }

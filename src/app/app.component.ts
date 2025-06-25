@@ -60,6 +60,7 @@ export class AppComponent {
     if (!this.payload.showHelp) {
 
       this.payload.showClassification = !this.payload.showClassification;
+      this.payload.stopTimer$.next();
 
       setTimeout(() => {
 
@@ -79,6 +80,7 @@ export class AppComponent {
   onShowHelp() {
 
     this.payload.showHelp = !this.payload.showHelp;
+    this.payload.stopTimer$.next();
     this.forceFocusout();
   }
 
@@ -91,39 +93,55 @@ export class AppComponent {
   }
 
   /**
+   * Mostra/nasconde la classifica e/o la sezione di aiuto.
+   * @param code Nome pulsante
+   * @param ctrlKey Se Ctrl/Cmd è stato premuto
+   * @param altKey Se Alt/Option è stato premuto
+   */
+  onShowH_C(code: string, ctrlKey: boolean, altKey: boolean) {
+
+    // Condizione chiusura gioco
+    const game = code === "KeyX" && ctrlKey && this.payload.gioco > -1;
+
+    // Condizione Classifica
+    const classifica = !this.showIntroComponent && !this.payload.showHelp &&
+      ((code === "KeyC" && altKey) ||
+      (code === "Escape" && this.payload.showClassification));
+
+    // Condizione Help
+    const help = !this.showIntroComponent &&
+      ((code === "KeyH" && altKey) ||
+      (code === "Escape" && this.payload.showHelp));
+
+    if (classifica) this.onShowClassification();
+
+    else {
+
+      if (help) this.onShowHelp();
+    }
+
+    if (game) {
+
+      if (this.payload.showHelp) this.onShowHelp();
+      if (this.payload.showClassification) this.onShowClassification();
+    }
+  }
+
+  /**
    * Evento keydown.
    */
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    if (event.code === "KeyX" && (event.ctrlKey || event.metaKey)) {
-
-      if (this.payload.gioco > -1) {
-
-        if (this.payload.showClassification) this.payload.showClassification = false;
-        if (this.payload.showHelp) this.payload.showHelp = false;
-      }
-
-      this.payload.gioco = -1;
-    }
-
-    if (event.code === "KeyC" && event.altKey && !this.showIntroComponent) {
-
-      if (!this.payload.showHelp) {
-
-        this.onShowClassification();
-        this.forceFocusout();
-      }
-    }
-
-    if (event.code === "KeyH" && event.altKey && !this.showIntroComponent) {
-
-      this.onShowHelp();
-      this.forceFocusout();
-    }
+    this.onShowH_C(event.code, event.ctrlKey || event.metaKey, event.altKey);
 
     if (["ArrowLeft", "ArrowRight"].includes(event.code)) {
 
       this.forceFocusout();
+    }
+
+    if (event.code === "KeyX" && (event.ctrlKey || event.metaKey)) {
+
+      this.payload.gioco = -1;
     }
   }
 }

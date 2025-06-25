@@ -58,37 +58,40 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
 
-    if (event.code === "ArrowUp") {
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-      // Aumenta il timer di 1 o 10 secondi, in base al valore di event.shiftKey
-      this.timer += event.shiftKey ? 10 : 1;
-      this.setValues();
-    }
+      if (event.code === "ArrowUp") {
 
-    if (event.code === "ArrowDown") {
+        // Aumenta il timer di 1 o 10 secondi, in base al valore di event.shiftKey
+        this.timer += event.shiftKey ? 10 : 1;
+        this.setValues();
+      }
 
-      // Diminuisce il timer di 10 secondi max: se il timer è sotto i 10 secondi
-      // toglie il rimanente per arrivare a 0; se è già 0 non fa nulla
-      if (event.shiftKey) {
+      if (event.code === "ArrowDown") {
 
-        if (this.timer > 9) this.timer -= 10;
+        // Diminuisce il timer di 10 secondi max: se il timer è sotto i 10 secondi
+        // toglie il rimanente per arrivare a 0; se è già 0 non fa nulla
+        if (event.shiftKey) {
 
+          if (this.timer > 9) this.timer -= 10;
+
+          else {
+
+            if (this.timer > 0 && this.timer < 10) this.timer = 0;
+          }
+        }
+
+        // Diminuisce il timer di un secondo se è maggiore di 0
         else {
 
-          if (this.timer > 0 && this.timer < 10) this.timer = 0;
+          if (this.timer > 0) this.timer--;
         }
+
+        this.setValues();
       }
 
-      // Diminuisce il timer di un secondo se è maggiore di 0
-      else {
-
-        if (this.timer > 0) this.timer--;
-      }
-
-      this.setValues();
+      if (event.code === "Space") this.setTimer();
     }
-
-    if (event.code === "Space") this.setTimer();
   }
 
   /**

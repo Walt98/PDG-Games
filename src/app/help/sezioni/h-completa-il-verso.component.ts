@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
         <h5 class="help-title"> Come si gioca </h5>
         In ogni round viene mostrato un versetto incompleto della Bibbia con 4 possibili risposte e l'obiettivo del gioco è riuscire a capire qual è quella giusta, che si illuminerà di verde, prima della scadenza del timer; se viene data la risposta sbagliata essa diventerà rossa e verrà mostrata qual è quella corretta.
         <br>
-        <br>
 
         <button class="btn btn-outline-warning altro-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse" (click)="click = !click">
           <span class="d-flex align-items-center justify-content-center">
@@ -20,18 +19,15 @@ import { Component } from '@angular/core';
           </span>
         </button>
         <br>
-        <br>
 
         <div class="collapse" id="collapse">
           <div class="card card-body">
             <h5 class="help-title"> Scelta della risposta </h5>
             Le risposte possibili sono sempre 4, dalla A alla D, e per sceglierne una basta cliccare su di essa, oppure cliccando sulla <b>lettera corrispondente sulla tastiera</b>.
             <br>
-            <br>
 
             <h5 class="help-title"> Cambiare round </h5>
             Solo quando verrà data una risposta sarà possibile cambiare round; per farlo basta usare le <b>frecce sinistra e destra</b>, oppure cliccando sul logo PDG YNG (sempre dopo aver risposto). Ma nel caso in cui si volesse forzare un cambio round, a prescindere se è stata data una risposta o meno, sarà possibile farlo utilizzando le frecce e il tasto <b>Shift</b> (non è possibile forzare un cambio round né spostarsi a quelli precedenti cliccando sul logo).
-            <br>
             <br>
 
             <h5 class="help-title"> Timer </h5>

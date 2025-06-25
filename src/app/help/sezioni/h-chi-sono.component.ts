@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
         <h5 class="help-title"> Come si gioca </h5>
         In ogni round verrà mostrato l'anagramma di una parola e l'obiettivo del gioco è capire qual è tale parola prima della scadenza del timer.
         <br>
-        <br>
 
         <button class="btn btn-outline-warning altro-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse" (click)="click = !click">
           <span class="d-flex align-items-center justify-content-center">
@@ -20,7 +19,6 @@ import { Component } from '@angular/core';
           </span>
         </button>
         <br>
-        <br>
 
         <div class="collapse" id="collapse">
           <div class="card card-body">
@@ -29,11 +27,9 @@ import { Component } from '@angular/core';
             <br>
             È anche possibile ordinarla cliccando sul logo PDG YNG.
             <br>
-            <br>
 
             <h5 class="help-title"> Cambiare round </h5>
             Solo quando la parola verrà mostrata correttamente sarà possibile cambiare round; per farlo basta usare le <b>frecce sinistra e destra</b>, oppure cliccando sul logo PDG YNG. Ma nel caso in cui si volesse forzare un cambio round, a prescindere se la parola è stata ordinata o meno, sarà possibile farlo utilizzando le frecce e il tasto <b>Shift</b> (non è possibile forzare un cambio round né spostarsi a quelli precedenti cliccando sul logo).
-            <br>
             <br>
 
             <h5 class="help-title"> Timer </h5>

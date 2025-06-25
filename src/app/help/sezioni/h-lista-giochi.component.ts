@@ -8,21 +8,17 @@ import { Component } from '@angular/core';
       <section class="text-center help-text">
         <b>IL SITO NON È STATO IDEATO E IMPLEMENTATO PER ESSERE USATO DA SMARTPHONE E TABLET.</b>
         <br>
-        <br>
 
-        <h5 class="help-title"> START! veloce </h5>
+        <h5 class="help-title" style="margin-top: 22px;"> START! veloce </h5>
         Quando si carica il sito compare un pulsante START! che, dopo un breve video di intro, fa iniziare l'esperienza di gioco; ma è anche possibile saltare il video tramite lo shortcut <b>Shift + Invio</b>.
-        <br>
         <br>
 
         <h5 class="help-title"> Scelta gioco tramite tastiera </h5>
         La tastiera può anche essere usata per muoversi tra i giochi utilizzando le <b>frecce sinistra e destra</b>; premendo <b>Esc</b> si perderà il focus sul gioco, ma se si riprende a utilizzare le frecce si ripartirà dallo stesso; premendo <b>Invio</b> quando ci si è posizionati su uno dei giochi esso si avvierà.
         <br>
-        <br>
 
         <h5 class="help-title"> Chiusura giochi </h5>
         Quando si apre un qualsiasi gioco comparirà una X in alto a destra; per uscire dal gioco basta cliccarla, oppure utilizzare lo shortcut <b>Ctrl + X</b> (<b>Cmd + X</b> su Mac).
-        <br>
         <br>
 
         <h5 class="help-title"> Classifica e sezione di aiuto </h5>

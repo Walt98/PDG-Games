@@ -11,7 +11,6 @@ import { Component } from '@angular/core';
         <br>
         Il colore della lettera indica lo stato in cui si trova: blu, lettera neutra; giallo, lettera "passata"; verde, lettera indovinata; rosso, lettera sbagliata.
         <br>
-        <br>
 
         <button class="btn btn-outline-warning altro-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse" (click)="click = !click">
           <span class="d-flex align-items-center justify-content-center">
@@ -21,7 +20,6 @@ import { Component } from '@angular/core';
             </svg>
           </span>
         </button>
-        <br>
         <br>
 
         <div class="collapse" id="collapse">
@@ -33,13 +31,11 @@ import { Component } from '@angular/core';
             <br>
             Non è possibile muoversi sulle lettere in verde e in rosso utilizzando le frecce, ma si può forzare l'accesso utilizzando la lettera corrispondente sulla tastiera.
             <br>
-            <br>
 
             <h5 class="help-title"> Modifica dello stato </h5>
             Una volta posizionati su una lettera si possono utilizzare degli shortcut per modificarne lo stato: <b>Invio</b> se è corretta; <b>Backspace</b> se è sbagliata; <b>Shift</b> se è "passata"; <b>Canc</b> (<b>Cmd + Backspace</b> su Mac) per riportarla a neutra.
             <br>
             È anche possibile modificare lo stato cliccando sulla lettera direttamente a schermo finché non ci sarà quello desiderato.
-            <br>
             <br>
 
             <h5 class="help-title"> Timer </h5>

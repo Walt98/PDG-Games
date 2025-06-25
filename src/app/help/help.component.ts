@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { PayloadService } from '../payload.service';
 import { HClassificaComponent } from './sezioni/h-classifica.component';
 import { HListaGiochiComponent } from './sezioni/h-lista-giochi.component';
@@ -28,12 +28,4 @@ import { HImpiccatoComponent } from './sezioni/h-impiccato.component';
 export class HelpComponent {
 
   constructor(public payload: PayloadService) { }
-
-  /**
-   * Evento keydown.
-   */
-  @HostListener("document:keydown", ["$event.code"]) onKeydown(code: string) {
-
-    if (code === "Escape") this.payload.showHelp = false;
-  }
 }

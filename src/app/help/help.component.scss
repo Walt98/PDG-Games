@@ -14,14 +14,14 @@
   text-align: center;
   font-size: 50px;
   font-weight: 900;
-  margin: 30px 0 50px;
+  margin: 30px 0 40px;
   padding: 0 40px;
 }
 
 :host ::ng-deep .help-text {
   width: 90%;
   margin: 0;
-  max-height: calc(100vh - 240px);
+  max-height: calc(100vh - 230px);
   overflow: auto;
   padding: 0 20px;
 
@@ -32,12 +32,17 @@
     text-decoration: underline;
   }
 
+  .help-title:nth-of-type(n+2) {
+    margin-top: 22px;
+  }
+
   b {
     color: var(--bs-warning);
   }
 
   .altro-button {
     border: none;
+    margin-top: 16px;
 
     span {
       font-weight: 600;
@@ -70,6 +75,10 @@
     min-width: auto;
     height: auto;
     word-wrap: normal;
+
+    .help-title:first-of-type {
+      margin-top: 16px;
+    }
   }
 }
 
