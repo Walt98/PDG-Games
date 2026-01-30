@@ -1,4 +1,5 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { HandlerBase } from '../handler-base.directive';
 
 @Component({
   selector: 'app-intro',
@@ -7,7 +8,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } 
   templateUrl: './intro.component.html',
   styleUrl: './intro.component.scss'
 })
-export class IntroComponent {
+export class IntroComponent extends HandlerBase {
 
   @Output() close = new EventEmitter<void>();
 
@@ -38,14 +39,11 @@ export class IntroComponent {
     if (!this.shiftClose) this.close.emit();
   }
 
-  /**
-   * Eventi keydown dell'intro.
-   */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
+  override introHandler() {
 
-    if (event.code === "Enter") {
+    if (this.code === "Enter") {
 
-      if (event.shiftKey) {
+      if (this.shiftKey) {
 
         this.shiftClose = true;
         this.close.emit();

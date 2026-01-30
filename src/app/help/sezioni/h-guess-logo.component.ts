@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-h-completa-il-verso',
+  selector: 'app-h-guess-logo',
   standalone: true,
   template: `
-    <div class="d-flex justify-content-center">
+    <!-- <div class="d-flex justify-content-center">
       <section class="text-center">
         <h5> Come si gioca </h5>
-        In ogni round viene mostrato un versetto incompleto della Bibbia con 4 possibili risposte e l'obiettivo del gioco è riuscire a capire qual è quella giusta, che si illuminerà di verde, prima della scadenza del timer; se viene data la risposta sbagliata essa diventerà rossa e verrà mostrata qual è quella corretta.
+        Per ogni round vengono mostrate 4 immagini e l'obiettivo del gioco è indovinare qual è la parola che le accomuna tutte entro la fine del timer.
         <br>
 
         <button class="btn btn-outline-warning altro-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse" (click)="click = !click">
@@ -22,25 +22,27 @@ import { Component } from '@angular/core';
 
         <div class="collapse" id="collapse">
           <div class="card card-body">
-            <h5> Scelta della risposta </h5>
-            Le risposte possibili sono sempre 4, dalla A alla D, e per sceglierne una basta cliccare su di essa, oppure cliccando sulla <b>lettera corrispondente sulla tastiera</b>.
+            <h5> Mostrare/nascondere la parola </h5>
+            Con il pulsante <b>Invio</b> si potrà mostrare la parola e il timer si fermerà; se si volesse nasconderla nuovamente basterà premere il pulsante <b>Backspace</b>. Se il tempo scade essa verrà automaticamente mostrata.
+            <br>
+            È anche possibile mostrare la parola cliccando sul logo PDG YNG ma ciò non permette anche di nasconderla.
             <br>
 
             <h5> Cambiare round </h5>
-            Solo quando verrà data una risposta sarà possibile cambiare round; per farlo basta usare le <b>frecce sinistra e destra</b>, oppure cliccando sul logo PDG YNG (sempre dopo aver risposto). Ma nel caso in cui si volesse forzare un cambio round, a prescindere se è stata data una risposta o meno, sarà possibile farlo utilizzando le frecce e il tasto <b>Shift</b> (non è possibile forzare un cambio round né spostarsi a quelli precedenti cliccando sul logo).
+            Solo quando la parola verrà mostrata sarà possibile cambiare round; per farlo basta usare le <b>frecce sinistra e destra</b>, oppure cliccando sul logo PDG YNG. Ma nel caso in cui si volesse forzare un cambio round, a prescindere se la parola è stata mostrata o meno, sarà possibile farlo utilizzando le frecce e il tasto <b>Shift</b> (non è possibile forzare un cambio round né spostarsi a quelli precedenti cliccando sul logo).
             <br>
 
             <h5> Timer </h5>
-            Per poter avviare il timer basta premere la <b>Barra spaziatrice</b>, oppure cliccando sul timer stesso; per fermarlo basta ripetere una delle due azioni precedentemente indicate, oppure dando una risposta.
+            Per poter avviare il timer basta premere la <b>Barra spaziatrice</b>, oppure cliccando sul timer stesso; per fermarlo basta ripetere una delle due azioni precedentemente indicate, oppure indovinando la parola.
             <br>
             È anche possibile aggiungere/rimuovere secondi utilizzando le <b>frecce su e giù</b>, ma usando anche il tasto <b>Shift</b> se ne potranno aggiungere/rimuovere 10 per volta.
           </div>
         </div>
       </section>
-    </div>
+    </div> -->
   `
 })
-export class HCompletaIlVersoComponent {
+export class HGuessLogoComponent {
   
-  click = false;
+  // click = false;
 }

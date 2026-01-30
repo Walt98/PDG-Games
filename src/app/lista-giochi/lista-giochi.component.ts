@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
-import { PayloadService } from '../payload.service';
+import { Component, OnInit } from '@angular/core';
 import { ICard } from '../card';
+import { HandlerBase } from '../handler-base.directive';
 
 @Component({
   selector: 'app-lista-giochi',
@@ -10,7 +10,7 @@ import { ICard } from '../card';
   templateUrl: './lista-giochi.component.html',
   styleUrl: './lista-giochi.component.scss'
 })
-export class ListaGiochiComponent implements OnInit {
+export class ListaGiochiComponent extends HandlerBase implements OnInit {
 
   index?: number;
   tmpIndex?: number;
@@ -22,15 +22,26 @@ export class ListaGiochiComponent implements OnInit {
     { title: "Completa il verso" },
     { title: "Reazione a catena" },
     { title: "Impiccato" },
+    { title: "Indovina il logo" },
     { title: "Prossimamente" }
   ];
-
-  constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
 
     this.changeComingSoonPosition();
-    setTimeout(() => this.showComingSoon = true, 2000);
+    this.timerRxJS(2000, () => this.showComingSoon = true);
+  }
+
+  /**
+   * Motodo che sposta l'elemento "Prossimamente" dell'array cards mettendolo all'ultimo posto se non si trova già lì.
+   */
+  private changeComingSoonPosition() {
+
+    if (this.cards[this.cards.length - 1].title !== "Prossimamente") {
+
+      const comingSoongIndex = this.cards.indexOf({ title: "Prossimamente" });
+      this.cards.splice(this.cards.length - 1, 0, this.cards.splice(comingSoongIndex, 1)[0]);
+    }
   }
 
   /**
@@ -39,7 +50,6 @@ export class ListaGiochiComponent implements OnInit {
   getCardImage(index: number) {
 
     const cond = index === this.cards.length - 1 || this.cards[index].title === "Prossimamente";
-
     const res = cond ? "coming-soon" : `card${index + 1}`;
 
     return `background-image: url("/${res}.jpg")`;
@@ -56,15 +66,12 @@ export class ListaGiochiComponent implements OnInit {
     }
   }
 
-  /**
-   * Evento keydown nella home.
-   */
-  @HostListener("document:keydown", ["$event.code"]) onKeydown(code: string) {
+  override listaGiochiHandler() {
 
-    if (this.payload.gioco === -1 && !this.payload.showClassification && !this.payload.showHelp) {
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
       // Entra qui quando index = undefined ma mi ero già mosso tra i giochi
-      if (["ArrowRight", "ArrowLeft"].includes(code) && this.tmpIndex !== this.index) {
+      if (["ArrowRight", "ArrowLeft"].includes(this.code) && this.tmpIndex !== this.index) {
 
         this.index = this.tmpIndex;
       }
@@ -87,7 +94,7 @@ export class ListaGiochiComponent implements OnInit {
           */
 
           // Va avanti
-          if (code === "ArrowRight") {
+          if (this.code === "ArrowRight") {
 
             if (this.index === undefined || this.index === this.cards.length - 2) {
 
@@ -108,7 +115,7 @@ export class ListaGiochiComponent implements OnInit {
           }
 
           // Va indietro
-          if (code === "ArrowLeft") {
+          if (this.code === "ArrowLeft") {
 
             if (this.index === undefined) {
 
@@ -140,7 +147,7 @@ export class ListaGiochiComponent implements OnInit {
           }
 
           // Seleziona il gioco
-          if (code === "Enter") {
+          if (this.code === "Enter") {
 
             if (this.index !== undefined) {
 
@@ -151,7 +158,7 @@ export class ListaGiochiComponent implements OnInit {
           }
 
           // Nessun index
-          if (code === "Escape" && !this.payload.showClassification && !this.payload.showHelp) {
+          if (this.code === "Escape" && !this.payload.showClassification && !this.payload.showHelp) {
 
             if (this.index !== undefined) this.tmpIndex = this.index;
             this.index = undefined;
@@ -161,18 +168,6 @@ export class ListaGiochiComponent implements OnInit {
         // Tutte le card sono wip
         else this.index = undefined;
       }
-    }
-  }
-
-  /**
-   * Motodo che sposta l'elemento "Prossimamente" dell'array cards mettendolo all'ultimo posto se non si trova già lì.
-   */
-  private changeComingSoonPosition() {
-
-    if (this.cards[this.cards.length - 1].title !== "Prossimamente") {
-
-      const comingSoongIndex = this.cards.indexOf({ title: "Prossimamente" });
-      this.cards.splice(this.cards.length - 1, 0, this.cards.splice(comingSoongIndex, 1)[0]);
     }
   }
 }

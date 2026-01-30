@@ -1,8 +1,8 @@
-import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { PayloadService } from '../payload.service';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IGiocatore } from '../giocatore';
+import { HandlerBase } from '../handler-base.directive';
 
 @Component({
   selector: 'app-classifica',
@@ -11,13 +11,11 @@ import { IGiocatore } from '../giocatore';
   templateUrl: './classifica.component.html',
   styleUrl: './classifica.component.scss'
 })
-export class ClassificaComponent implements OnInit {
+export class ClassificaComponent extends HandlerBase implements OnInit {
 
   @ViewChildren("pointsInput") inputs?: QueryList<ElementRef<HTMLInputElement>>;
 
   grouped: IGiocatore[][] = [];
-
-  constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
 
@@ -83,7 +81,7 @@ export class ClassificaComponent implements OnInit {
       });
 
       this.setGroupedPlayers();
-      this.forceFocusout();
+      this.forceFocusout(this.inputs);
     }
   }
 
@@ -97,7 +95,7 @@ export class ClassificaComponent implements OnInit {
     this.payload.giocatori.sort((a, b) => b.points - a.points);
 
     this.setGroupedPlayers();
-    this.forceFocusout();
+    this.forceFocusout(this.inputs);
   }
 
   /**
@@ -140,23 +138,12 @@ export class ClassificaComponent implements OnInit {
     this.grouped = giocatori;
   }
 
-  /**
-   * Forza il focusout.
-   */
-  forceFocusout() {
-
-    this.inputs?.forEach(i => i.nativeElement.blur());
-  }
-
-  /**
-   * Evento keydown.
-   */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
+  override classificationHandler() {
 
     if (!this.payload.showHelp) {
 
-      if (event.code === "KeyR") this.onRefreshPositions();
-      if (event.code === "KeyE") this.onEditPlayers();
+      if (this.code === "KeyR") this.onRefreshPositions();
+      if (this.code === "KeyE") this.onEditPlayers();
     }
   }
 }

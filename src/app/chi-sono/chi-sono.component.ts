@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { PayloadService } from '../payload.service';
-import { play } from '../common-functions';
+import { Component, OnInit } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { CommonModule } from '@angular/common';
+import { HandlerBase } from '../handler-base.directive';
 
 @Component({
   selector: 'app-chi-sono',
@@ -11,15 +10,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './chi-sono.component.html',
   styleUrl: './chi-sono.component.scss'
 })
-export class ChiSonoComponent implements OnInit {
+export class ChiSonoComponent extends HandlerBase implements OnInit {
 
   index = 0;
   showName = false;
-  showTimer = true;
   characters: string[] = [];
   randomized: string[] = [];
-
-  constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
 
@@ -39,16 +35,7 @@ export class ChiSonoComponent implements OnInit {
       this.characters.forEach(c => this.randomized.push(this.shuffle(c)));
     }
 
-    else this.closeGame();
-  }
-
-  /**
-   * Chiude il gioco.
-   */
-  private closeGame() {
-
-    alert("Per poter giocare assicurati di aggiungere dei nomi.");
-    setTimeout(() => this.payload.gioco = -1, 0);
+    else this.closeGame("Per poter giocare assicurati di aggiungere dei nomi.");
   }
 
   /**
@@ -70,60 +57,6 @@ export class ChiSonoComponent implements OnInit {
   }
 
   /**
-   * Evento keydown.
-   */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
-
-    if (!this.payload.showClassification && !this.payload.showHelp) {
-
-      // Va avanti
-      if (event.code === "ArrowRight") {
-
-        if (this.index !== this.randomized.length - 1 && (this.showName || event.shiftKey)) {
-
-          this.showName = false;
-          this.showTimer = false;
-
-          setTimeout(() => {
-            this.showTimer = true;
-            this.payload.timerSubscription?.unsubscribe();
-          }, 1);
-
-          this.index++;
-        }
-      }
-
-      // Va indietro
-      if (event.code === "ArrowLeft") {
-
-        if (this.index !== 0 && (this.showName || event.shiftKey)) {
-
-          this.showName = false;
-          this.showTimer = false;
-
-          setTimeout(() => {
-            this.showTimer = true;
-            this.payload.timerSubscription?.unsubscribe();
-          }, 1);
-
-          this.index--;
-        }
-      }
-
-      // Risposta esatta
-      if (event.code === "Enter") this.show();
-
-      // Risposta sbagliata
-      if (["Delete", "Backspace"].includes(event.code)) {
-
-        this.payload.stopTimer$.next();
-        play("error");
-        this.showName = true;
-      }
-    }
-  }
-
-  /**
    * Mostra la parola corretta.
    */
   show(isClick = false) {
@@ -133,12 +66,7 @@ export class ChiSonoComponent implements OnInit {
       if (this.index !== this.randomized.length - 1) {
 
         this.showName = false;
-        this.showTimer = false;
-
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
+        this.restartTimer();
 
         this.index++;
       }
@@ -148,7 +76,7 @@ export class ChiSonoComponent implements OnInit {
 
       this.showName = true;
       this.payload.stopTimer$.next();
-      play("success");
+      this.play("success");
     }
   }
 
@@ -157,6 +85,47 @@ export class ChiSonoComponent implements OnInit {
    */
   onTimeout() {
 
-    setTimeout(() => this.showName = true, 3000);
+    this.timerRxJS(3000, () => this.showName = true);
+  }
+
+  override chiSonoHandler() {
+
+    if (!this.payload.showClassification && !this.payload.showHelp) {
+
+      // Va avanti
+      if (this.code === "ArrowRight") {
+
+        if (this.index !== this.randomized.length - 1 && (this.showName || this.shiftKey)) {
+
+          this.showName = false;
+          this.restartTimer();
+
+          this.index++;
+        }
+      }
+
+      // Va indietro
+      if (this.code === "ArrowLeft") {
+
+        if (this.index !== 0 && (this.showName || this.shiftKey)) {
+
+          this.showName = false;
+          this.restartTimer();
+
+          this.index--;
+        }
+      }
+
+      // Risposta esatta
+      if (this.code === "Enter") this.show();
+
+      // Risposta sbagliata
+      if (["Delete", "Backspace"].includes(this.code)) {
+
+        this.payload.stopTimer$.next();
+        this.play("error");
+        this.showName = true;
+      }
+    }
   }
 }

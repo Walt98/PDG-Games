@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { PayloadService } from '../payload.service';
+import { Component, OnInit } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
-import { play } from '../common-functions';
 import { CommonModule } from '@angular/common';
+import { HandlerBase } from '../handler-base.directive';
 
 @Component({
   selector: 'app-reazione-a-catena',
@@ -11,14 +10,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './reazione-a-catena.component.html',
   styleUrl: './reazione-a-catena.component.scss'
 })
-export class ReazioneACatenaComponent implements OnInit {
+export class ReazioneACatenaComponent extends HandlerBase implements OnInit {
 
   index = 0;
-  showTimer = true;
   points = 0;
   words: string[] = [];
-
-  constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
 
@@ -32,53 +28,21 @@ export class ReazioneACatenaComponent implements OnInit {
 
     const charsString = prompt("Inserisci le parole.", "Genesi Salomone Apostolo Arca Patto");
 
-    if (!charsString || charsString === "") this.closeGame();
+    if (!charsString || charsString === "") {
+      this.closeGame("Per poter giocare assicurati di aggiungere delle parole.");
+    }
 
     else this.words = charsString.split(" ").map(c => c.toUpperCase());
   }
 
   /**
-   * Chiude il gioco.
+   * Fa ripartire il timer.
    */
-  private closeGame() {
+  private startTimer() {
 
-    alert("Per poter giocare assicurati di aggiungere delle parole.");
-    setTimeout(() => this.payload.gioco = -1, 0);
-  }
+    this.payload.stopTimer$.next();
 
-  /**
-   * Evento keydown.
-   */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
-
-    if (!this.payload.showClassification && !this.payload.showHelp) {
-
-      // Va avanti
-      if (event.code === "ArrowRight") {
-
-        if (this.index !== this.words.length - 1) {
-
-          this.index++;
-          this.startTimer();
-        }
-      }
-
-      // Va indietro
-      if (event.code === "ArrowLeft") {
-
-        if (this.index > 0) {
-
-          this.index--;
-          this.startTimer();
-        }
-      }
-
-      // Risposta esatta
-      if (event.code === "Enter") this.setPoints(true, !event.shiftKey);
-
-      // Risposta sbagliata
-      if (event.code === "Backspace") this.setPoints(false, !event.shiftKey);
-    }
+    this.timerRxJS(0, () => this.payload.startTimer$.next());
   }
 
   /**
@@ -106,17 +70,39 @@ export class ReazioneACatenaComponent implements OnInit {
 
       this.payload.stopTimer$.next();
 
-      if (playSound) play(result ? "success" : "error");
+      if (playSound) this.play(result ? "success" : "error");
     }
   }
 
-  /**
-   * Fa ripartire il timer.
-   */
-  private startTimer() {
+  override reazioneACatenaHandler() {
 
-    this.payload.stopTimer$.next();
+    if (!this.payload.showClassification && !this.payload.showHelp) {
 
-    setTimeout(() => this.payload.startTimer$.next());
+      // Va avanti
+      if (this.code === "ArrowRight") {
+
+        if (this.index !== this.words.length - 1) {
+
+          this.index++;
+          this.startTimer();
+        }
+      }
+
+      // Va indietro
+      if (this.code === "ArrowLeft") {
+
+        if (this.index > 0) {
+
+          this.index--;
+          this.startTimer();
+        }
+      }
+
+      // Risposta esatta
+      if (this.code === "Enter") this.setPoints(true, !this.shiftKey);
+
+      // Risposta sbagliata
+      if (this.code === "Backspace") this.setPoints(false, !this.shiftKey);
+    }
   }
 }

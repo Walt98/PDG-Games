@@ -18,13 +18,16 @@
     <!-- Impiccato -->
     @case (5) { <app-impiccato></app-impiccato> }
 
+    <!-- Impiccato -->
+    @case (6) { <app-guess-logo></app-guess-logo> }
+
     @default
     {
         <!-- Intro -->
-        <app-intro *ngIf="showIntroComponent" (close)="showIntroComponent = false"></app-intro>
+        <app-intro *ngIf="payload.showIntro" (close)="payload.showIntro = false"></app-intro>
 
         <!-- Lista dei giochi -->
-        <app-lista-giochi *ngIf="!showIntroComponent"></app-lista-giochi>
+        <app-lista-giochi *ngIf="!payload.showIntro"></app-lista-giochi>
     }
 }
 
@@ -34,7 +37,7 @@
 <!-- Sezione aiuto -->
 @if (payload.showHelp) { <app-help></app-help> }
 
-@if (!showIntroComponent)
+@if (!payload.showIntro)
 {
     <!-- Pulsante classifica -->
     <button type="button" class="btn list fade-in" (click)="onShowClassification()" title="Classifica (Alt/Option + C)" #classificationHelp>

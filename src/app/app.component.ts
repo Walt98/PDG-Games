@@ -1,7 +1,6 @@
-import { Component, ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { FourImagesOneWordComponent } from './four-images-one-word/four-images-one-word.component';
 import { PassaParolaComponent } from './passa-parola/passa-parola.component';
-import { PayloadService } from './payload.service';
 import { ListaGiochiComponent } from './lista-giochi/lista-giochi.component';
 import { CompletaIlVersoComponent } from './completa-il-verso/completa-il-verso.component';
 import { IntroComponent } from './intro/intro.component';
@@ -11,6 +10,8 @@ import { ReazioneACatenaComponent } from './reazione-a-catena/reazione-a-catena.
 import { ImpiccatoComponent } from "./impiccato/impiccato.component";
 import { ClassificaComponent } from './classifica/classifica.component';
 import { HelpComponent } from './help/help.component';
+import { GuessLogoComponent } from './guess-logo/guess-logo.component';
+import { HandlerBase } from './handler-base.directive';
 
 @Component({
   selector: 'app-root',
@@ -28,17 +29,15 @@ import { HelpComponent } from './help/help.component';
     ChiSonoComponent,
     CompletaIlVersoComponent,
     ReazioneACatenaComponent,
-    ImpiccatoComponent
+    ImpiccatoComponent,
+    GuessLogoComponent
 ]
 })
-export class AppComponent {
+export class AppComponent extends HandlerBase {
 
   @ViewChildren("classificationHelp") buttons?: QueryList<ElementRef<HTMLButtonElement>>;
 
   title = "pdg-games";
-  showIntroComponent = true;
-
-  constructor(public payload: PayloadService) { }
 
   /**
    * Chiude il gioco.
@@ -62,14 +61,13 @@ export class AppComponent {
       this.payload.showClassification = !this.payload.showClassification;
       this.payload.stopTimer$.next();
 
-      setTimeout(() => {
+      this.timerRxJS(0, () => {
 
         if (!this.payload.giocatori.length) {
-
           this.payload.showClassification = false;
         }
 
-        this.forceFocusout();
+        this.forceFocusout(this.buttons);
       });
     }
   }
@@ -81,37 +79,27 @@ export class AppComponent {
 
     this.payload.showHelp = !this.payload.showHelp;
     this.payload.stopTimer$.next();
-    this.forceFocusout();
+    this.forceFocusout(this.buttons);
   }
 
   /**
-   * Forza il focusout dai bottoni classifica e aiuto.
+   * Mostra/nasconde la sezione di aiuto o la classifica.
    */
-  forceFocusout() {
+  onShowHelpClassification() {
 
-    this.buttons?.forEach(i => i.nativeElement.blur());
-  }
-
-  /**
-   * Mostra/nasconde la classifica e/o la sezione di aiuto.
-   * @param code Nome pulsante
-   * @param ctrlKey Se Ctrl/Cmd è stato premuto
-   * @param altKey Se Alt/Option è stato premuto
-   */
-  onShowH_C(code: string, ctrlKey: boolean, altKey: boolean) {
+    const ctrlKey = this.ctrlKey || this.metaKey;
 
     // Condizione chiusura gioco
-    const game = code === "KeyX" && ctrlKey && this.payload.gioco > -1;
+    const game = this.code === "KeyX" && ctrlKey && this.payload.gioco > -1;
 
     // Condizione Classifica
-    const classifica = !this.showIntroComponent && !this.payload.showHelp &&
-      ((code === "KeyC" && altKey) ||
-      (code === "Escape" && this.payload.showClassification));
+    const classifica = !this.payload.showHelp &&
+      ((this.code === "KeyC" && this.altKey) ||
+      (this.code === "Escape" && this.payload.showClassification));
 
     // Condizione Help
-    const help = !this.showIntroComponent &&
-      ((code === "KeyH" && altKey) ||
-      (code === "Escape" && this.payload.showHelp));
+    const help = ((this.code === "KeyH" && this.altKey) ||
+      (this.code === "Escape" && this.payload.showHelp));
 
     if (classifica) this.onShowClassification();
 
@@ -127,19 +115,16 @@ export class AppComponent {
     }
   }
 
-  /**
-   * Evento keydown.
-   */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
+  override homeHelpHandler() {
 
-    this.onShowH_C(event.code, event.ctrlKey || event.metaKey, event.altKey);
+    this.onShowHelpClassification();
 
-    if (["ArrowLeft", "ArrowRight"].includes(event.code)) {
+    if (["ArrowLeft", "ArrowRight"].includes(this.code)) {
 
-      this.forceFocusout();
+      this.forceFocusout(this.buttons);
     }
 
-    if (event.code === "KeyX" && (event.ctrlKey || event.metaKey)) {
+    if (this.code === "KeyX" && (this.ctrlKey || this.metaKey)) {
 
       this.payload.gioco = -1;
     }

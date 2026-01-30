@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
-import { PayloadService } from '../payload.service';
-import { play } from '../common-functions';
+import { HandlerBase } from '../handler-base.directive';
 
 @Component({
   selector: 'app-four-images-one-word',
@@ -11,14 +10,11 @@ import { play } from '../common-functions';
   templateUrl: './four-images-one-word.component.html',
   styleUrl: './four-images-one-word.component.scss'
 })
-export class FourImagesOneWordComponent {
+export class FourImagesOneWordComponent extends HandlerBase {
 
   index = 0;
   showLetters = false;
-  showTimer = true;
   words = [ "MOSÈ", "DAVIDE", "PIETRO", "ISACCO", "ELIA", "AARONNE", "66", "PAOLO", "ADAMO", "EBREI", "COMANDAMENTI", "APOCALISSE", "VANGELI", "PASTORE", "SALMI", "DANIELE", "APOSTOLO", "SANSONE", "GRACE PARTY", "CHIESA" ];
-
-  constructor(public payload: PayloadService) { }
 
   /**
    * Restituisce il background-image del singolo quadrante.
@@ -33,56 +29,7 @@ export class FourImagesOneWordComponent {
    */
   onTimeout() {
 
-    setTimeout(() => this.showLetters = true, 3000);
-  }
-
-  /**
-   * Evento keydown.
-   */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
-
-    if (!this.payload.showClassification && !this.payload.showHelp) {
-
-      // Va avanti
-      if (event.code === "ArrowRight") {
-
-        if (this.index !== this.words.length - 1 && (this.showLetters || event.shiftKey)) {
-
-          this.showLetters = false;
-          this.showTimer = false;
-
-          setTimeout(() => {
-            this.showTimer = true;
-            this.payload.timerSubscription?.unsubscribe();
-          }, 1);
-
-          this.index++;
-        }
-      }
-
-      // Va indietro
-      if (event.code === "ArrowLeft") {
-
-        if (this.index !== 0 && (this.showLetters || event.shiftKey)) {
-
-          this.showLetters = false;
-          this.showTimer = false;
-
-          setTimeout(() => {
-            this.showTimer = true;
-            this.payload.timerSubscription?.unsubscribe();
-          }, 1);
-
-          this.index--;
-        }
-      }
-
-      // Risposta esatta
-      if (event.code === "Enter") this.showWord();
-
-      // Risposta sbagliata
-      if (["Delete", "Backspace"].includes(event.code)) this.showLetters = false;
-    }
+    this.timerRxJS(3000, () => this.showLetters = true);
   }
 
   /**
@@ -95,12 +42,7 @@ export class FourImagesOneWordComponent {
       if (this.index !== this.words.length - 1) {
 
         this.showLetters = false;
-        this.showTimer = false;
-
-        setTimeout(() => {
-          this.showTimer = true;
-          this.payload.timerSubscription?.unsubscribe();
-        }, 1);
+        this.restartTimer();
 
         this.index++;
       }
@@ -110,7 +52,43 @@ export class FourImagesOneWordComponent {
 
       this.showLetters = true;
       this.payload.stopTimer$.next();
-      play("success");
+      this.play("success");
+    }
+  }
+
+  override fourImagesOneWordHandler() {
+
+    if (!this.payload.showClassification && !this.payload.showHelp) {
+
+      // Va avanti
+      if (this.code === "ArrowRight") {
+
+        if (this.index !== this.words.length - 1 && (this.showLetters || this.shiftKey)) {
+
+          this.showLetters = false;
+          this.restartTimer();
+
+          this.index++;
+        }
+      }
+
+      // Va indietro
+      if (this.code === "ArrowLeft") {
+
+        if (this.index !== 0 && (this.showLetters || this.shiftKey)) {
+
+          this.showLetters = false;
+          this.restartTimer();
+
+          this.index--;
+        }
+      }
+
+      // Risposta esatta
+      if (this.code === "Enter") this.showWord();
+
+      // Risposta sbagliata
+      if (["Delete", "Backspace"].includes(this.code)) this.showLetters = false;
     }
   }
 }

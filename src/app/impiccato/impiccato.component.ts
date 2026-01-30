@@ -1,7 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { PayloadService } from '../payload.service';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { play } from '../common-functions';
+import { HandlerBase } from '../handler-base.directive';
 
 declare type ImpiccatoCharItem = { char: string; show: boolean; }
 
@@ -12,15 +11,13 @@ declare type ImpiccatoCharItem = { char: string; show: boolean; }
   templateUrl: './impiccato.component.html',
   styleUrl: './impiccato.component.scss'
 })
-export class ImpiccatoComponent implements OnInit {
+export class ImpiccatoComponent extends HandlerBase implements OnInit {
 
   index = 0;
   imageIndex = 0;
   showWord = false;
   wrong: string[] = [];
   items: ImpiccatoCharItem[][] = [];
-
-  constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
 
@@ -34,7 +31,9 @@ export class ImpiccatoComponent implements OnInit {
 
     const wordsString = prompt("Inserisci le parole.", "Rivelazione, 1 Samuele, Grace Party, Efod, Betesda");
 
-    if (!wordsString || wordsString === "") this.closeGame();
+    if (!wordsString || wordsString === "") {
+      this.closeGame("Per poter giocare assicurati di aggiungere delle parole.");
+    }
 
     else wordsString.split(",").map(c => c.trim().toUpperCase()).forEach(w => {
 
@@ -48,15 +47,6 @@ export class ImpiccatoComponent implements OnInit {
         this.items.push(word);
       }
     });
-  }
-
-  /**
-   * Chiude il gioco.
-   */
-  private closeGame() {
-
-    alert("Per poter giocare assicurati di aggiungere delle parole.");
-    setTimeout(() => this.payload.gioco = -1, 0);
   }
 
   /**
@@ -84,83 +74,6 @@ export class ImpiccatoComponent implements OnInit {
   }
 
   /**
-   * Evento keydown.
-   */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
-
-    if (!this.payload.showClassification && !this.payload.showHelp) {
-
-      // Si può cambiare pagina solo se la parola è
-      // completamente visibile oppure forzando utilizzando Shift
-      const canChange = this.showWord || event.shiftKey;
-
-      // Va avanti
-      if (event.code === "ArrowRight") {
-
-        if (this.index !== this.items.length - 1 && canChange) this.changeWord();
-      }
-
-      // Va indietro
-      if (event.code === "ArrowLeft") {
-
-        if (this.index > 0 && canChange) this.changeWord(true);
-      }
-
-      if (this.checkIfIsLetter(event.key) && !event.ctrlKey && !event.metaKey && !event.altKey) {
-
-        const key = event.key.toUpperCase();
-
-        if (!this.wrong.includes(key)) {
-
-          let guessed = this.items[this.index].filter(i => this.normalize(i.char) === key);
-
-          guessed.forEach(i => i.show = true);
-
-          if (!this.items[this.index].map(i => i.show).includes(false)) {
-
-            if (!this.showWord) play("success");
-            this.showWord = true;
-          }
-
-          if (!guessed.length && this.imageIndex < 6 && !this.showWord) {
-
-            this.imageIndex++;
-
-            if (this.imageIndex === 6) {
-
-              this.showWord = true;
-              play("gong");
-            }
-
-            else {
-
-              this.wrong.push(key);
-              play("error");
-            }
-          }
-        }
-      }
-
-      // Parola indovinata
-      if (event.code === "Enter") {
-
-        if (!this.showWord) play("success");
-        this.showWord = true;
-      }
-
-      // Parola sbagliata
-      if (event.code === "Backspace") {
-
-        if (this.imageIndex > 0 && this.imageIndex < 6) {
-
-          this.imageIndex--;
-          this.wrong.pop();
-        }
-      }
-    }
-  }
-
-  /**
    * Verifica se il carattere in parametro è una lettera; in tal caso restituirà true, altrimenti false.
    */
   public checkIfIsLetter(key: string, normalize = false) {
@@ -174,5 +87,79 @@ export class ImpiccatoComponent implements OnInit {
   public getImage() {
 
     return `background-image: url("/impiccato${this.imageIndex}.jpg")`;
+  }
+
+  override impiccatoHandler() {
+
+    if (!this.payload.showClassification && !this.payload.showHelp) {
+
+      // Si può cambiare pagina solo se la parola è
+      // completamente visibile oppure forzando utilizzando Shift
+      const canChange = this.showWord || this.shiftKey;
+
+      // Va avanti
+      if (this.code === "ArrowRight") {
+
+        if (this.index !== this.items.length - 1 && canChange) this.changeWord();
+      }
+
+      // Va indietro
+      if (this.code === "ArrowLeft") {
+
+        if (this.index > 0 && canChange) this.changeWord(true);
+      }
+
+      if (this.checkIfIsLetter(this.key) && !this.ctrlKey && !this.metaKey && !this.altKey) {
+
+        const key = this.key.toUpperCase();
+
+        if (!this.wrong.includes(key)) {
+
+          let guessed = this.items[this.index].filter(i => this.normalize(i.char) === key);
+
+          guessed.forEach(i => i.show = true);
+
+          if (!this.items[this.index].map(i => i.show).includes(false)) {
+
+            if (!this.showWord) this.play("success");
+            this.showWord = true;
+          }
+
+          if (!guessed.length && this.imageIndex < 6 && !this.showWord) {
+
+            this.imageIndex++;
+
+            if (this.imageIndex === 6) {
+
+              this.showWord = true;
+              this.play("gong");
+            }
+
+            else {
+
+              this.wrong.push(key);
+              this.play("error");
+            }
+          }
+        }
+      }
+
+      // Parola indovinata
+      if (this.code === "Enter") {
+
+        if (!this.showWord) this.play("success");
+        this.showWord = true;
+      }
+
+      // Parola sbagliata
+      if (this.code === "Backspace") {
+
+        if (this.imageIndex > 0 && this.imageIndex < 6) {
+
+          this.imageIndex--;
+          this.wrong.pop();
+        }
+      }
+    }
   }
 }

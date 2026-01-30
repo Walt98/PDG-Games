@@ -14,7 +14,7 @@
     }
   </div>
 
-  <div *ngIf="grouped?.length" class="overflow-y otherPlayers" style="padding: 0 20px;">
+  <div *ngIf="grouped.length" class="overflow-y otherPlayers" style="padding: 0 20px;">
     <div *ngFor="let group of grouped; let i = index" class="lista row row-cols-4">
       @for (giocatore of group; track $index)
       {

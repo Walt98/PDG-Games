@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
-import { PayloadService } from '../payload.service';
-import { play } from '../common-functions';
+import { HandlerBase } from '../handler-base.directive';
 
 declare type PassaParola = { key: string; status: string; }
 
@@ -13,14 +12,12 @@ declare type PassaParola = { key: string; status: string; }
   templateUrl: './passa-parola.component.html',
   styleUrl: './passa-parola.component.scss'
 })
-export class PassaParolaComponent implements OnInit {
+export class PassaParolaComponent extends HandlerBase implements OnInit {
 
   index?: number;
   tmpIndex?: number;
   isReady = false;
   items: PassaParola[] = [];
-
-  constructor(public payload: PayloadService) { }
 
   ngOnInit(): void {
 
@@ -60,23 +57,51 @@ export class PassaParolaComponent implements OnInit {
   }
 
   /**
-   * Chiude il gioco.
+   * Se non ci sono altre lettere su cui posizionarsi ferma il timer.
    */
-  private closeGame() {
+  stopTimer() {
 
-    setTimeout(() => this.payload.gioco = -1, 0);
+    const statusSet = [...new Set(this.items.map(i => i.status))];
+
+    if (!statusSet.includes("") && !statusSet.includes("skip")) {
+
+      this.payload.stopTimer$.next();
+    }
   }
 
   /**
-   * Imposta l'index e lo status delle lettere.
+   * Cambia lo status dell'item.
    */
-  @HostListener("document:keydown", ["$event"]) onKeydown(event: KeyboardEvent) {
+  setStatus(item: PassaParola) {
+
+    if (item.status === "") {
+
+      this.play("skip");
+      item.status = "skip";
+    }
+
+    else if (item.status === "skip") {
+
+      this.play("success");
+      item.status = "success";
+    }
+
+    else if (item.status === "success") {
+
+      this.play("error");
+      item.status = "error";
+    }
+
+    else item.status = "";
+  }
+
+  override passaParolaHandler() {
 
     if (!this.payload.showClassification && !this.payload.showHelp) {
 
-      if (event.code.includes("Key") && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      if (this.code.includes("Key") && !this.ctrlKey && !this.metaKey && !this.altKey) {
 
-        let item = this.items.find(i => i.key === event.code[3]);
+        let item = this.items.find(i => i.key === this.code[3]);
 
         if (!!item) {
 
@@ -92,7 +117,7 @@ export class PassaParolaComponent implements OnInit {
       })
 
       // Va solo avanti
-      if (event.code === "ArrowRight") {
+      if (this.code === "ArrowRight") {
 
         if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
 
@@ -134,7 +159,7 @@ export class PassaParolaComponent implements OnInit {
       }
 
       // Va solo indietro
-      if (event.code === "ArrowLeft") {
+      if (this.code === "ArrowLeft") {
 
         if (this.tmpIndex !== this.index && !allSetted) this.index = this.tmpIndex;
         else {
@@ -175,90 +200,51 @@ export class PassaParolaComponent implements OnInit {
       }
 
       // PassaParola
-      if (event.code.includes("Shift")) {
+      if (this.code.includes("Shift")) {
 
         if (this.index !== undefined) {
 
           this.items[this.index].status = "skip";
-          play("skip");
+          this.play("skip");
         }
       }
 
       // Corretto
-      if (event.code === "Enter") {
+      if (this.code === "Enter") {
 
         if (this.index !== undefined) {
 
           this.items[this.index].status = "success";
-          play("success");
+          this.play("success");
 
           this.stopTimer();
         }
       }
 
       // Sbagliato
-      if (event.code === "Backspace" && !event.metaKey) {
+      if (this.code === "Backspace" && !this.metaKey) {
 
         if (this.index !== undefined) {
 
           this.items[this.index].status = "error";
-          play("error");
+          this.play("error");
 
           this.stopTimer();
         }
       }
 
       // Nessuno status
-      if (event.code === "Delete" || (event.metaKey && event.code === "Backspace")) {
+      if (this.code === "Delete" || (this.metaKey && this.code === "Backspace")) {
 
         if (this.index !== undefined) this.items[this.index].status = "";
       }
 
       // Nessun index
-      if (event.code === "Escape") {
+      if (this.code === "Escape") {
 
         if (this.index !== undefined) this.tmpIndex = this.index;
         this.index = undefined;
       }
     }
-  }
-
-  /**
-   * Se non ci sono altre lettere su cui posizionarsi ferma il timer.
-   */
-  stopTimer() {
-
-    const statusSet = [...new Set(this.items.map(i => i.status))];
-
-    if (!statusSet.includes("") && !statusSet.includes("skip")) {
-
-      this.payload.stopTimer$.next();
-    }
-  }
-
-  /**
-   * Cambia lo status dell'item.
-   */
-  setStatus(item: PassaParola) {
-
-    if (item.status === "") {
-
-      play("skip");
-      item.status = "skip";
-    }
-
-    else if (item.status === "skip") {
-
-      play("success");
-      item.status = "success";
-    }
-
-    else if (item.status === "success") {
-
-      play("error");
-      item.status = "error";
-    }
-
-    else item.status = "";
   }
 }

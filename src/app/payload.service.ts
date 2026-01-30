@@ -7,6 +7,9 @@ import { IGiocatore } from './giocatore';
 })
 export class PayloadService {
 
+  /** Indica se il componente intro esiste o è stato distrutto. */
+  public showIntro = true;
+
   /** Rappresenta il codice del gioco. */
   public gioco = -1;
 
@@ -27,6 +30,4 @@ export class PayloadService {
 
   /** Subject da usare per fermare il timer "in remoto". */
   public stopTimer$ = new Subject<void>();
-
-  constructor() { }
 }

@@ -18,21 +18,20 @@
   padding: 0 40px;
 }
 
-:host ::ng-deep .help-text {
+:host ::ng-deep section {
   width: 90%;
   margin: 0;
   max-height: calc(100vh - 230px);
   overflow: auto;
   padding: 0 20px;
 
-  .help-title {
+  h5 {
     font-size: 1.15rem;
     font-weight: 800;
     color: #ffecb4;
     text-decoration: underline;
   }
-
-  .help-title:nth-of-type(n+2) {
+  h5:nth-of-type(n+2) {
     margin-top: 22px;
   }
 
@@ -42,7 +41,7 @@
 
   .altro-button {
     border: none;
-    margin-top: 16px;
+    margin: 20px 0 4px;
 
     span {
       font-weight: 600;
@@ -76,7 +75,7 @@
     height: auto;
     word-wrap: normal;
 
-    .help-title:first-of-type {
+    h5:first-of-type {
       margin-top: 16px;
     }
   }
