@@ -34,7 +34,7 @@ export class ChiSonoComponent extends HandlerBase implements OnInit {
       this.characters = this.mapPrompt(charsString);
 
       if (this.characters.find(c => c.split(" ").length > 1)) {
-        this.closeGame(`Momentaneamente non è possibile inserire nomi di più parole, come ad esempio "Giovanni Battista".`);
+        this.closeGame(`Al momento non è possibile inserire nomi di più parole, come ad esempio "Giovanni Battista" o quello che hai inserito tu.`);
       }
 
       else this.characters.forEach(c => this.randomized.push(this.shuffle(c)));
