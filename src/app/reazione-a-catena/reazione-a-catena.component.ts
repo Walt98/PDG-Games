@@ -26,13 +26,10 @@ export class ReazioneACatenaComponent extends HandlerBase implements OnInit {
    */
   private setNames() {
 
-    const charsString = prompt("Inserisci le parole.", "Genesi Salomone Apostolo Arca Patto");
+    const charsString = prompt("Inserisci le parole.", "Genesi, Salomone, Apostolo, Arca, Patto");
 
-    if (!charsString || charsString === "") {
-      this.closeGame("Per poter giocare assicurati di aggiungere delle parole.");
-    }
-
-    else this.words = charsString.split(" ").map(c => c.toUpperCase());
+    if (charsString?.length) this.words = this.mapPrompt(charsString);
+    else this.closeGame("Per poter giocare assicurati di aggiungere delle parole.");
   }
 
   /**

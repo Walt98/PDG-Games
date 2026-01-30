@@ -63,4 +63,13 @@ export class Base {
     const audio = new Audio(`/${sound}.mp3`);
     audio.play();
   }
+
+  /**
+   * Mappa il prompt in parametro facendo il trim delle parole.
+   */
+  mapPrompt(prompt: string, separator = ",") {
+
+    return prompt.split(separator)
+      .map(el => el.trim().toUpperCase().split(" ").filter(c => c !== "").join(" "));
+  }
 }

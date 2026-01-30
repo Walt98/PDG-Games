@@ -27,12 +27,17 @@ export class ChiSonoComponent extends HandlerBase implements OnInit {
    */
   private setNames() {
 
-    const charsString = prompt("Inserisci i nomi.", "Giobbe Ester Pietro Timoteo Giosuè");
+    const charsString = prompt("Inserisci i nomi.", "Giobbe, Ester, Pietro, Timoteo, Giosuè");
 
     if (charsString?.length) {
 
-      this.characters = charsString.split(" ").map(c => c.toUpperCase());
-      this.characters.forEach(c => this.randomized.push(this.shuffle(c)));
+      this.characters = this.mapPrompt(charsString);
+
+      if (this.characters.find(c => c.split(" ").length > 1)) {
+        this.closeGame(`Momentaneamente non è possibile inserire nomi di più parole, come ad esempio "Giovanni Battista".`);
+      }
+
+      else this.characters.forEach(c => this.randomized.push(this.shuffle(c)));
     }
 
     else this.closeGame("Per poter giocare assicurati di aggiungere dei nomi.");

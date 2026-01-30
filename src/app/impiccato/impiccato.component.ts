@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HandlerBase } from '../handler-base.directive';
-
-declare type ImpiccatoCharItem = { char: string; show: boolean; }
+import { IHiddenCharItem } from '../hidden-char-item';
 
 @Component({
   selector: 'app-impiccato',
@@ -17,36 +16,32 @@ export class ImpiccatoComponent extends HandlerBase implements OnInit {
   imageIndex = 0;
   showWord = false;
   wrong: string[] = [];
-  items: ImpiccatoCharItem[][] = [];
+  items: IHiddenCharItem[][] = [];
 
   ngOnInit(): void {
 
-    this.setNames();
+    this.setWords();
   }
 
   /**
    * Imposta le parole del gioco.
    */
-  private setNames() {
+  private setWords() {
 
     const wordsString = prompt("Inserisci le parole.", "Rivelazione, 1 Samuele, Grace Party, Efod, Betesda");
 
-    if (!wordsString || wordsString === "") {
-      this.closeGame("Per poter giocare assicurati di aggiungere delle parole.");
-    }
-
-    else wordsString.split(",").map(c => c.trim().toUpperCase()).forEach(w => {
+    if (wordsString?.length) this.mapPrompt(wordsString).forEach(w => {
 
       if (w?.length) {
 
-        const trimmed = w.split(" ").filter(c => c !== "").join(" ");
+        let word: IHiddenCharItem[] = [];
 
-        let word: ImpiccatoCharItem[] = [];
-
-        trimmed.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c, true) }));
+        w.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c, true) }));
         this.items.push(word);
       }
     });
+
+    else this.closeGame("Per poter giocare assicurati di aggiungere delle parole.");
   }
 
   /**

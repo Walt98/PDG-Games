@@ -29,18 +29,28 @@ export class PassaParolaComponent extends HandlerBase implements OnInit {
    */
   private setFields() {
 
-    let charsString = prompt("Inserisci le lettere (min. 1 e max. 15).", "A B C D E F");
+    let charsString = prompt("Inserisci le tue lettere (min. 1, max. 15). Assicurati di non inserire numeri e caratteri speciali e che ogni lettera sia ben separata l'una dall'altra.", "A, B, C, D, E, F");
 
-    if (!!charsString) {
+    if (charsString?.length) {
 
-      let allChars = charsString.split(" ");
+      let allChars = this.mapPrompt(charsString);
       let chars: string[] = [];
 
-      allChars.forEach(c => {
+      if (allChars.find(c => c.length > 1)) {
+        this.closeGame(`Assicurati di aver separato tutte le lettere e di non aver inserito numeri e caratteri speciali, in modo da avere qualcosa tipo "A, B, C, D, E, F".`);
+        return;
+      }
+
+      else if (allChars.find(c => !/^[a-zA-Z]$/.test(c))) {
+        this.closeGame(`Assicurati di inserire solo lettere, in modo da avere qualcosa tipo "A, B, C, D, E, F".`);
+        return;
+      }
+
+      else allChars.forEach(c => {
         if (c !== "") chars.push(c.toUpperCase());
       });
 
-      if (chars.length < 1 || chars.length > 15) {
+      if (!chars.length || chars.length > 15) {
 
         alert("Per poter giocare assicurati di inserire un numero di lettere compreso tra 1 e 15.");
         this.closeGame();
