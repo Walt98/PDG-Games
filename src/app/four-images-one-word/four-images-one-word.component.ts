@@ -19,7 +19,7 @@ export class FourImagesOneWordComponent extends HandlerBase {
   /**
    * Restituisce il background-image del singolo quadrante.
    */
-  getImage(index: number): string {
+  getImage(index: number) {
 
     return `background-image: url("/game2_${this.index}_${index}.jpg")`;
   }

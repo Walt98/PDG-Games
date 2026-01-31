@@ -58,9 +58,9 @@ export class Base {
   /**
    * Riproduce il suono descritto in parametro.
    */
-  play(sound: "success" | "error" | "skip" | "gong") {
+  play(track: "success" | "error" | "skip" | "gong") {
 
-    const audio = new Audio(`/${sound}.mp3`);
+    const audio = new Audio(`/${track}.mp3`);
     audio.play();
   }
 
@@ -70,6 +70,8 @@ export class Base {
   mapPrompt(prompt: string, separator = ",") {
 
     return prompt.split(separator)
-      .map(el => el.trim().toUpperCase().split(" ").filter(c => c !== "").join(" "));
+      .map(el => el.trim().toUpperCase())
+      .filter(el => el.length)
+      .map(el => el.split(" ").filter(c => c !== "").join(" "));
   }
 }

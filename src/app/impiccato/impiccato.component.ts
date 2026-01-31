@@ -32,13 +32,10 @@ export class ImpiccatoComponent extends HandlerBase implements OnInit {
 
     if (wordsString?.length) this.mapPrompt(wordsString).forEach(w => {
 
-      if (w?.length) {
+      let word: IHiddenCharItem[] = [];
 
-        let word: IHiddenCharItem[] = [];
-
-        w.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c, true) }));
-        this.items.push(word);
-      }
+      w.split("").forEach(c => word.push({ char: c, show: !this.checkIfIsLetter(c, true) }));
+      this.items.push(word);
     });
 
     else this.closeGame("Per poter giocare assicurati di aggiungere delle parole.");
