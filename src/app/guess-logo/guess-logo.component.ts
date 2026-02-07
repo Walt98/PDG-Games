@@ -15,7 +15,7 @@ export class GuessLogoComponent extends HandlerBase implements OnInit {
   index = 0;
   showLogo = false;
   tries = 0;
-  logos = ["PDG Young", "Apple", "Timberland"];
+  logos = ["McDonald's", "Apple", "Warner Bros", "Air Jordan", "Nike", "Beats", "Pinterest", "Starbucks", "Volkswagen", "Vodafone", "Maserati", "Lacoste", "Toyota", "Juventus", "Playboy", "WWF", "Tesla", "Unicredit", "Timberland", "Parola della Grazia"];
   items: IHiddenCharItem[][] = [];
 
   ngOnInit() {
